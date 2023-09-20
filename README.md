@@ -1,4 +1,4 @@
-![White Stone Logo](/public/image/Logo2.jpg)
+![White Stone Logo](/public/image/Logo2.png)
 
 # White Stone : Your Personal Dental Assistant 🦷
 
