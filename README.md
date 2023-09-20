@@ -1,6 +1,6 @@
 ![White Stone Logo](/public/image/Logo.jpg)
 
-# White Stone Care: Your Personal Dental Assistant 🦷
+# White Stone : Your Personal Dental Assistant 🦷
 
 White Stone Care harnesses the power of AI to offer a revolutionary dental analysis experience. Designed specifically for those who find dental care financially challenging, our app aims to detect and advise on minor dental issues early on.
 
