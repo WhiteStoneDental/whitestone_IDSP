@@ -7,6 +7,7 @@ export default function Home() {
   return (
     <div>
       <h1>Page</h1>
+      <h2>hello!</h2>
       <p>Current theme: {resolvedTheme}</p>
       <button onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}>
         Toggle Theme
