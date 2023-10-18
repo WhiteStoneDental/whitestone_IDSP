@@ -8,8 +8,10 @@ export default function NavBar() {
             <SettingsNavButton>
             </SettingsNavButton>
             <HomeNavButton>
+                d
             </HomeNavButton>
             <ResourceNavButton>
+                H
             </ResourceNavButton>
         </div>
     );
