@@ -37,7 +37,7 @@ export default function HomePage() {
         </div>
 
         <div>
-          <ResourceButton />
+        <Link href="/healthresources"><ResourceButton/></Link>
           <div className={twMerge('placeholder-content dark:text-black')}>Placeholder for Health Information</div>
         </div>
       </div>
