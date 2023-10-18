@@ -16,19 +16,19 @@ export default function HomePage() {
     <div className={twMerge('flex flex-col p-5 bg-gradient-to-br from-24008C to-641A99 via-9D32A5 h-screen')}>
       
       <div className={twMerge('flex flex-col items-center mb-5')}>
-        <h1 className={twMerge('text-black text-4xl mb-5')}>Start Your Scan</h1>
+        <h1 className={twMerge('text-black text-4xl mb-5 dark:text-white')}>Start Your Scan</h1>
         <StartScanButton />
       </div>
       
       <div className={twMerge('bg-white p-5 rounded-xl mb-5')}>
         <div className={twMerge('flex items-center mb-5')}>
           <div className={twMerge('bg-gray-300 rounded-full w-12 h-12 mr-5')}></div>
-          <h2 className={twMerge('text-lg')}>Placeholder for Username</h2>
+          <h2 className={twMerge('text-lg dark:text-black')}>Placeholder for Username</h2>
         </div>
         
         <div className={twMerge('mb-5')}>
-          <h3 className={twMerge('text-xl mb-3')}>Previous Scans</h3>
-          <div>
+          <h3 className={twMerge('text-black text-xl mb-3 dark:text-black')}>Previous Scans</h3>
+          <div >
       {scans.map((details, index) => (
         <ScanButton key={index} details={details} />
       ))}
@@ -38,7 +38,7 @@ export default function HomePage() {
 
         <div>
           <ResourceButton />
-          <div className={twMerge('placeholder-content')}>Placeholder for Health Information</div>
+          <div className={twMerge('placeholder-content dark:text-black')}>Placeholder for Health Information</div>
         </div>
       </div>
     </div>

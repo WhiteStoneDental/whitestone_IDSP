@@ -4,9 +4,9 @@ import  ArrowIcon  from "./ArrowIcon";
 
 export default function StartScanButton() {
     return (
-        <BaseButton className={twMerge('bg-white w-16 h-16 flex items-center justify-center')}>
+        <BaseButton className={twMerge('shadow-lg bg-white w-16 h-16 flex items-center justify-center')}>
             <ArrowIcon />
         </BaseButton>
     );
 }
-   
+    
