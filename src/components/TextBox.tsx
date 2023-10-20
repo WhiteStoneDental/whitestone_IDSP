@@ -1,7 +1,7 @@
 // components/TextBox.jsx
 import React from 'react';
 
-const TextBox = () => {
+export default function TextBox = () => {
   return (
     <div className="p-4">
       <label htmlFor="textbox" className="block text-gray-600 font-medium">
@@ -17,5 +17,3 @@ const TextBox = () => {
     </div>
   );
 };
-
-export default TextBox;
