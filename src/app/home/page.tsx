@@ -8,6 +8,7 @@ import  StartScanButton  from "@/components/StartButton"
 import HistoryButton from "@/components/HistoryButton"
 import ResourceButton from "@/components/ResourceButton"
 import ScanButton from "@/components/ScanButton"
+import FooterButtons from "@/components/FooterButtons";
 
 export default function HomePage() {
   const scans = ['Placeholder for Scan Details', 'Placeholder for Scan Details'];
@@ -29,18 +30,19 @@ export default function HomePage() {
         <div className={twMerge('mb-5')}>
           <h3 className={twMerge('text-black text-xl mb-3 dark:text-black')}>Previous Scans</h3>
           <div >
+            
       {scans.map((details, index) => (
         <ScanButton key={index} details={details} />
       ))}
     </div>
           <HistoryButton />
         </div>
-
         <div>
         <Link href="/healthresources"><ResourceButton/></Link>
           <div className={twMerge('placeholder-content dark:text-black')}>Placeholder for Health Information</div>
         </div>
       </div>
+      <FooterButtons />
     </div>
   );
 }
