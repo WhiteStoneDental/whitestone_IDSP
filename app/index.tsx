@@ -6,7 +6,6 @@ import { Link } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 
 import tw from '../lib/tailwind.js';
-import Button from "../components/button"
 import WhitestoneLogo from "../assets/whitestone-black.svg";
 
 SplashScreen.preventAutoHideAsync();
