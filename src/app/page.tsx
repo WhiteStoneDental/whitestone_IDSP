@@ -1,18 +1,8 @@
 //src/app/page.tsx
 'use client';
-import { useState, useEffect } from "react";
-import { useTheme } from "next-themes";
-import Link from "next/link";
-import { twMerge } from "tailwind-merge";
 import ClientComponent from '@/components/ClientComponent';
-import { Inter } from "next/font/google"
 
-const inter = Inter({ subsets: ["latin"] })
-
-
-
-
-export default function MainPhrase() {
+export default function Landing() {
   return (
     <div className="h-screen bg-gray-10 flex flex-col items-center justify-center min-h-screen">
       <ClientComponent />
