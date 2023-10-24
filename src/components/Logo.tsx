@@ -1,8 +1,7 @@
-//Components/ClientComponent.tsx
 import Link from 'next/link';
 import Image from 'next/image';
 
-export default function ClientComponent() {
+export default function Logo() {
   return (
     <Link href="/home">
       <div>

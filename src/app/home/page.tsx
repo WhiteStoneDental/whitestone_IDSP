@@ -9,7 +9,7 @@ import HistoryButton from "@/components/HistoryButton"
 import ResourceButton from "@/components/ResourceButton"
 import ScanButton from "@/components/ScanButton"
 
-export default function HomePage() {
+export default function Home() {
   const scans = ['Placeholder for Scan Details', 'Placeholder for Scan Details'];
 
   return (
