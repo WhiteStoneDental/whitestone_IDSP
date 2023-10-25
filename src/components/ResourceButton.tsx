@@ -4,7 +4,7 @@ import  ArrowIcon  from "./ArrowIcon";
 
 export default function ResourceButton() {
     return (
-      <BaseButton className={twMerge('flex justify-between items-center')}>
+      <BaseButton className={twMerge('flex justify-between items-center text-black ')}>
         Health Resources
         <ArrowIcon />
       </BaseButton>
