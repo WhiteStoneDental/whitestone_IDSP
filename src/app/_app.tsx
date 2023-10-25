@@ -1,3 +1,4 @@
+//_app.tsx
 import { AppProps } from 'next/app';
 import RootLayout from './layout';
 
@@ -8,6 +9,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <RootLayout>
       <Component {...pageProps} />
     </RootLayout>
+    
   );
 }
 

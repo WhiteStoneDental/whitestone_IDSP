@@ -1,20 +1,21 @@
-"use client";
+import React from "react";
+import { twMerge } from "tailwind-merge";
 
-import ScanButton from "@/components/ScanButton";
-import dynamic from "next/dynamic";
-
-const FaceLandmarkCanvas = dynamic(
-  () => {
-    return import("@/components/FaceLandmarker");
-  },
-  { ssr: false }
-);
-
-export default function Scan() {
+export default function ScanPage() {
   return (
-    <div className="flex flex-col items-center px-2 pt-10 min-h-screen">
-      <div className="flex justify-center w-full">
-        <FaceLandmarkCanvas />
+    <div
+      className={twMerge(
+        "flex flex-col p-5 h-screen  items-center"
+      )}
+      style={{
+        backgroundImage:
+          "var(--homepage-gradient, gradient-from-24008C via-9D32A5 to-641A99)",
+      }}
+    >
+      <div className={twMerge("flex flex-col items-center mb-5")}>
+        <h1 className={twMerge("text-white text-4xl mb-5 dark:text-white")}>
+          Start Your Scan
+        </h1>
       </div>
     </div>
   );
