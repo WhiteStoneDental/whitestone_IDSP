@@ -17,5 +17,5 @@ for pred in response["predictions"]:
 model.predict("junteeth.jpg", confidence=40, overlap=30).save("prediction.jpg")
 
 # infer on an image hosted elsewhere
-print(model.predict("URL_OF_YOUR_IMAGE", hosted=True, confidence=40, overlap=30).json())
+# print(model.predict("URL_OF_YOUR_IMAGE", hosted=True, confidence=40, overlap=30).json())
 
