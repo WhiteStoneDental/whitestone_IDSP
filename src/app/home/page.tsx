@@ -13,27 +13,32 @@ export default function HomePage() {
     "Placeholder for Scan Details",
   ];
 
-  // Mock logged-in status. Later, this can be replaced by real authentication data.
   const isLoggedIn = false;
 
   return (
     <div
-      className={twMerge(
-        "flex flex-col p-5 bg-gradient-to-br from-24008C to-641A99 via-9D32A5 h-screen"
-      )}
+      className={twMerge("flex flex-col p-5 h-screen")}
+      style={{
+        backgroundImage:
+          "var(--homepage-gradient, gradient-from-24008C via-9D32A5 to-641A99)",
+      }}
     >
       <div className={twMerge("flex flex-col items-center mb-5")}>
-        <h1 className={twMerge("text-black text-4xl mb-5 dark:text-white")}>
+        <h1 className={twMerge("text-white text-4xl mb-5 dark:text-white")}>
           Start Your Scan
         </h1>
         <StartScanButton />
       </div>
 
-      <div className={twMerge("bg-white p-5 rounded-xl mb-5")}>
+      <div className={twMerge("bg-white p-5 rounded-xl h-screen w-full overflow-hidden" )}>
         <div className={twMerge("mb-5")}>
           <Link href="/login/">
-            <h3 className={twMerge("text-black text-xl mb-3 dark:text-black cursor-pointer")}>
-              Past Scans
+            <h3
+              className={twMerge(
+                "text-black text-xl mb-3 dark:text-black cursor-pointer"
+              )}
+            >
+              Past Scans- Log In
             </h3>
           </Link>
           {isLoggedIn ? (
@@ -44,7 +49,9 @@ export default function HomePage() {
               <HistoryButton />
             </div>
           ) : (
-            <p>No Past Scans</p>
+            <p className={twMerge(
+              "text-black "
+            )}>No Past Scans</p>
           )}
         </div>
 
