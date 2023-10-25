@@ -12,7 +12,7 @@ const FaceLandmarkCanvas = dynamic(
 
 export default function Scan() {
   return (
-    <div className="flex flex-col items-center px-2 pt-10 bg-dark-theme min-h-screen text-white">
+    <div className="flex flex-col items-center px-2 pt-10 min-h-screen">
       <div className="flex justify-center w-full">
         <FaceLandmarkCanvas />
       </div>

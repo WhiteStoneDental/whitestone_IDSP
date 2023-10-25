@@ -1,81 +1,86 @@
-import { useEffect, useRef, useState } from "react";
+import Webcam from "react-webcam";
+import { useCallback, useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import FaceLandmarkManager from "@/class/FaceLandmarkManager";
-import DrawLandmarkCanvas from "./DrawLandmarkCanvas";
+
+interface Coordinates {
+  [key: string]: number;
+}
+
+const denormalizeCoordinates = (
+  coordinates: Coordinates,
+  width: number,
+  height: number
+) => {
+  const newCoords = { x: 0, y: 0 };
+
+  newCoords.x = coordinates.x * width;
+  newCoords.y = coordinates.y * height;
+
+  return newCoords;
+};
 
 export default function FaceLandmarker() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const lastVideoTimeRef = useRef(-1);
-  const requestRef = useRef(0);
-  const [videoSize, setVideoSize] = useState<{
-    width: number;
-    height: number;
-  }>();
+  const webcamRef = useRef(null);
+  const imageRef = useRef(null);
+  const canvasRef = useRef(null);
+  const [imgSrc, setImgSrc] = useState(null);
 
-  const animate = () => {
-    if (
-      videoRef.current &&
-      videoRef.current.currentTime !== lastVideoTimeRef.current
-    ) {
-      lastVideoTimeRef.current = videoRef.current.currentTime;
+  function cropImg(landmarkManager: FaceLandmarkManager, imageSrc: ImageData) {
+    const landmarkCoordinates =
+      landmarkManager.getResults().faceLandmarks[0][35];
+    console.log(landmarkCoordinates)
+    const ctx = canvasRef.current.getContext("2d");
+    const denormalizedCoordinates = denormalizeCoordinates(
+      { x: landmarkCoordinates.x, y: landmarkCoordinates.y },
+      600,
+      600
+    );
+    ctx.drawImage(
+      imageRef.current,
+      denormalizedCoordinates.x + 12,
+      denormalizedCoordinates.y - 25,
+      100,
+      100,
+      0,
+      0,
+      canvasRef.current.width,
+      canvasRef.current.height
+    );
+  }
+
+  const capture = useCallback(() => {
+    // yea too lazy to fix rn
+    const imageSrc = webcamRef.current.getScreenshot();
+    setImgSrc(imageSrc);
+  }, [webcamRef]);
+
+  useEffect(() => {
+    if (imgSrc) {
       try {
         const faceLandmarkManager = FaceLandmarkManager.getInstance();
-        faceLandmarkManager.detectLandmarks(videoRef.current, Date.now());
+        console.log(imageRef.current)
+        setTimeout(() => {
+          faceLandmarkManager.detectLandmarks(imageRef.current);
+          cropImg(faceLandmarkManager, imgSrc);
+        }, 1000)
       } catch (e) {
         console.log(e);
       }
     }
-    requestRef.current = requestAnimationFrame(animate);
-  };
-
-  useEffect(() => {
-    const getUserCamera = async () => {
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({
-          video: true,
-        });
-        if (videoRef.current) {
-          videoRef.current.srcObject = stream;
-          videoRef.current.onloadedmetadata = () => {
-            setVideoSize({
-              width: videoRef.current!.offsetWidth,
-              height: videoRef.current!.offsetHeight,
-            });
-            videoRef.current!.play();
-
-            // Start animation once video is loaded
-            requestRef.current = requestAnimationFrame(animate);
-          };
-        }
-      } catch (e) {
-        console.log(e);
-        alert("Failed to load webcam!");
-      }
-    };
-    getUserCamera();
-
-    return () => cancelAnimationFrame(requestRef.current);
-  }, []);
+  }, [imgSrc]);
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="flex justify-center gap-10 mt-5 mb-10">
-      </div>
-      <div className="flex justify-center">
-        <video
-          className="w-full h-auto"
-          ref={videoRef}
-          loop={true}
-          muted={true}
-          autoPlay={true}
-          playsInline={true}
-        ></video>
-        {videoSize && (
-            <DrawLandmarkCanvas
-                width={videoSize.width}
-                height={videoSize.height}
-            />
-        )}
+    <div className="container">
+      {imgSrc ? (
+        <Image ref={imageRef} src={imgSrc} alt="webcam" width={600} height={600} />
+      ) : (
+        <Webcam height={600} width={600} ref={webcamRef} />
+      )}
+      <canvas ref={canvasRef}></canvas>
+      <div className="btn-container">
+        <button onClick={capture}>Capture photo</button>
       </div>
     </div>
   );
-};
+}
