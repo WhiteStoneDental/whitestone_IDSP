@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
-export default function ClientComponent() {
+export default function Logo() {
   return (
     //633x223
     //638X230

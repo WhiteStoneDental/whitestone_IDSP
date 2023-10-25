@@ -1,6 +1,7 @@
 //_app.tsx
 import { AppProps } from 'next/app';
 import RootLayout from './layout';
+
 import 'global.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
