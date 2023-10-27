@@ -3,7 +3,7 @@ import { useFonts, Mulish_400Regular } from "@expo-google-fonts/mulish";
 import { useDeviceContext, useAppColorScheme } from "twrnc";
 import { SplashScreen, Slot } from "expo-router";
 
-import tw from '../lib/tailwind.js';
+import tw from '@/lib/tailwind';
 
 SplashScreen.preventAutoHideAsync();
 
