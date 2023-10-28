@@ -1,8 +1,8 @@
 import { Text, View } from "react-native";
 import { Link } from 'expo-router';
 
-import tw from '../lib/tailwind.js';
-import WhitestoneLogo from "../assets/whitestone-black.svg";
+import tw from '@/lib/tailwind.js';
+import WhitestoneLogo from "@/assets/whitestone-black.svg";
 
 export default function App() {
 
