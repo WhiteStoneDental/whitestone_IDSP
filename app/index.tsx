@@ -5,7 +5,6 @@ import tw from '@/lib/tailwind.js';
 import WhitestoneLogo from "@/assets/whitestone-black.svg";
 
 export default function App() {
-
   return (
     <View style={tw`flex-1 items-center justify-center`}>
       <WhitestoneLogo width="40%" height="40%" style={tw`py-4`} />
