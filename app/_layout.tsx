@@ -11,7 +11,7 @@ import tw from "@/lib/tailwind";
 
 SplashScreen.preventAutoHideAsync();
 
-export default function Layout({ children }: { children: React.ReactNode[] }) {
+export default function Layout() {
   const colorScheme = useColorScheme();
   const [fontsLoaded, fontError] = useFonts({
     Mulish_400Regular,
