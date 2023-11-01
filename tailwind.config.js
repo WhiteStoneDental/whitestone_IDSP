@@ -15,8 +15,7 @@ module.exports = {
         'lighter-gray': '#40304B',
       },
       fontFamily: {
-        'sans': ['Mulish_400Regular', 'ui-sans-serif', 'system-ui'],
-        'mulish': ['Mulish_400Regular', 'ui-sans-serif'],
+        'mulish': ['Mulish_400Regular', 'ui-sans-serif', 'system-ui'],
       },
     },
   },
