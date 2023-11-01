@@ -21,15 +21,18 @@ const denormalizeCoordinates = (
 };
 
 export default function FaceLandmarker() {
-  const webcamRef = useRef(null);
-  const imageRef = useRef(null);
-  const canvasRef = useRef(null);
+  const webcamRef = useRef<Webcam>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const [imgSrc, setImgSrc] = useState(null);
 
   function cropImg(landmarkManager: FaceLandmarkManager, imageSrc: ImageData) {
     const landmarkCoordinates =
       landmarkManager.getResults().faceLandmarks[0][35];
     console.log(landmarkCoordinates)
+    if (canvasRef.current != null) {
+      console.log(canvasRef.current)
+    }
     const ctx = canvasRef.current.getContext("2d");
     const denormalizedCoordinates = denormalizeCoordinates(
       { x: landmarkCoordinates.x, y: landmarkCoordinates.y },
