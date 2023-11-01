@@ -1,46 +1,30 @@
-interface User {
-    username: string;
-    password: string;
-}
+'use server'
+import { db } from '@/db';
+import { users } from './db/schema/users';
+import { verifyPassword } from "./utils/passwordUtility";
+import { eq } from "drizzle-orm";
 
-const users: User[] = [
-    {
-        username: 'fefo',
-        password: 'idk'
-    },
-    {
-        username: 'devynn',
-        password: 'admin'
-    },
-    {
-        username: 'jun',
-        password: 'admin'
-    },
-    {
-        username: 'brian',
-        password: 'admin'
-    },
-    {
-        username: 'jill',
-        password: 'admin'
-    },
-    {
-        username: 'jessie',
-        password: 'admin'
-    },
-    {
-        username: 'wendy',
-        password: 'admin'
-    },
-    {
-        username: 'ingrid',
-        password: 'admin'
-    },
-
+export async function checkCredentials(username: string, password: string): Promise<{ username: string, email: string, password: string } | null> {
+    const results = await db.select().from(users).where(eq(users.username, username));
+    const user = results[0];
     
-    
-];
+    if (user) {
+        const isPasswordValid = await verifyPassword(password, user.password);
+        console.log('Is password valid?', isPasswordValid); 
 
-export function checkCredentials(username: string, password: string): boolean {
-    return users.some(user => user.username === username && user.password === password);
+        if (isPasswordValid) {
+            return {
+                username: user.username,
+                email: user.email,
+                password: user.password     
+            };
+        } else {
+            console.log(user);
+            return null;
+        }
+    }
+
+
+    console.log("User not found or password incorrect");
+    return null;
 }
