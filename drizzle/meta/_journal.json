@@ -1,0 +1,27 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1698684787309,
+      "tag": "0000_lyrical_jasper_sitwell",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1698701381055,
+      "tag": "0001_grey_mysterio",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1698861159373,
+      "tag": "0002_lumpy_alex_wilder",
+      "breakpoints": true
+    }
+  ]
+}
