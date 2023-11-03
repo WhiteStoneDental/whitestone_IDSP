@@ -7,7 +7,6 @@ import {
   DarkTheme,
   DefaultTheme,
 } from "@react-navigation/native";
-import { LinearGradient } from "expo-linear-gradient";
 import tw from "@/lib/tailwind";
 
 SplashScreen.preventAutoHideAsync();
@@ -30,13 +29,7 @@ export default function Layout() {
 
   return (
     <ThemeProvider value={colorScheme === "light" ? DefaultTheme : DarkTheme}>
-      <LinearGradient
-      colors={["#9D32A5", "#641A99", "#24008C"]}
-      style={tw`flex-1`}
-    >
-
       <Slot />
-    </LinearGradient>
     </ThemeProvider>
   );
 }
