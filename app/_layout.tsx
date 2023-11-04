@@ -7,7 +7,7 @@ import {
   DarkTheme,
   DefaultTheme,
 } from "@react-navigation/native";
-import tw from "@/lib/tailwind";
+import { tw } from "@/lib/tailwind";
 
 SplashScreen.preventAutoHideAsync();
 
