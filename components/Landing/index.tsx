@@ -8,12 +8,10 @@ import { tw } from '@/lib/tailwind';
 
 const Landing = ({ navigation }) => {
   useEffect(() => {
-    // Redirect to the home page after 3 seconds
     const redirectTimeout = setTimeout(() => {
-      navigation.navigate('Home'); // Replace 'Home' with the name of your home screen
-    }, 3000); // 3000 milliseconds (3 seconds)
+      navigation.navigate('Home'); 
+    }, 3000); // 3 seconds
 
-    // Clear the timeout if the component is unmounted
     return () => clearTimeout(redirectTimeout);
   }, [navigation]);
 
