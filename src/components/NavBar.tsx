@@ -9,7 +9,7 @@ const NavBar: React.FC = () => {
           <img src="/Settings.svg" alt="Home" className="w-8 h-8 mb-1" />
         </div>
       </Link>
-      <Link href="/">
+      <Link href="/home">
         <div className="flex flex-col items-center text-sm">
           <i className="fas fa-search text-2xl mb-1"></i>
           <img src="/Home.svg" alt="Home" className="w-8 h-8 mb-1" />

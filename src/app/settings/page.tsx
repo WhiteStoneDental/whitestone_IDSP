@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import SaveButton from '@/components/SaveButton';
 import CancelButton from '@/components/CancelButton';
+import NavBar from "@/components/NavBar";
 
 const SettingsPage = () => {
   const [userData, setUserData] = useState({
@@ -118,13 +119,14 @@ const SettingsPage = () => {
             />
           </div>
           <div>
-          <SaveButton/>
-          <CancelButton />
-        </div>
+            <SaveButton />
+            <CancelButton />
+          </div>
 
         </form>
-
-       
+      </div>
+      <div>
+        <NavBar />
       </div>
     </div>
   );
