@@ -1,6 +1,6 @@
 import { Text, useColorScheme } from "react-native";
 import { Platform } from "react-native";
-import tw from "@/lib/tailwind";
+import {tw} from "@/lib/tailwind";
 
 
 export default function Scan() {
