@@ -1,18 +1,10 @@
-import { useRouter, useFocusEffect, Link } from "expo-router";
+import { Link } from "expo-router";
 import { View, Text } from "react-native";
 
 import { tw } from "@/lib/tailwind";
 import WhitestoneLogo from "@/assets/whitestone-black.svg";
 
 export default function Landing() {
-    const router = useRouter();
-
-    useFocusEffect(() => {
-        setTimeout(() => {
-            router.replace("/home");
-        }, 3000)
-    })
-
     return (
         <View style={tw`flex-1 items-center justify-center`}>
         <Link href="/home" style={tw`mb-10`}>
