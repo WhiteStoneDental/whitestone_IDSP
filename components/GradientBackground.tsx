@@ -6,7 +6,8 @@ export default function GradientBackground({
 }: {
   children: React.ReactNode
 }) {
-  const colors = fullConfig.theme.extend.colors;
+  // this exists, idk how to fix
+  const colors = fullConfig.theme.colors;
   const chosenColors = [colors["pinkish-purple"], colors["custom-purple"], colors["custom-blue"]] as string[];
     return <LinearGradient
     colors={chosenColors}
