@@ -1,15 +1,19 @@
-import { Text } from "react-native";
+import { View, Text } from "react-native";
 import { Link } from "expo-router";
 
-import GradientBackground from "@/components/GradientBackground";
 import { tw } from "@/lib/tailwind";
+
+import GradientBackground from "@/components/GradientBackground";
+import ScanButton from "@/components/ScanButton";
+
 
 export default function Home() {
   return (
     <GradientBackground>
-      <Link href="/scan">
-        <Text style={tw`font-mulish text-xl`}>Scan</Text>
-      </Link>
+      <View style={tw`flex items-center`}>
+      <Text style={tw`font-mulish text-9 text-white`}>Start Your Scan</Text>
+      <ScanButton />
+      </View>
     </GradientBackground>
   );
 }

@@ -7,9 +7,9 @@ import WhitestoneLogo from "@/assets/whitestone-black.svg";
 export default function Landing() {
     return (
         <View style={tw`flex-1 items-center justify-center`}>
-        <Link href="/home" style={tw`mb-10`}>
-          <WhitestoneLogo width="100%" height="100%" style={tw`py-4`} />
-        </Link>
+     
+          <WhitestoneLogo width="50%" height="50%" style={tw`py-4`} />
+     
         <Link href="/scan">
             <Text style={tw`font-mulish text-xl`}>Scan</Text>
         </Link>
