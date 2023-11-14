@@ -24,7 +24,6 @@ const denormalizeCoordinates = (
 
 export default function FaceLandmarker() {
   const webcamRef = useRef<Webcam>(null);
-  const imageRef = useRef<Image>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [imgSrc, setImgSrc] = useState(null);
 
@@ -85,7 +84,7 @@ export default function FaceLandmarker() {
   return (
     <View style={tw`container`}>
       {imgSrc ? (
-        <Image ref={imageRef} source={imgSrc} alt="webcam image" />
+        <Image source={imgSrc} alt="webcam image" />
       ) : (
         <Webcam height={600} width={600} ref={webcamRef} alt="webcam" />
       )}
