@@ -1,5 +1,4 @@
 import { useRouter, useFocusEffect } from "expo-router";
-import { FaceLandmarker } from "@mediapipe/tasks-vision";
 
 import Landing from "@/components/landing";
 
