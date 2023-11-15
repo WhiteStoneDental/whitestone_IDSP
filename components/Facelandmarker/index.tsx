@@ -27,7 +27,7 @@ export default function FaceLandmarker() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [imgSrc, setImgSrc] = useState(null);
 
-  function cropImg(landmarkManager: FaceLandmarkManager, imageSrc: ImageData) {
+  function cropImg(landmarkManager: FaceLandmarkManager) {
     console.log(landmarkManager.getResults())
     const landmarkCoordinates =
       landmarkManager.getResults().faceLandmarks[0][35];
@@ -69,7 +69,7 @@ export default function FaceLandmarker() {
           faceLandmarkManager.detectLandmarks(imgSrc);
           const blendshapeObject = faceLandmarkManager.getResults().faceBlendshapes;
           if (blendshapeObject[0].categories[35].score >= 0.14) {
-            cropImg(faceLandmarkManager, imgSrc);
+            cropImg(faceLandmarkManager);
           } else {
             alert("confidence score was not high enough, retake picture");
             setImgSrc(null);
