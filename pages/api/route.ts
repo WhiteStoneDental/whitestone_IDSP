@@ -11,6 +11,8 @@ type Message = {
   content: string;
 };
 
+export const runtime = "edge";
+
 export default async function POST(req: NextRequest) {
   console.log("hitting openai");
   const systemMessages: Message[] = [
