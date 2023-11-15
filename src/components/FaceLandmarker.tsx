@@ -39,7 +39,7 @@ export default function FaceLandmarker() {
     ctx.drawImage(
       imageRef.current,
       denormalizedCoordinates.x + 12,
-      denormalizedCoordinates.y - 25,
+      denormalizedCoordinates.y - 20,
       100,
       100,
       0,
