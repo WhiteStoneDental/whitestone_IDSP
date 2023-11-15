@@ -24,7 +24,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.devynnt.whitestone"
     },
     "web": {
       "favicon": "./assets/favicon.png",
@@ -33,6 +34,14 @@
     "plugins": [
       "expo-router"
     ],
-    "scheme": "demo"
+    "scheme": "demo",
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "b20fd00f-7460-4e22-88d3-ea47663948dd"
+      }
+    }
   }
 }
