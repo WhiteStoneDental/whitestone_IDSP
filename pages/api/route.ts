@@ -3,7 +3,7 @@ import { type NextRequest } from "next/server";
 import OpenAI from "openai";
 
 const openai = new OpenAI({
-  apiKey: "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",
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 type Message = {
