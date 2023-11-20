@@ -3,73 +3,27 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import FaceLandmarkManager from "@/class/FaceLandmarkManager";
 
-interface Coordinates {
-  [key: string]: number;
-}
-
-const denormalizeCoordinates = (
-  coordinates: Coordinates,
-  width: number,
-  height: number
-) => {
-  const newCoords = { x: 0, y: 0 };
-
-  newCoords.x = coordinates.x * width;
-  newCoords.y = coordinates.y * height;
-
-  return newCoords;
-};
 
 export default function FaceLandmarker() {
   const webcamRef = useRef<Webcam>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [imgSrc, setImgSrc] = useState(null);
-
-  function cropImg(landmarkManager: FaceLandmarkManager, imageSrc: ImageData) {
-    console.log(landmarkManager.getResults())
-    const landmarkCoordinates =
-      landmarkManager.getResults().faceLandmarks[0][35];
-    console.log(landmarkCoordinates)
-    if (canvasRef.current != null) {
-      console.log(canvasRef.current)
-    }
-    const ctx = canvasRef.current.getContext("2d");
-    const denormalizedCoordinates = denormalizeCoordinates(
-      { x: landmarkCoordinates.x, y: landmarkCoordinates.y },
-      600,
-      600
-    );
-    ctx.drawImage(
-      imageRef.current,
-      denormalizedCoordinates.x + 12,
-      denormalizedCoordinates.y - 25,
-      100,
-      100,
-      0,
-      0,
-      canvasRef.current.width,
-      canvasRef.current.height
-    );
-  }
+  const faceLandmarkManager = FaceLandmarkManager.getInstance();
 
   const capture = useCallback(() => {
-    // yea too lazy to fix rn
-    const imageSrc = webcamRef.current.getScreenshot();
-    setImgSrc(imageSrc);
+    const results = faceLandmarkManager.getResults();
+    console.log(results)
   }, [webcamRef]);
 
   useEffect(() => {
-    if (imgSrc) {
+    if (imgSrc && webcamRef.current) {
       try {
-        const faceLandmarkManager = FaceLandmarkManager.getInstance();
-      
-        console.log(imageRef.current)
+        console.log("runnign")
         setTimeout(() => {
-          faceLandmarkManager.detectLandmarks(imageRef.current);
+          faceLandmarkManager.videoDetectLandmarks(webcamRef.current!.video, Date.now());
           const blendshapeObject = faceLandmarkManager.getResults().faceBlendshapes;
           if (blendshapeObject[0].categories[35].score >= 0.14) {
-            cropImg(faceLandmarkManager, imgSrc);
           } else {
             alert("confidence score was not high enough, retake picture");
             setImgSrc(null);
@@ -79,12 +33,12 @@ export default function FaceLandmarker() {
         console.log(e);
       }
     }
-  }, [imgSrc]);
+  }, []);
 
   return (
     <div className="container">
       {imgSrc ? (
-        <Image ref={imageRef} src={imgSrc} alt="webcam" width={600} height={600} />
+        <Image ref={imageRef} src={imgSrc} alt="webcam image" width={600} height={600} />
       ) : (
         <Webcam height={600} width={600} ref={webcamRef} />
       )}
