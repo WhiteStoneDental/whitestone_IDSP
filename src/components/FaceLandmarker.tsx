@@ -19,9 +19,8 @@ export default function FaceLandmarker() {
   useEffect(() => {
     if (imgSrc && webcamRef.current) {
       try {
-        console.log("runnign")
         setTimeout(() => {
-          faceLandmarkManager.videoDetectLandmarks(webcamRef.current!.video, Date.now());
+          faceLandmarkManager.detectLandmarks(webcamRef.current.video, Date.now());
           const blendshapeObject = faceLandmarkManager.getResults().faceBlendshapes;
           if (blendshapeObject[0].categories[35].score >= 0.14) {
           } else {
