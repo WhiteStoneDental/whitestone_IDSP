@@ -3,21 +3,7 @@ import {
   FilesetResolver,
   FaceLandmarkerResult,
   DrawingUtils,
-  ImageSource,
 } from "@mediapipe/tasks-vision";
-
-interface Coordinates {
-  [key: string]: number
-}
-
-const denormalizeCoordinates = (coordinates: Coordinates, width: number, height: number) => {
-  const newCoords = { x: 0, y: 0 };
-
-  newCoords.x = coordinates.x * width;
-  newCoords.y = coordinates.y * height;
-
-  return newCoords;
-};
 
 class FaceLandmarkManager {
   private static instance: FaceLandmarkManager = new FaceLandmarkManager();
@@ -46,7 +32,7 @@ class FaceLandmarkManager {
         },
         outputFaceBlendshapes: true,
         outputFacialTransformationMatrixes: true,
-        runningMode: "IMAGE",
+        runningMode: "VIDEO",
         numFaces: 1,
       }
     );
@@ -56,18 +42,7 @@ class FaceLandmarkManager {
     return this.results;
   };
 
-  detectLandmarks = (
-    image: ImageSource,
-  ) => {
-    if (!this.faceLandmarker) {
-      return;
-    }
-    const results = this.faceLandmarker.detect(image);
-    console.log(results)
-    this.results = results;
-  };
-
-  videoDetectLandmarks = (videoElement: HTMLVideoElement, time: number) => {
+  detectLandmarks = (videoElement: HTMLVideoElement, time: number) => {
     if (!this.faceLandmarker) return;
 
     const results = this.faceLandmarker.detectForVideo(videoElement, time);
