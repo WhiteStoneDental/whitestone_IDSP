@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import Head from "next/head";
@@ -18,7 +19,9 @@ export default function HomePage() {
   ];
 
   const [loading, setLoading] = useState(true);
+
   
+
 
   const isLoggedIn = true;
 

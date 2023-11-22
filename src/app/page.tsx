@@ -16,12 +16,20 @@ export default function Landing() {
     return () => clearTimeout(timeout);
   }, []);
 
+  const handleLetsGoClick = () => {
+    setLoading(true);
+
+    setTimeout(() => {
+      window.location.href = "/home";
+    }, 3000);
+  };
+
   if (loading) {
     console.log("line 12"); //hitting this line ok
     return (
       <>
         <div className="flex items-center justify-center h-screen">
-          <h2 className="font-lg">Welcome to White Stone!</h2>
+          <h2 className="font-lg">Loading White Stone...</h2>
         </div>
       </>
     );
@@ -170,20 +178,16 @@ export default function Landing() {
             </Link>
           </div>
 
-          <div
-            className={`bg-purple-200 rounded-md ${
-              loading ? "opacity-50" : ""
-            }`}
-          >
+          <div className="bg-purple-200 rounded-md">
             <p className="text-gray-700 mb-3 mt-2">Check the web app</p>
-            <Link
-              href="/home"
+            <button
               className={`bg-purple-500 text-white px-20 py-3 rounded-full ${
                 loading ? "pointer-events-none" : ""
               }`}
+              onClick={handleLetsGoClick}
             >
-              Let's Go
-            </Link>
+              {loading ? "Loading..." : "Let's Go"}
+            </button>
           </div>
         </div>
         <hr className="mt-10"></hr>
