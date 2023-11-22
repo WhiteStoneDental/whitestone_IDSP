@@ -2,10 +2,8 @@ export const submitImage = async (
   url: string,
   message: string,
   image: string,
-  base64?: boolean
 ) => {
-  const imageString = base64 ? `data:image/jpeg;base64,${image}` : image;
-  console.log(imageString)
+  console.log("ran")
   const res = await fetch(url, {
     method: "POST",
     headers: {
@@ -23,7 +21,7 @@ export const submitImage = async (
             {
               type: "image_url",
               image_url: {
-                url: imageString,
+                url: image,
               },
             },
           ],

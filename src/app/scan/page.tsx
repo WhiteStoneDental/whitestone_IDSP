@@ -1,7 +1,8 @@
 "use client";
-import React from "react";
+import { useState } from "react";
 import dynamic from "next/dynamic";
 import { twMerge } from "tailwind-merge";
+import { submitImage } from "../../../util/send-to-api";
 
 const FaceLandmarkCanvas = dynamic(
   () => {
@@ -23,9 +24,6 @@ export default function ScanPage() {
     >
       <div className={twMerge("flex flex-col items-center mb-5")}>
         <FaceLandmarkCanvas />
-        <h1 className={twMerge("text-white text-4xl mb-5 dark:text-white")}>
-          Start Your Scan
-        </h1>
       </div>
     </div>
   );
