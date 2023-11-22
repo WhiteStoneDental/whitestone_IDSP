@@ -11,7 +11,7 @@ const AccordionItem = ({ title, content }) => {
     return (
         <div className="mb-5 font-sans">
             <div
-                className="flex items-center justify-between p-3 bg-purple-300 cursor-pointer rounded"
+                className="flex items-center justify-between p-3 bg-white-300 cursor-pointer rounded"
                 onClick={toggleAccordion}
             >
                 <span className="font-bold text-l">{title}</span>
@@ -38,12 +38,12 @@ const AccordionItem = ({ title, content }) => {
 const Accordion = () => {
     const items = [
         { title: 'Bleeding Gums', content: 'Main Symptoms: bleeding, swollen, red, bad breath, tenderness' },
-        { title: 'Section 2', content: 'Content' },
-        { title: 'Section 3', content: 'Content' },
-        { title: 'Section 4', content: 'Content' },
-        { title: 'Section 5', content: 'Content' },
-        { title: 'Section 6', content: 'Content' },
-        { title: 'Section 7', content: 'Content' },
+        { title: 'Swollen and Red Gums', content: 'Content' },
+        { title: 'Gum Sensitivity', content: 'Content' },
+        { title: 'Gum Inflammation', content: 'Content' },
+        { title: 'Gap Between Teeth and Gums', content: 'Content' },
+        { title: 'Gum Recession', content: 'Content' },
+        { title: 'Cavities', content: 'Content' },
         { title: 'Section 8', content: 'Content' },
     ];
 
