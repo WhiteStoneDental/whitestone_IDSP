@@ -1,6 +1,6 @@
-import { twMerge } from "tailwind-merge";
 import NavBar from "@/components/NavBar";
-import Accordion from "@/components/Accordian";
+import Accordion from "@/components/Accordion";
+import LoginButton from "@/components/LoginButton";
 
 export default function ResourcePage() {
 
