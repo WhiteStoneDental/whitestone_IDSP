@@ -1,5 +1,7 @@
 import React from 'react';
 import { twMerge } from 'tailwind-merge';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Landing() {
     return (
@@ -10,7 +12,7 @@ export default function Landing() {
             }}>
             <div className="bg-white p-8 rounded shadow-lg text-center items-center justify-center max-h-screen overflow-y-scroll">
                 <div className="items-center flex justify-center">
-                    <img className="flex object-center justify-center items-center" src='image/blackLogo.png' alt='WhiteStone Logo' width={300} height={50} />
+                    <Image className="flex object-center justify-center items-center" src='/image/blackLogo.png' alt='WhiteStone Logo' width={300} height={50} />
                 </div>
                 <h1 className="text-5xl font-extrabold text-gray-800 mt-4">
                     Your Personal Dental Assistant
@@ -40,22 +42,24 @@ export default function Landing() {
                             <h1 className="text-4xl font-extrabold text-purple-500">Bringing Back Smiles</h1>
                             <p className='text-black mt-5 text-justify px-3 text-lg'>Our Goal with WhiteStone is create an <b>affordable alternative</b> to in person oral consultation. WhiteStone utilizes machine learning technology paired with your phone or computers camera to scan and quickly determine any possible oral afflictions you may be facing, then recommend your next steps for possible healthcare actions to improve your oral health.</p>
                         </div>
-                        <img
-                            className=""
-                            src="image/Scan Pic.png"
+                        <Image
+                            className="h-auto"
+                            src="/image/Scan Pic.png"
                             alt="Placeholder"
                             width={260}
+                            height={0}
                         />
                     </div>
                 </div>
                 <hr className='mt-4'></hr>
                 <div className='text-center items-center justify-center flex'>
                     <div className='mt-4 flex text-center items-center justify-center max-w-3xl'>
-                        <img
-                            className=""
-                            src="image/Scan Details.png"
+                        <Image
+                            className="h-auto"
+                            src="/image/Scan Details.png"
                             alt="Placeholder"
                             width={280}
+                            height={0}
                         />
                         <div className='flex-initial row ml-10'>
                             <h1 className="text-4xl font-extrabold text-purple-500">Track Your Progress</h1>
@@ -70,11 +74,12 @@ export default function Landing() {
                             <h1 className="text-4xl font-extrabold text-purple-500">Learn About Your Teeth</h1>
                             <p className='text-black mt-5 text-justify px-3 text-lg'>Find informational <b>dental care resources</b> relating directly to your scan results in the app. Pair the effective dental scans with relevant oral care practices to immeditely improve the health of your teeth.</p>
                         </div>
-                        <img
-                            className=""
-                            src="image/Health Resources.png"
+                        <Image
+                            className="h-auto"
+                            src="/image/Health Resources.png"
                             alt="Placeholder"
                             width={270}
+                            height={0}
                         />
                     </div>
                 </div>
@@ -84,16 +89,16 @@ export default function Landing() {
                         <p className="text-gray-700 mb-2.5">
                             Try Our Demo
                         </p>
-                        <a href="/Loading" className="bg-purple-500 text-white px-5 py-3 rounded-full">
+                        <Link href="/scan" className="bg-purple-500 text-white px-5 py-3 rounded-full">
                             Check It Out
-                        </a>
+                        </Link>
                     </div>
                 </div>
                 <hr className='mt-10'></hr>
                 <div className=''>
                     <h1 className="text-4xl font-extrabold text-gray-800 mt-6">Contact Us</h1>
-                    <p className='text-black mt-2'><b>Email:</b><a href="mailto:White.Stone.23@gmail.com"> White.Stone.23@gmail.com</a></p>
-                    <p className='text-black mt-2'><b>Blog:</b><a href="https://whitestone23.wixsite.com/whitestone"> WhiteStone</a></p>
+                    <p className='text-black mt-2'><b>Email:</b><Link href="mailto:White.Stone.23@gmail.com"> White.Stone.23@gmail.com</Link></p>
+                    <p className='text-black mt-2'><b>Blog:</b><Link href="https://whitestone23.wixsite.com/whitestone">WhiteStone</Link></p>
                 </div>
             </div>
         </div>
