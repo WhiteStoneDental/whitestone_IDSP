@@ -9,12 +9,16 @@ import IssuesStatus from "@/components/IssuesStatus";
 import ScanButton from "@/components/ScanButton";
 import NavBar from "@/components/NavBar";
 import LoginButton from "@/components/LoginButton";
+import { useState, useEffect } from "react";
 
 export default function HomePage() {
   const scans = [
     "Placeholder for Scan Details",
     "Placeholder for Scan Details",
   ];
+
+  const [loading, setLoading] = useState(true);
+  
 
   const isLoggedIn = true;
 

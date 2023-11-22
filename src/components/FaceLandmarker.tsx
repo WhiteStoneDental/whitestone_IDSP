@@ -94,7 +94,7 @@ export default function FaceLandmarker() {
               setMouthOpen("mouth not open");
             }
           } else {
-            setMouthOpen("mouth not open");
+            setMouthOpen("face not detected");
           }
         } catch (error) {
           console.log(error);
