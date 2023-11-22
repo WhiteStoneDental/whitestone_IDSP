@@ -6,6 +6,7 @@ import StartScanButton from "@/components/StartButton";
 import HistoryButton from "@/components/HistoryButton";
 import ResourceButton from "@/components/ResourceButton";
 import ScanButton from "@/components/ScanButton";
+import NavBar from "@/components/NavBar";
 
 export default function HomePage() {
   const scans = [
@@ -61,6 +62,10 @@ export default function HomePage() {
             Placeholder for Health Information
           </div>
         </div>
+      </div>
+
+      <div>
+        <NavBar/>
       </div>
     </div>
   );

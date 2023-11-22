@@ -21,15 +21,19 @@ const denormalizeCoordinates = (
 };
 
 export default function FaceLandmarker() {
-  const webcamRef = useRef(null);
-  const imageRef = useRef(null);
-  const canvasRef = useRef(null);
+  const webcamRef = useRef<Webcam>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const [imgSrc, setImgSrc] = useState(null);
 
   function cropImg(landmarkManager: FaceLandmarkManager, imageSrc: ImageData) {
+    console.log(landmarkManager.getResults())
     const landmarkCoordinates =
       landmarkManager.getResults().faceLandmarks[0][35];
     console.log(landmarkCoordinates)
+    if (canvasRef.current != null) {
+      console.log(canvasRef.current)
+    }
     const ctx = canvasRef.current.getContext("2d");
     const denormalizedCoordinates = denormalizeCoordinates(
       { x: landmarkCoordinates.x, y: landmarkCoordinates.y },
@@ -59,10 +63,17 @@ export default function FaceLandmarker() {
     if (imgSrc) {
       try {
         const faceLandmarkManager = FaceLandmarkManager.getInstance();
+      
         console.log(imageRef.current)
         setTimeout(() => {
           faceLandmarkManager.detectLandmarks(imageRef.current);
-          cropImg(faceLandmarkManager, imgSrc);
+          const blendshapeObject = faceLandmarkManager.getResults().faceBlendshapes;
+          if (blendshapeObject[0].categories[35].score >= 0.14) {
+            cropImg(faceLandmarkManager, imgSrc);
+          } else {
+            alert("confidence score was not high enough, retake picture");
+            setImgSrc(null);
+          }
         }, 1000)
       } catch (e) {
         console.log(e);
