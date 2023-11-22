@@ -84,7 +84,7 @@ export default function Landing() {
                         <p className="text-gray-700 mb-2.5">
                             Try Our Demo
                         </p>
-                        <a href="/Loading" className="bg-purple-500 text-white px-5 py-3 rounded-full">
+                        <a href="/scan" className="bg-purple-500 text-white px-5 py-3 rounded-full">
                             Check It Out
                         </a>
                     </div>

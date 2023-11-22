@@ -1,6 +1,7 @@
 import Webcam from "react-webcam";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import FaceLandmarkManager from "@/class/FaceLandmarkManager";
 
 interface Coordinates {
@@ -92,6 +93,9 @@ export default function FaceLandmarker() {
       <div className="btn-container">
         <button onClick={capture}>Capture photo</button>
       </div>
+        <Link href="/test-scan">
+          <button>test scan</button>
+        </Link>
     </div>
   );
 }

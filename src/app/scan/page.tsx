@@ -15,10 +15,10 @@ export default function ScanPage() {
       }}
     >
       <div className={twMerge("flex flex-col items-center mb-5")}>
-        <FaceLandmarker />
         <h1 className={twMerge("text-white text-4xl mb-5 dark:text-white")}>
           Start Your Scan
         </h1>
+        <FaceLandmarker />
       </div>
     </div>
   );
