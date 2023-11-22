@@ -11,6 +11,7 @@
     "db:push": "drizzle-kit push:pg"
   },
   "dependencies": {
+    "@heroicons/react": "^1.0.6",
     "@mediapipe/tasks-vision": "^0.10.7",
     "@neondatabase/serverless": "^0.6.0",
     "@types/node": "20.6.3",

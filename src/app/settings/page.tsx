@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import SaveButton from '@/components/SaveButton';
 import CancelButton from '@/components/CancelButton';
+import NavBar from '@/components/NavBar';
+import LoginButton from "@/components/LoginButton";
 
 const SettingsPage = () => {
   const [userData, setUserData] = useState({
@@ -70,6 +72,7 @@ const SettingsPage = () => {
           "var(--homepage-gradient, gradient-from-24008C via-9D32A5 to-641A99)",
       }}
     >
+      <LoginButton/>
       <div className="flex flex-col p-5">
         <div className="relative mx-auto mb-5">
           <div className="rounded-full border-4 border-white">
@@ -118,13 +121,14 @@ const SettingsPage = () => {
             />
           </div>
           <div>
-          <SaveButton/>
-          <CancelButton />
-        </div>
-
+            <SaveButton />
+            <CancelButton />
+          </div>
         </form>
+      </div>
 
-       
+      <div>
+        <NavBar />
       </div>
     </div>
   );

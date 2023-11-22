@@ -84,13 +84,22 @@ export default function Landing() {
                     </div>
                 </div>
                 <hr className='mt-4'></hr>
-                <div className='flex text-center items-center justify-center mt-10'>
+                <div className='flex text-center items-center justify-center mt-10 space-x-4'>
                     <div className='bg-purple-200 rounded-md'>
-                        <p className="text-gray-700 mb-2.5">
+                        <p className="text-gray-700 mb-3 mt-2">
                             Try Our Demo
                         </p>
-                        <Link href="/scan" className="bg-purple-500 text-white px-5 py-3 rounded-full">
+                        <Link href="/scan" className="bg-purple-500 text-white px-10 py-3 rounded-full">
                             Check It Out
+                        </Link>
+                    </div>
+
+                    <div className='bg-purple-200 rounded-md'>
+                        <p className="text-gray-700 mb-3 mt-2">
+                            Check the web app
+                        </p>
+                        <Link href="/home" className="bg-purple-500 text-white px-20 py-3 rounded-full">
+                            Let's Go
                         </Link>
                     </div>
                 </div>
