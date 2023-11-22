@@ -2,23 +2,8 @@ import Webcam from "react-webcam";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import FaceLandmarkManager from "@/class/FaceLandmarkManager";
-
-interface Coordinates {
-  [key: string]: number;
-}
-
-const denormalizeCoordinates = (
-  coordinates: Coordinates,
-  width: number,
-  height: number
-) => {
-  const newCoords = { x: 0, y: 0 };
-
-  newCoords.x = coordinates.x * width;
-  newCoords.y = coordinates.y * height;
-
-  return newCoords;
-};
+import { twMerge } from "tailwind-merge";
+import { submitImage } from "../../util/send-to-api";
 
 const isMouthOpen = (score: number) => {
   return score >= 0.005;
@@ -31,71 +16,14 @@ export default function FaceLandmarker() {
   const canvasBoxRef = useRef<HTMLCanvasElement>(null);
   const lastVideoTimeRef = useRef(-1);
   const requestRef = useRef(0);
-  const [imgSrc, setImgSrc] = useState(null);
+  const [imgSrc, setImgSrc] = useState<string | null>(null);
   const [mouthOpen, setMouthOpen] = useState("mouth not open");
-
-  const cropImg = () => {
-    if (
-      canvasRef.current === null ||
-      imgSrc === null ||
-      imageRef.current === null
-    ) {
-      return;
-    }
-    const ctx = canvasRef.current.getContext("2d");
-
-    if (!ctx) {
-      return;
-    }
-
-    ctx.drawImage(
-      imageRef.current,
-      250,
-      300,
-      120,
-      100,
-      0,
-      0,
-      canvasRef.current.width,
-      canvasRef.current.height
-    );
-  };
-
-  const getResults = () => {
-    if (
-      webcamRef.current &&
-      webcamRef.current.video &&
-      webcamRef.current.video.currentTime !== lastVideoTimeRef.current
-    ) {
-      lastVideoTimeRef.current = webcamRef.current.video.currentTime;
-
-      try {
-        const faceLandmarkManager = FaceLandmarkManager.getInstance();
-        faceLandmarkManager.detectLandmarks(
-          webcamRef.current.video,
-          Date.now()
-        );
-        const results = faceLandmarkManager.getResults();
-        if (results.faceBlendshapes[0]) {
-          const mouthOpenScore =
-            results.faceBlendshapes[0].categories[27].score;
-          if (isMouthOpen(mouthOpenScore)) {
-            setMouthOpen("mouth open");
-          } else {
-            setMouthOpen("mouth not open");
-          }
-        } else {
-          setMouthOpen("mouth not open");
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    requestRef.current = requestAnimationFrame(getResults);
-  };
+  const [message, setMessage] = useState<string>("");
+  const [imageURL, setImageURL] = useState<string>("");
+  const [result, setResult] = useState<string | null>(null);
 
   const capture = useCallback(() => {
-    if (webcamRef.current) {
+    if (webcamRef.current && canvasRef.current) {
       try {
         const faceLandmarkManager = FaceLandmarkManager.getInstance();
         const results = faceLandmarkManager.getResults();
@@ -113,7 +41,6 @@ export default function FaceLandmarker() {
 
   useEffect(() => {
     if (canvasBoxRef.current) {
-      console.log("1");
       const ctx = canvasBoxRef.current.getContext("2d");
 
       if (ctx) {
@@ -142,6 +69,39 @@ export default function FaceLandmarker() {
       }
     };
     getUserWebcam();
+
+    const getResults = () => {
+      if (
+        webcamRef.current &&
+        webcamRef.current.video &&
+        webcamRef.current.video.currentTime !== lastVideoTimeRef.current
+      ) {
+        lastVideoTimeRef.current = webcamRef.current.video.currentTime;
+
+        try {
+          const faceLandmarkManager = FaceLandmarkManager.getInstance();
+          faceLandmarkManager.detectLandmarks(
+            webcamRef.current.video,
+            Date.now()
+          );
+          const results = faceLandmarkManager.getResults();
+          if (results.faceBlendshapes[0]) {
+            const mouthOpenScore =
+              results.faceBlendshapes[0].categories[27].score;
+            if (isMouthOpen(mouthOpenScore)) {
+              setMouthOpen("mouth open");
+            } else {
+              setMouthOpen("mouth not open");
+            }
+          } else {
+            setMouthOpen("mouth not open");
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      requestRef.current = requestAnimationFrame(getResults);
+    };
     // if (imgSrc && webcamRef.current) {
     //   try {
     //     setTimeout(() => {
@@ -162,16 +122,67 @@ export default function FaceLandmarker() {
   }, []);
 
   useEffect(() => {
+    const cropImg = () => {
+      if (
+        canvasRef.current === null ||
+        imgSrc === null ||
+        imageRef.current === null
+      ) {
+        return;
+      }
+      const ctx = canvasRef.current.getContext("2d");
+
+      if (!ctx) {
+        return;
+      }
+
+      ctx.drawImage(
+        imageRef.current,
+        250,
+        300,
+        120,
+        100,
+        0,
+        0,
+        canvasRef.current.width,
+        canvasRef.current.height
+      );
+    };
+
+    const handleSubmit = async () => {
+      try {
+        // console.log(message);
+        // console.log(imageURL);
+        const streamIterator = await submitImage(
+          "/api/route",
+          message,
+          imageURL
+        );
+        let result = "";
+        for await (const chunk of streamIterator) {
+          result += chunk;
+        }
+        setResult(result);
+      } catch (error) {
+        console.error("Error submitting image:", error);
+        setResult("Error submitting image");
+      }
+    };
+
     if (imgSrc) {
       try {
         setTimeout(() => {
           cropImg();
+          if (canvasRef.current) {
+            setImageURL(canvasRef.current.toDataURL());
+            handleSubmit();
+          }
         }, 1000);
       } catch (error) {
         console.log(error);
       }
     }
-  }, [imgSrc]);
+  }, [imgSrc, imageURL, message]);
 
   return (
     <div className="container">
@@ -202,6 +213,32 @@ export default function FaceLandmarker() {
       <div className="btn-container">
         <button onClick={capture}>Capture photo</button>
       </div>
+
+      <input
+        type="text"
+        placeholder="What is your question"
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        className={twMerge(
+          "w-full p-2 mb-4 border rounded bg-white text-black dark:bg-gray-800 dark:text-white"
+        )}
+      />
+      <input
+        type="text"
+        placeholder="Enter an image url"
+        value={imageURL}
+        onChange={(e) => setImageURL(e.target.value)}
+        className={twMerge(
+          "w-full p-2 mb-4 border rounded bg-white text-black dark:bg-gray-800 dark:text-white"
+        )}
+      />
+      <div></div>
+      {result && (
+        <div>
+          <h2>Result:</h2>
+          <p>{result}</p>
+        </div>
+      )}
     </div>
   );
 }
