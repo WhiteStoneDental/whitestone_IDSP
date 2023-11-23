@@ -21,22 +21,30 @@ export default function FaceLandmarker() {
   const [message, setMessage] = useState<string>("");
   const [imageURL, setImageURL] = useState<string>("");
   const [result, setResult] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const capture = useCallback(() => {
-    if (webcamRef.current && canvasRef.current) {
-      try {
-        const faceLandmarkManager = FaceLandmarkManager.getInstance();
-        const results = faceLandmarkManager.getResults();
-        const mouthOpenScore = results.faceBlendshapes[0].categories[27].score;
+    setLoading(true);
 
-        if (isMouthOpen(mouthOpenScore)) {
-          const imageSrc = webcamRef.current.getScreenshot();
-          setImgSrc(imageSrc);
+    setTimeout(() => {
+      if (webcamRef.current && canvasRef.current) {
+        try {
+          const faceLandmarkManager = FaceLandmarkManager.getInstance();
+          const results = faceLandmarkManager.getResults();
+          const mouthOpenScore =
+            results.faceBlendshapes[0].categories[27].score;
+
+          if (isMouthOpen(mouthOpenScore)) {
+            const imageSrc = webcamRef.current.getScreenshot();
+            setImgSrc(imageSrc);
+          }
+        } catch (error) {
+          console.log(error);
         }
-      } catch (error) {
-        console.log(error);
       }
-    }
+
+      setLoading(false);
+    }, 2000);
   }, [webcamRef]);
 
   useEffect(() => {
@@ -211,7 +219,9 @@ export default function FaceLandmarker() {
       <canvas ref={canvasRef}></canvas>
       <h2>{mouthOpen}</h2>
       <div className="btn-container">
-        <button onClick={capture}>Capture photo</button>
+        <button onClick={capture}>
+          {loading ? "Cropping..." : "Capture photo"}
+        </button>
       </div>
 
       <input
