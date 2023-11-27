@@ -26,11 +26,9 @@ export default function HomePage() {
   const isLoggedIn = true;
 
   return (
-    <div className="flex w-full flex-col items-center p-5 h-screen relative" style={{ backgroundImage: "var(--homepage-gradient, gradient-from-24008C via-9D32A5 to-641A99)" }}>
-     <LoginButton/>
-      <h1 className="text-white text-4xl mt-20 mb-10 dark:text-white">
-        Hello UserName. What are you up to today?
-      </h1>
+    <div className="flex flex-col items-center p-8  h-screen relative" style={{ backgroundImage: "var(--homepage-gradient, gradient-from-24008C via-9D32A5 to-641A99)" }}>
+     {/* <LoginButton/> */}
+      
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div className="bg-purple-100 bg-opacity-80 p-5 rounded-xl overflow-hidden">
           <h3 className="text-black font-bold text-xl mb-3 dark:text-black cursor-pointer">
@@ -40,8 +38,8 @@ export default function HomePage() {
         </div>
 
         <div className="bg-purple-100 bg-opacity-90 p-10 rounded-xl text-center shadow-xl">
-          <h3 className="text-black font-bold text-3xl mb-3 dark:text-black cursor-pointer">
-            Start a New Scan
+          <h3 className="text-black font-bold text-2xl mb-3 dark:text-black cursor-pointer">
+            Start Scan
           </h3>
           <div className="mx-auto flex items-center justify-center">
             <StartScanButton />
