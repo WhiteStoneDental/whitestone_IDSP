@@ -26,7 +26,7 @@ export default function HomePage() {
   const isLoggedIn = true;
 
   return (
-    <div className="flex flex-col items-center p-5 h-screen relative" style={{ backgroundImage: "var(--homepage-gradient, gradient-from-24008C via-9D32A5 to-641A99)" }}>
+    <div className="flex w-full flex-col items-center p-5 h-screen relative" style={{ backgroundImage: "var(--homepage-gradient, gradient-from-24008C via-9D32A5 to-641A99)" }}>
      <LoginButton/>
       <h1 className="text-white text-4xl mt-20 mb-10 dark:text-white">
         Hello UserName. What are you up to today?
