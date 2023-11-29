@@ -1,5 +1,5 @@
 import React from "react";
-import { OpenAIResult } from "@/app/results/page";
+import { OpenAIResult, Issue } from "./Results";
 import { AccordionItem } from "./Accordion";
 
 export default function ResultsAccordion({
@@ -14,7 +14,7 @@ export default function ResultsAccordion({
           <h3 className="text-black font-bold text-2xl mb-3 dark:text-white cursor-pointer">
             Severe
           </h3>
-          {results.severe.map((item, index) => (
+          {results.severe.map((item: Issue, index: number) => (
             <AccordionItem
               key={index}
               title={item.issue_title}
@@ -30,7 +30,7 @@ export default function ResultsAccordion({
           <h3 className="text-black font-bold text-2xl mb-3 dark:text-white cursor-pointer">
             Moderate
           </h3>
-          {results.moderate.map((item, index) => (
+          {results.moderate.map((item: Issue, index: number) => (
             <AccordionItem
               key={index}
               title={item.issue_title}
@@ -46,7 +46,7 @@ export default function ResultsAccordion({
           <h3 className="text-black font-bold text-2xl mb-3 dark:text-white cursor-pointer">
             Mild
           </h3>
-          {results.mild.map((item, index) => (
+          {results.mild.map((item: Issue, index) => (
             <AccordionItem
               key={index}
               title={item.issue_title}
