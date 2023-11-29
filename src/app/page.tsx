@@ -4,6 +4,8 @@ import { twMerge } from "tailwind-merge";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import Logo from "@/components/Logo";
+
 
 export default function Landing() {
   const [loading, setLoading] = useState(true);
@@ -43,20 +45,14 @@ export default function Landing() {
           "var(--homepage-gradient, gradient-from-24008C via-9D32A5 to-641A99)",
       }}
     >
-      <div className="bg-white p-8 rounded shadow-lg text-center items-center justify-center max-h-screen overflow-y-scroll sm:p-4">
+      <div className="bg-white p-8 rounded shadow-lg text-center items-center justify-center max-h-screen overflow-y-scroll sm:p-4  dark:bg-[var(--mainphrase-bg)]   ">
         <div className="items-center flex justify-center mb-4">
-          <Image
-            src="/image/blackLogo.png"
-            alt="WhiteStone Logo"
-            width={450}
-            height={65}
-            className= "object-contain"
-          />
+        <Logo />
         </div>
-        <h1 className="text-4xl font-extrabold text-gray-800 mt-4 sm:text-1.5xl">
+        <h1 className="text-4xl font-extrabold text-gray-800 mt-4 sm:text-1.5xl dark:text-white">
           Your Personal Dental Assistant
         </h1>
-        <p className="text-gray-600 mt-4 text-xl sm:text-lg">
+        <p className="text-gray-600 mt-4 text-xl sm:text-lg dark:text-gray-200">
           Find out about the evolution of oral health care
         </p>
         <hr className="my-5"></hr>
@@ -65,18 +61,17 @@ export default function Landing() {
             <h1 className="text-4xl font-extrabold text-purple-500 mt-10 sm:text-2xl">
               Why WhiteStone?
             </h1>
-            <p className="text-black mt-5 text-lg text-center sm:text-base">
+            <p className="text-black mt-5 text-lg text-center sm:text-base dark:text-white">
               When we started our work on WhiteStone we had one question we
               asked ourselves.
             </p>
-            <p className="text-black text-2xl mt-4 sm:text-xl">
+            <p className="text-black text-2xl mt-4 sm:text-xl dark:text-white">
               <b>
-                "How can we make dental care more accessible for those who need
-                it?"
+              &quot;How can we make dental care more accessible for those who need
+                it?&quot;
               </b>
             </p>
-            {/* <div className="text-center items-center justify-center flex"> */}
-              <p className="text-black mt-5 text-lg text-justify max-w-2xl sm:text-base">
+              <p className="text-black mt-5 text-lg text-justify max-w-2xl sm:text-base dark:text-white">
                 After careful planning, we felt that putting the right tools in
                 the hands of those individuals for free will achieve our goal.{" "}
                 <b>1 in 3 Canadians lack proper access to dental care</b> and
@@ -84,17 +79,16 @@ export default function Landing() {
                 the amount of individuals that are in dire need of dental health
                 information and care resources.
               </p>
-            {/* </div> */}
           </div>
         </div>
         <hr className="my-10"></hr>
         <div className="text-center items-center justify-center flex flex-col sm:flex-row">
-          {/* <div className="mt-4 flex text-center items-center justify-center max-w-3xl"> */}
+
             <div className="sm:flex-initial sm:mr-10 max-w-4xl">
               <h1 className="text-4xl font-extrabold text-purple-500">
                 Bringing Back Smiles
               </h1>
-              <p className="text-black mt-5 text-justify px-3 text-lg">
+              <p className="text-black mt-5 text-justify px-3 text-lg dark:text-white">
                 Our Goal with WhiteStone is create an{" "}
                 <b>affordable alternative</b> to in person oral consultation.
                 WhiteStone utilizes machine learning technology paired with your
@@ -112,10 +106,8 @@ export default function Landing() {
               className="object-contain"
             />
           </div>
-          {/* </div> */}
         <hr className="mt-4"/>
         <div className="text-center items-center justify-center flex flex-col sm:flex-row">
-          {/* <div className="mt-4 flex text-center items-center justify-center max-w-3xl"> */}
             <Image
               src="/image/ScanDetails.png"
               alt="Placeholder"
@@ -127,23 +119,21 @@ export default function Landing() {
               <h1 className="text-4xl font-extrabold text-purple-500">
                 Track Your Progress
               </h1>
-              <p className="text-black mt-5 text-justify px-3 text-lg sm:text-base">
+              <p className="text-black mt-5 text-justify px-3 text-lg sm:text-base dark:text-white">
                 Follow your own dental health journey as the WhiteStone app
                 tracks and documents each new scan. With a log of your previous
                 dental scans, you can <b>gain dental care insights</b> into what
                 oral care practices have been effective for you.{" "}
               </p>
             </div>
-          {/* </div> */}
         </div>
         <hr className="mt-4"/>
         <div className="text-center items-center justify-center flex flex-col sm:flex-row">
-          {/* <div className="mt-4 flex text-center items-center justify-center max-w-3xl"> */}
             <div className="sm:flex-initial sm:mr-10 max-w-4xl">
               <h1 className="text-4xl font-extrabold text-purple-500">
                 Learn About Your Teeth
               </h1>
-              <p className="text-black mt-5 text-justify px-3 text-lg sm:text-base">
+              <p className="text-black mt-5 text-justify px-3 text-lg sm:text-base dark:text-white">
                 Find informational <b>dental care resources</b> relating
                 directly to your scan results in the app. Pair the effective
                 dental scans with relevant oral care practices to immediately
@@ -157,7 +147,6 @@ export default function Landing() {
               height={270}
               className="object-contain"
             />
-          {/* </div> */}
         </div>
         <hr className="mt-4"/>
         <div className="flex text-center items-center justify-center mt-10 space-x-4 sm:flex-col sm:space-x-0 sm:space-y-4">
@@ -189,19 +178,19 @@ export default function Landing() {
 </div>
 
 <div className="mt-6">
-  <h1 className="text-2xl font-extrabold text-gray-800 sm:text-3xl">
+  <h1 className="text-2xl font-extrabold text-gray-800 sm:text-3xl dark:text-gray-300">
     Contact Us
   </h1>
-  <p className="text-black mt-2 text-sm sm:text-base">
+  <p className="text-black mt-2 text-sm sm:text-base dark:text-white">
     <b>Email:</b>
-    <Link href="mailto:White.Stone.23@gmail.com">
-      <div className="cursor-pointer">White.Stone.23@gmail.com</div>
+    <Link href="mailto:White.Stone.23@gmail.com" className="dark:text-white">
+      <div className="cursor-pointer dark:text-white">White.Stone.23@gmail.com</div>
     </Link>
   </p>
-  <p className="text-black mt-2 text-sm sm:text-base">
+  <p className="text-black mt-2 text-sm sm:text-base dark:text-white">
     <b>Blog:</b>
     <Link href="https://whitestone23.wixsite.com/whitestone">
-      <div className="cursor-pointer">WhiteStone</div>
+      <div className="cursor-pointer dark:text-white">WhiteStone</div>
     </Link>
   </p>
 </div>

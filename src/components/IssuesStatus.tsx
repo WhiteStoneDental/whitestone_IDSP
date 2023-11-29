@@ -1,6 +1,8 @@
 import React from 'react';
-import ArrowIconMin from './ArrowIconMin';
+import  ArrowIcon  from './ArrowIconMin';
 
+
+const isDarkBackground = true;
 interface StatusIndicatorProps {
     color: string;
     number: number;
@@ -28,8 +30,8 @@ const IssuesStatus: React.FC<IssuesStatusProps> = ({ redNumber, yellowNumber, gr
             <StatusIndicator color="red" number={redNumber} label="Severe Issues" />
             <StatusIndicator color="yellow" number={yellowNumber} label="Moderate Issues" />
             <StatusIndicator color="green" number={greenNumber} label="No Issues" />
-            <ArrowIconMin/>
-        </div>
+            <ArrowIcon />
+                 </div>
     </div>
 );
 

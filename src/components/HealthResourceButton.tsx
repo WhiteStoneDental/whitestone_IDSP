@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function ResourceButton() {
   return (
     <Link href="/resources">
-    <BaseButton className="flex justify-between items-center text-black">
+    <BaseButton className="flex justify-between items-center text-black dark:text-white">
       Go to Health Resources
       <ArrowIcon />
     </BaseButton>
