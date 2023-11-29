@@ -15,7 +15,7 @@ export default function ResourcePage() {
     >
       <div
         className={twMerge(
-          "flex flex-col items-center mt-20 mb-5 font-bold text-6xl text-center text-white"
+          "flex flex-col items-center mt-20 mb-10 font-bold text-6xl text-center text-white"
         )}
       >
         Health Resources
