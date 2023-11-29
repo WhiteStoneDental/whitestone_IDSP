@@ -7,19 +7,20 @@ export default function Logo() {
     //638X230
     <Link href="/home">
       <div>
-        <Image
-          src="/image/blackLogo.png"
-          alt="WhiteStone Logo - Light"
-          width={300}
-          height={300}
-          className="mb-4 dark:hidden"
-        />
+       
         <Image
           src="/image/whiteLogo.png"
           alt="WhiteStone Logo - Dark"
-          width={300}
-          height={300}
+          width={450}
+          height={65}
           className="mb-4 hidden dark:block"
+        />
+         <Image
+          src="/image/blackLogo.png"
+          alt="WhiteStone Logo - Light"
+          width={450}
+          height={65}
+          className="mb-4 dark:hidden"
         />
       </div>
     </Link>

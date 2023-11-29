@@ -1,7 +1,12 @@
 "use client"
 import React, { useState } from 'react';
 
-const AccordionItem = ({ title, content }) => {
+interface AccordionItemProps {
+    title: string;
+    content: string;
+}
+
+const AccordionItem: React.FC<AccordionItemProps> = ({ title, content }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleAccordion = () => {
@@ -9,12 +14,12 @@ const AccordionItem = ({ title, content }) => {
     };
 
     return (
-        <div className="mb-5 font-sans">
+        <div className="mb-5 font-sans ">
             <div
                 className="flex items-center justify-between p-3 bg-white-300 cursor-pointer rounded"
                 onClick={toggleAccordion}
             >
-                <span className="font-bold text-l">{title}</span>
+                <span className="font-bold text-l text-black dark:text-white">{title}</span>
                 <svg
                     className="w-4 h-4 transform transition-transform"
                     fill="currentColor"
@@ -27,8 +32,8 @@ const AccordionItem = ({ title, content }) => {
                 </svg>
             </div>
             {isOpen && (
-                <div className="p-4 bg-white border rounded-b-lg">
-                    <p className="text-black">{content}</p>
+                <div className="p-4 bg-white border rounded-b-lg dark: dark:bg-[var(--mainphrase-bg)]">
+                    <p className="text-black dark:text-white">{content}</p>
                 </div>
             )}
         </div>
