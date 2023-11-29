@@ -11,16 +11,35 @@ import ScanButton from "@/components/ScanButton";
 import NavBar from "@/components/NavBar";
 import LoginButton from "@/components/LoginButton";
 import { useState, useEffect } from "react";
+import history from "./history.json";
+
+interface HistoryItem {
+  id: number;
+  date: string;
+  diseaseAnalysis?: {
+    gingivitis?: {
+      count: number;
+      level: string;
+    };
+    cavities?: {
+      count: number;
+      level: string;
+    };
+    plaque?: string;
+    gumRecession?: string;
+  };
+}
+
+interface HistoryData {
+  oralScans: HistoryItem[];
+}
 
 export default function HomePage() {
-  const scans = [
-    "Placeholder for Scan Details",
-    "Placeholder for Scan Details",
-  ];
-
   const [loading, setLoading] = useState(true);
 
   const isLoggedIn = true;
+
+  console.log(history);
 
   return (
     <div
@@ -33,7 +52,6 @@ export default function HomePage() {
       {/* <LoginButton/> */}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-
         <div className="bg-purple-100 bg-opacity-60 pl-20 pr-20 p-5 rounded-xl text-center shadow-xl">
           <h3 className="text-black font-bold text-xl mb-3 dark:text-black cursor-pointer">
             History
@@ -63,32 +81,45 @@ export default function HomePage() {
       </div>
 
       {/* "Latest Scans" section */}
-      <div className="bg-white p-5 rounded-xl h-screen w-full overflow-hidden mt-10 mb-5">
-        <div className="mb-5">
-          <h3 className="text-black text-2xl mb-3 dark:text-black">
-            Latest Scans
-          </h3>
-          {isLoggedIn ? (
-            <div>
-              {/* Placeholder for latest scans if already logged in */}
-              <div>
-                <IssuesStatus redNumber={3} yellowNumber={2} greenNumber={5} />
-                <IssuesStatus redNumber={4} yellowNumber={1} greenNumber={2} />
-                <IssuesStatus redNumber={1} yellowNumber={2} greenNumber={3} />
-                {/* Add more components or content as needed */}
+      <div
+        className="bg-white p-5 rounded-xl h-screen w-full overflow-hidden mt-10 mb-5"
+        id="latest-scans"
+      >
+        <h3 className="text-black font-bold text-2xl mb-3 dark:text-black cursor-pointer">
+          Latest Scans
+        </h3>
+        <div id="latest-scans-content">
+          {history.oralScans.slice(0, 4).map((scan) => (
+            <div key={scan.id} className="gap-4">
+              <div className="bg-purple-100 bg-opacity-60  pl-20 pr-20 p-5 rounded-xl text-center shadow-xl">
+                <h3 className="text-black font-bold text-xl mb-3 dark:text-black ">
+                  {scan.date}
+                </h3>
+                {scan.diseaseAnalysis && (
+                  <>
+                    {scan.diseaseAnalysis.gingivitis && (
+                      <h3 className="text-black font-bold text-xl mb-3 dark:text-black ">
+                        {scan.diseaseAnalysis.gingivitis.count} Gingivitis:{" "}
+                        {scan.diseaseAnalysis.gingivitis.level}
+                      </h3>
+                    )}
+                    {scan.diseaseAnalysis.cavities && (
+                      <h3 className="text-black font-bold text-xl mb-3 dark:text-black ">
+                        {scan.diseaseAnalysis.cavities.count} Cavities:{" "}
+                        {scan.diseaseAnalysis.cavities.level}
+                      </h3>
+                    )}
+                    {scan.diseaseAnalysis.gumRecession && (
+                      <h3 className="text-black font-bold text-xl mb-3 dark:text-black cursor-pointer">
+                        {scan.diseaseAnalysis.gumRecession.count} Gum Recession:{" "}
+                        {scan.diseaseAnalysis.gumRecession.level}
+                      </h3>
+                    )}
+                  </>
+                )}
               </div>
-              {/* Add more scan results as needed */}
-              <HistoryButton />
             </div>
-          ) : (
-            // not logged in
-            <div>
-              Please log in to see your past scans results{" "}
-              <span className="underline text-purple-500">
-                <Link href="/login/"> Log In here </Link>
-              </span>
-            </div>
-          )}
+          ))}
         </div>
       </div>
 

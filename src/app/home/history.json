@@ -1,0 +1,83 @@
+{
+  "oralScans": [
+    {
+      "id": 1,
+      "date": "2023-10-10",
+      "diseaseAnalysis": {
+        "gingivitis": { "count": 1, "level": "Moderate" },
+        "cavities": { "count": 1, "level": "Moderate" }
+      }
+    },
+    {
+      "id": 2,
+      "date": "2023-10-01",
+      "diseaseAnalysis": {
+        "gingivitis": { "count": 2, "level": "Moderate" },
+        "cavities": { "count": 2, "level": "Moderate" }
+      }
+    },
+    {
+      "id": 3,
+      "date": "2023-10-25",
+      "diseaseAnalysis": {
+        "gingivitis": { "count": 1, "level": "Moderate" },
+        "cavities": { "count": 2, "level": "Moderate" }
+      }
+    },
+    {
+      "id": 4,
+      "date": "2023-10-15",
+      "diseaseAnalysis": {
+        "gingivitis": { "count": 4, "level": "Severe" },
+        "gumRecession": { "count": 2, "level": "Moderate" }
+      }
+    },
+    {
+      "id": 5,
+      "date": "2023-10-05",
+      "diseaseAnalysis": {
+        "gingivitis": { "count": 2, "level": "Moderate" },
+        "cavities": { "count": 1, "level": "Moderate" }
+      }
+    },
+    {
+      "id": 6,
+      "date": "2023-09-25",
+      "diseaseAnalysis": {
+        "plaque": { "count": 1, "level": "Mild" },
+        "gumRecession": { "count": 2, "level": "Moderate" }
+      }
+    },
+    {
+      "id": 7,
+      "date": "2023-09-20",
+      "diseaseAnalysis": {
+        "gingivitis": { "count": 3, "level": "Severe" },
+        "cavities": { "count": 1, "level": "Moderate" }
+      }
+    },
+    {
+      "id": 8,
+      "date": "2023-09-10",
+      "diseaseAnalysis": {
+        "cavities": { "count": 1, "level": "Moderate" },
+        "gumRecession": { "count": 1, "level": "Mild" }
+      }
+    },
+    {
+      "id": 9,
+      "date": "2023-09-15",
+      "diseaseAnalysis": {
+        "cavities": { "count": 1, "level": "Moderate" }
+      }
+    },
+    {
+      "id": 10,
+      "date": "2023-09-05",
+      "diseaseAnalysis": {
+        "gingivitis": { "count": 1, "level": "Moderate" },
+        "cavities": { "count": 2, "level": "Severe" }
+      }
+    }
+  ]
+}
