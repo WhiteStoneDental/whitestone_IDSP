@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import FaceLandmarkManager from "@/class/FaceLandmarkManager";
 import { twMerge } from "tailwind-merge";
-import { submitImage } from "../../util/send-to-api";
+import { getResponse } from "@/app/actions";
 
 const isMouthOpen = (score: number) => {
   return score >= 0.005;
@@ -158,22 +158,11 @@ export default function FaceLandmarker() {
     };
 
     const handleSubmit = async () => {
-      try {
-        // console.log(message);
-        // console.log(imageURL);
-        const streamIterator = await submitImage(
-          "/api/route",
-          message,
-          imageURL
-        );
-        let result = "";
-        for await (const chunk of streamIterator) {
-          result += chunk;
-        }
-        setResult(result);
-      } catch (error) {
-        console.error("Error submitting image:", error);
-        setResult("Error submitting image");
+      const result = await getResponse(message, imageURL);
+      if (!result.error && result.response) {
+        setResult(result.response);
+      } else {
+        setResult(result.error!)
       }
     };
 
