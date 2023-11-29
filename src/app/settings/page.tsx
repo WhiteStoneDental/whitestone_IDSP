@@ -146,21 +146,21 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
             <div className={twMerge(
               "mb-4 flex flex-row justify-between"
             )}>
-              <button className="text-xl flex min-w-full object-right justify-between">Username <ArrowIconMin />
+              <button className="text-xl flex min-w-full object-right justify-between mt-4">Username <ArrowIconMin />
               </button>
             </div>
             <div className="border-t border-gray-300 my-4"></div>
             <div className={twMerge(
               "mb-4 flex flex-row justify-between"
             )}>
-              <button className="text-xl flex min-w-full object-right justify-between">Email <ArrowIconMin />
+              <button className="text-xl flex min-w-full object-right justify-between mt-4">Email <ArrowIconMin />
               </button>
             </div>
             <div className="border-t border-gray-300 my-4"></div>
             <div className={twMerge(
               "mb-4 flex flex-row justify-between"
             )}>
-              <button className="text-xl flex min-w-full object-right justify-between">Password <ArrowIconMin />
+              <button className="text-xl flex min-w-full object-right justify-between mt-4">Password <ArrowIconMin />
               </button>
             </div>
             <div className="border-t border-gray-300 my-4"></div>
