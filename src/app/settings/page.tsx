@@ -9,6 +9,7 @@ import ArrowIconMin from '@/components/ArrowIconMin';
 import Switch from "react-switch";
 import { twMerge } from "tailwind-merge";
 import Image from 'next/image';
+import CustomSwitch from '@/components/CustomSwitch';
 
 const SettingsPage = () => {
   
@@ -101,7 +102,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   return (
     
     <div
-      className={twMerge("flex flex-col p-5 min-h-screen")}
+      className={twMerge("flex flex-col p-5 max-h-screen items-center")}
       style={{
         backgroundImage:
           "var(--homepage-gradient, gradient-from-24008C via-9D32A5 to-641A99)",
@@ -120,11 +121,12 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
             />
 
           </div>
+          </div>
+          <input className="relative mx-auto hidden" id='files' type="file" accept="image/*" onChange={handleAvatarChange} />
+          <label className="relative mx-auto bg-white rounded-md font-bold w-36 h-6 text-center text-black" htmlFor='files'>Change Photo</label>
         </div>
-        <input className="relative mx-auto" type="file" accept="image/*" onChange={handleAvatarChange} />
-      </div>
 
-      <div className="bg-white p-5 rounded-xl h-screen w-full overflow-hidden dark:bg-[var(--mainphrase-bg)]">
+      <div className="bg-white p-5 rounded-xl h-screen max-w-screen-lg overflow-hidden dark:bg-[var(--mainphrase-bg)]">
         <h1 className="text-4xl mt-30 mb-10">Account Information</h1>
         <div className="mb-10">
           <label className="text-xl">Name</label>
@@ -141,28 +143,41 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
           </div>
         </div>
         <div className="mb-10">
-          <div className={twMerge(
-            "mb-4 flex flex-row justify-between"
-          )}>
-            <button className="text-xl">Username</button>
-            <ArrowIconMin />
+            <div className={twMerge(
+              "mb-4 flex flex-row justify-between"
+            )}>
+              <button className="text-xl flex min-w-full object-right justify-between mt-4">Username <ArrowIconMin />
+              </button>
+            </div>
+            <div className="border-t border-gray-300 my-4"></div>
+            <div className={twMerge(
+              "mb-4 flex flex-row justify-between"
+            )}>
+              <button className="text-xl flex min-w-full object-right justify-between mt-4">Email <ArrowIconMin />
+              </button>
+            </div>
+            <div className="border-t border-gray-300 my-4"></div>
+            <div className={twMerge(
+              "mb-4 flex flex-row justify-between"
+            )}>
+              <button className="text-xl flex min-w-full object-right justify-between mt-4">Password <ArrowIconMin />
+              </button>
+            </div>
+            <div className="border-t border-gray-300 my-4"></div>
           </div>
-          <div className="border-t border-gray-300 my-4"></div>
-          <div className={twMerge(
-            "mb-4 flex flex-row justify-between"
-          )}>
-            <button className="text-xl">Email</button>
-            <ArrowIconMin />
+        <div className="mb-4">
+            <h1 className="text-4xl mt-30 mb-10 font-bold">Display</h1>
+            <label className={twMerge(
+              "mb-4 flex flex-row justify-between"
+            )}>
+              <span className="text-xl">Dark mode</span>
+              <CustomSwitch />
+            </label>
+            <div className="border-t border-gray-300 my-4"></div>
+            <div>
+
+            </div>
           </div>
-          <div className="border-t border-gray-300 my-4"></div>
-          <div className={twMerge(
-            "mb-4 flex flex-row justify-between"
-          )}>
-            <button className="text-xl">Password</button>
-            <ArrowIconMin />
-          </div>
-          <div className="border-t border-gray-300 my-4"></div>
-        </div>
         {/* <div className="mb-4">
           <h1 className="text-4xl mt-30 mb-10">Display</h1>
           <label className={twMerge(
