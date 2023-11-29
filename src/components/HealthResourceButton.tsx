@@ -5,10 +5,11 @@ import Link from "next/link";
 export default function ResourceButton() {
   return (
     <Link href="/resources">
-    <BaseButton className="flex justify-between items-center text-black">
-      Go to Health Resources
-      <ArrowIcon />
-    </BaseButton>
+      <BaseButton className="bg-white w-16 h-16 flex items-center justify-center">
+        <div className="flex items-center justify-center">
+          <ArrowIcon />
+        </div>
+      </BaseButton>
     </Link>
   );
 }
