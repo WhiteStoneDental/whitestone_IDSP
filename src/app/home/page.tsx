@@ -119,7 +119,7 @@ export default function HomePage() {
                         </h3>
                       )}
                     </div>
-                      <hr className="mt-3" />
+                    <hr className="mt-3" />
                   </>
                 )}
               </div>
