@@ -4,6 +4,8 @@ import Image from "next/image";
 import FaceLandmarkManager from "@/class/FaceLandmarkManager";
 import { twMerge } from "tailwind-merge";
 import { submitImage } from "../../util/send-to-api";
+import fs from "fs";
+import path from "path";
 
 const isMouthOpen = (score: number) => {
   return score >= 0.005;
@@ -158,7 +160,6 @@ export default function FaceLandmarker() {
     };
 
     const handleSubmit = async () => {
-      localStorage.setItem("scannedTeeth", imageURL);
       try {
         // console.log(message);
         // console.log(imageURL);
@@ -171,7 +172,10 @@ export default function FaceLandmarker() {
         for await (const chunk of streamIterator) {
           result += chunk;
         }
+        localStorage.setItem("imageURL", imageURL);
+        localStorage.setItem("results", result);
         setResult(result);
+        window.location.href = "/results";
       } catch (error) {
         console.error("Error submitting image:", error);
         setResult("Error submitting image");

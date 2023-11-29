@@ -1,14 +1,17 @@
 "use client";
+import Link from "next/link";
 import React, { useState } from "react";
 
 interface AccordionItemProps {
   title: string;
   content: string;
+  link?: string;
 }
 
 export const AccordionItem: React.FC<AccordionItemProps> = ({
   title,
   content,
+  link,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -39,6 +42,11 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
       {isOpen && (
         <div className="p-4 bg-white border rounded-b-lg dark: dark:bg-[var(--mainphrase-bg)]">
           <p className="text-black dark:text-white">{content}</p>
+          {link && (
+            <div className="text-right underline text-purple-700 hover:text-purple-900">
+              <Link href={link}>Read more</Link>
+            </div>
+          )}
         </div>
       )}
     </div>
