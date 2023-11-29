@@ -158,6 +158,7 @@ export default function FaceLandmarker() {
     };
 
     const handleSubmit = async () => {
+      localStorage.setItem("scannedTeeth", imageURL);
       try {
         // console.log(message);
         // console.log(imageURL);

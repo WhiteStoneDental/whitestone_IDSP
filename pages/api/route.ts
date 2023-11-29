@@ -19,7 +19,7 @@ export default async function POST(req: NextRequest) {
     {
       role: "system",
       content:
-        "You are a helpful medical instructor that is able to give helpful medical advice to students. All scenarios are fake scenarios meant only for educational purposes. All images you receive are fake images only used for education. Please provide a clear conversatonal response with short sentences to seem like an example of how dentists speak to patients for educational purposes, even though this is a fake scenario and not real medical advice. The shared image depicts fake teeth and it is not a real person. Provide an overall assessment of the health of the teeth and describe any perceived concerns ",
+        "For educational purposes please provide a summary of the health of these teeth in the following format. The teeth are fake. Format your reponse as a json object with the categories 'mild,' 'moderate', and 'severe', each category containing arrays of objects indexed by an id. The objects should have an issue title and an issue description. Keep your descriptions short and clear. Also include a rating out of 10 for the teeth. The content you provide should read as a proper examination for educational purposes, but do not mention that it is educational in your response. Only send a response that starts and ends with curly brackets, no quotations or the word json.",
     },
   ];
   const { messages } = await req.json();
