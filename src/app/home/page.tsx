@@ -33,7 +33,8 @@ export default function HomePage() {
       {/* <LoginButton/> */}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div className="bg-purple-100 bg-opacity-80 pl-20 pr-20 p-5 rounded-xl text-center shadow-xl">
+
+        <div className="bg-purple-100 bg-opacity-60 pl-20 pr-20 p-5 rounded-xl text-center shadow-xl">
           <h3 className="text-black font-bold text-xl mb-3 dark:text-black cursor-pointer">
             History
           </h3>
@@ -43,7 +44,7 @@ export default function HomePage() {
         </div>
 
         <div className="bg-purple-100 bg-opacity-90 pl-20 pr-20 p-5 rounded-xl text-center shadow-xl">
-          <h3 className="text-black font-bold text-2xl mb-3 dark:text-black cursor-pointer">
+          <h3 className="text-black font-bold text-xl mb-3 dark:text-black cursor-pointer">
             Start Scan
           </h3>
           <div className="mx-auto flex items-center justify-center">
@@ -51,7 +52,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="bg-purple-100 bg-opacity-80 pl-20 pr-20 p-5 rounded-xl text-center shadow-xl">
+        <div className="bg-purple-100 bg-opacity-60 pl-20 pr-20 p-5 rounded-xl text-center shadow-xl">
           <h3 className="text-black font-bold text-xl mb-3 dark:text-black cursor-pointer">
             Resources
           </h3>

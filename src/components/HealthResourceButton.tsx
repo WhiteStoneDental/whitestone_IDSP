@@ -1,5 +1,5 @@
 import { BaseButton } from "./BaseButton";
-import ArrowIcon from "./ArrowIcon";
+import ResourcesIcon from "./Icon_Resources";
 import Link from "next/link";
 
 export default function ResourceButton() {
@@ -7,7 +7,7 @@ export default function ResourceButton() {
     <Link href="/resources">
       <BaseButton className="bg-white w-16 h-16 flex items-center justify-center">
         <div className="flex items-center justify-center">
-          <ArrowIcon />
+          <ResourcesIcon />
         </div>
       </BaseButton>
     </Link>

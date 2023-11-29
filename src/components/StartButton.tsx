@@ -1,5 +1,5 @@
 import { BaseButton } from "./BaseButton";
-import ArrowIcon from "./ArrowIcon";
+import ScanIcon from "./Icon_Scan";
 import Link from "next/link";
 
 export default function StartScanButton() {
@@ -7,7 +7,7 @@ export default function StartScanButton() {
     <BaseButton className="bg-white w-16 h-16 flex items-center justify-center">
       <Link href="/scan">
         <div className="flex items-center justify-center">
-          <ArrowIcon />
+          <ScanIcon />
         </div>
       </Link>
     </BaseButton>
