@@ -62,7 +62,7 @@ export default function Results() {
   );
 }
 
-type Issue = {
+export type Issue = {
   id: string;
   issue_title: string;
   issue_description: string;

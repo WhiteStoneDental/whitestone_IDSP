@@ -4,8 +4,6 @@ import Image from "next/image";
 import FaceLandmarkManager from "@/class/FaceLandmarkManager";
 import { twMerge } from "tailwind-merge";
 import { submitImage } from "../../util/send-to-api";
-import fs from "fs";
-import path from "path";
 
 const isMouthOpen = (score: number) => {
   return score >= 0.005;
