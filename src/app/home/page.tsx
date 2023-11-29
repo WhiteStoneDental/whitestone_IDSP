@@ -42,6 +42,7 @@ export default function HomePage() {
   console.log(history);
 
   return (
+
     <div
       className="flex flex-col items-center p-8  h-screen relative"
       style={{
@@ -52,27 +53,34 @@ export default function HomePage() {
       {/* <LoginButton/> */}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div className="bg-purple-100 bg-opacity-60 pl-20 pr-20 p-5 rounded-xl text-center shadow-xl">
-          <h3 className="text-black font-bold text-xl mb-3 dark:text-black cursor-pointer">
+        <div className="bg-purple-100 bg-opacity-60 pl-20 pr-20 p-5 rounded-xl text-center shadow-xl dark:bg-[var(--box-color)]">
+          <h3 className="text-black font-bold text-xl mb-3 dark:text-white cursor-pointer">
             History
+
+
           </h3>
           <div className="mx-auto flex items-center justify-center">
             <PastScan />
           </div>
         </div>
 
-        <div className="bg-purple-100 bg-opacity-90 pl-20 pr-20 p-5 rounded-xl text-center shadow-xl">
-          <h3 className="text-black font-bold text-xl mb-3 dark:text-black cursor-pointer">
+
+        <div className="bg-purple-100 bg-opacity-90 pl-20 pr-20 p-5 rounded-xl text-center shadow-xl dark:bg-[var(--box-color)]">
+          <h3 className="text-black font-bold text-xl mb-3 dark:white-black cursor-pointer">
             Start Scan
+
+
           </h3>
           <div className="mx-auto flex items-center justify-center">
             <StartScanButton />
           </div>
         </div>
 
-        <div className="bg-purple-100 bg-opacity-60 pl-20 pr-20 p-5 rounded-xl text-center shadow-xl">
-          <h3 className="text-black font-bold text-xl mb-3 dark:text-black cursor-pointer">
+
+        <div className="bg-purple-100 bg-opacity-60 pl-20 pr-20 p-5 rounded-xl text-center shadow-xl dark:bg-[var(--box-color)]">
+          <h3 className="text-black font-bold text-xl mb-3 dark:text-white cursor-pointer">
             Resources
+
           </h3>
           <div className="mx-auto flex items-center justify-center">
             <ResourceButton />
@@ -81,42 +89,44 @@ export default function HomePage() {
       </div>
 
       {/* "Latest Scans" section */}
+
       <div
-        className="bg-white p-5 rounded-xl h-screen w-full overflow-hidden mt-10 mb-5"
+        className="bg-white p-5 rounded-xl h-screen w-full overflow-hidden mt-10 mb-5 dark:bg-[var(--mainphrase-bg)]"
         id="latest-scans"
       >
-        <h3 className="text-black font-bold text-2xl mb-3 dark:text-black cursor-pointer">
+        <h3 className="text-black font-bold text-2xl mb-3 dark:text-white cursor-pointer">
           Latest Scans
         </h3>
         <div id="latest-scans-content">
           {history.oralScans.slice(0, 4).map((scan) => (
             <div key={scan.id} className="gap-4">
               <div className="bg-purple-100 bg-opacity-60  pl-20 pr-20 p-5 rounded-xl text-center shadow-xl">
-                <h3 className="text-black font-bold text-xl mb-3 dark:text-black ">
+                <h3 className="text-black font-bold text-xl mb-3 dark:text-white ">
                   {scan.date}
                 </h3>
                 {scan.diseaseAnalysis && (
                   <>
                     {scan.diseaseAnalysis.gingivitis && (
-                      <h3 className="text-black font-bold text-xl mb-3 dark:text-black ">
+                      <h3 className="text-black font-bold text-xl mb-3 dark:text-white ">
                         {scan.diseaseAnalysis.gingivitis.count} Gingivitis:{" "}
                         {scan.diseaseAnalysis.gingivitis.level}
                       </h3>
                     )}
                     {scan.diseaseAnalysis.cavities && (
-                      <h3 className="text-black font-bold text-xl mb-3 dark:text-black ">
+                      <h3 className="text-black font-bold text-xl mb-3 dark:text-white ">
                         {scan.diseaseAnalysis.cavities.count} Cavities:{" "}
                         {scan.diseaseAnalysis.cavities.level}
                       </h3>
                     )}
                     {scan.diseaseAnalysis.gumRecession && (
-                      <h3 className="text-black font-bold text-xl mb-3 dark:text-black cursor-pointer">
+                      <h3 className="text-black font-bold text-xl mb-3 dark:text-white cursor-pointer">
                         {scan.diseaseAnalysis.gumRecession.count} Gum Recession:{" "}
                         {scan.diseaseAnalysis.gumRecession.level}
                       </h3>
                     )}
                   </>
-                )}
+
+
               </div>
             </div>
           ))}
