@@ -1,3 +1,5 @@
+// pages/api/route.ts
+
 import { type NextRequest } from "next/server";
 
 import OpenAI from "openai";
