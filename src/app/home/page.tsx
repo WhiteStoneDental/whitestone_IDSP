@@ -44,7 +44,7 @@ export default function HomePage() {
   return (
 
     <div
-      className="flex flex-col items-center p-8  h-screen relative"
+      className="flex flex-col items-center p-8  h-full relative overflow-y-auto"
       style={{
         backgroundImage:
           "var(--homepage-gradient, gradient-from-24008C via-9D32A5 to-641A99)",
@@ -94,14 +94,14 @@ export default function HomePage() {
         className="bg-white p-5 rounded-xl h-screen w-full overflow-hidden mt-10 mb-5 dark:bg-[var(--mainphrase-bg)]"
         id="latest-scans"
       >
-        <h3 className="text-black font-bold text-2xl mb-3 dark:text-white cursor-pointer">
+        <h3 className="text-black font-bold text-2xl mb-3 dark:text-white">
           Latest Scans
         </h3>
         <div id="latest-scans-content">
           {history.oralScans.slice(0, 4).map((scan) => (
-            <div key={scan.id} className="gap-4">
-              <div className="bg-purple-100 bg-opacity-60  pl-20 pr-20 p-5 rounded-xl text-center shadow-xl">
-                <h3 className="text-black font-bold text-xl mb-3 dark:text-white ">
+            <div key={scan.id} className="gap-4 ">
+              <div className="bg-purple-100 bg-opacity-60  pl-20 pr-20 p-5 rounded-sm text-center shadow-lg">
+                <h3 className="text-black font-bold text-xl mb-3 dark:text-white">
                   {scan.date}
                 </h3>
                 {scan.diseaseAnalysis && (
