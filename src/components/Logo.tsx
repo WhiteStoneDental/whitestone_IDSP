@@ -3,22 +3,21 @@ import Image from 'next/image';
 
 export default function Logo() {
   return (
-    //633x223
-    //638X230
+    //278x259
     <Link href="/home">
       <div>
        
         <Image
-          src="/image/whiteLogo.png"
+          src="/logo-dark.svg"
           alt="WhiteStone Logo - Dark"
-          width={450}
+          width={350}
           height={65}
           className="mb-4 hidden dark:block"
         />
          <Image
-          src="/image/blackLogo.png"
+          src="/image/logo-dark.svg"
           alt="WhiteStone Logo - Light"
-          width={450}
+          width={50}
           height={65}
           className="mb-4 dark:hidden"
         />
