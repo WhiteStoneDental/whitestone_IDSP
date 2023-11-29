@@ -178,7 +178,7 @@ export default function Landing() {
   </div>
 
   <div className="bg-purple-200 rounded-md">
-    <p className="text-gray-700 mb-2 mt-2 text-sm sm:text-base">Check the web app</p>
+    <p className="text-gray-700 mb-2 mt-2 text-sm sm:text-base">Check The Web App</p>
     <button
       className={`bg-purple-500 text-white px-4 py-2 sm:px-20 sm:py-3 rounded-full w-full sm:w-auto text-center ${loading ? "pointer-events-none" : ""}`}
       onClick={handleLetsGoClick}
