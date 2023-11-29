@@ -126,7 +126,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
           <label className="relative mx-auto bg-white rounded-md font-bold w-36 h-6 text-center text-black" htmlFor='files'>Change Photo</label>
         </div>
 
-      <div className="bg-white p-5 rounded-xl h-screen max-w-screen-lg overflow-hidden dark:bg-[var(--mainphrase-bg)]">
+      <div className="bg-white p-10 rounded-xl h-screen max-w-screen-lg overflow-hidden dark:bg-[var(--mainphrase-bg)]">
         <h1 className="text-4xl mt-30 mb-10">Account Information</h1>
         <div className="mb-10">
           <label className="text-xl">Name</label>
@@ -146,24 +146,24 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
             <div className={twMerge(
               "mb-4 flex flex-row justify-between"
             )}>
-              <button className="text-xl flex min-w-full object-right justify-between mt-4">Username <ArrowIconMin />
+              <button className="items-center	text-xl flex min-w-full object-right justify-between mt-2">Username <ArrowIconMin />
               </button>
             </div>
-            <div className="border-t border-gray-300 my-4"></div>
+            <div className="border-t border-gray-300 my-1"></div>
             <div className={twMerge(
               "mb-4 flex flex-row justify-between"
             )}>
-              <button className="text-xl flex min-w-full object-right justify-between mt-4">Email <ArrowIconMin />
+              <button className="items-center	text-xl flex min-w-full object-right justify-between mt-2">Email <ArrowIconMin />
               </button>
             </div>
-            <div className="border-t border-gray-300 my-4"></div>
+            <div className="border-t border-gray-300 my-1"></div>
             <div className={twMerge(
               "mb-4 flex flex-row justify-between"
             )}>
-              <button className="text-xl flex min-w-full object-right justify-between mt-4">Password <ArrowIconMin />
+              <button className="items-center	text-xl flex min-w-full object-right justify-between mt-2">Password <ArrowIconMin />
               </button>
             </div>
-            <div className="border-t border-gray-300 my-4"></div>
+            <div className="border-t border-gray-300 my-1"></div>
           </div>
         <div className="mb-4">
             <h1 className="text-4xl mt-30 mb-10 font-bold">Display</h1>

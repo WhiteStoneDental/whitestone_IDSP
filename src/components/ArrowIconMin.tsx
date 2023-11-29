@@ -2,7 +2,7 @@ export default function ArrowIcon() {
   return (
     <>
       <svg
-        className="mb-4 dark:hidden"
+        className=" dark:hidden"
         xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="24"
@@ -13,7 +13,7 @@ export default function ArrowIcon() {
         />
       </svg>
       <svg
-        className="mb-4 hidden dark:block"
+        className="hidden dark:block"
         xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="24"
