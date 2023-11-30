@@ -159,7 +159,12 @@ export default function FaceLandmarker() {
 
     const handleSubmit = async () => {
       const result = await getResponse(message, imageURL);
-      setResult(result.error ? result.error : result.response!)
+      if (!result.error && result.response) {
+        setResult(result.response)
+        localStorage.setItem("imageURL", imageURL);
+        localStorage.setItem("results", result.response);
+        window.location.href = "/results";
+      }
     };
 
     if (imgSrc) {
