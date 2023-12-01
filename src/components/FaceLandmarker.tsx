@@ -206,6 +206,7 @@ export default function FaceLandmarker() {
         style={{ width: 600, height: 450, transform: "scaleX(-1)" }}
       ></canvas>
       <Webcam
+        className="rounded-xl shadow-xl dark:bg-[var(--box-color)]"
         height={600}
         width={600}
         ref={webcamRef}
@@ -233,8 +234,13 @@ export default function FaceLandmarker() {
           {loading ? "Cropping..." : "Capture photo"}
         </button>
       </div>
-      {sending && <h2>Sending...</h2>}
-      <Prompt message={message} imageURL={imageURL} onMessageChange={(e) => setMessage(e.target.value)} onImageChange={(e) => setImageURL(e.target.value)} />
+      {sending && <h2>Scanning...</h2>}
+      <Prompt
+        message={message}
+        imageURL={imageURL}
+        onMessageChange={(e) => setMessage(e.target.value)}
+        onImageChange={(e) => setImageURL(e.target.value)}
+      />
     </div>
   );
 }
