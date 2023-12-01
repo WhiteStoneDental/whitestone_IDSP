@@ -13,32 +13,32 @@ const SettingsPage = () => {
     password: "",
   });
   const [avatar, setAvatar] = useState<File | null>(null);
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    const savedTheme = localStorage.getItem("darkMode");
-    return savedTheme === "true" ? true : false;
-  });
+  // const [isDarkMode, setIsDarkMode] = useState(() => {
+  //   const savedTheme = localStorage.getItem("darkMode");
+  //   return savedTheme === "true" ? true : false;
+  // });
 
-  useEffect(() => {
-    setUserData({
-      username: "SampleUser",
-      email: "sample@example.com",
-      password: "******",
-    });
-  }, [3000]);
+  // useEffect(() => {
+  //   setUserData({
+  //     username: "SampleUser",
+  //     email: "sample@example.com",
+  //     password: "******",
+  //   });
+  // }, [3000]);
 
-  useEffect(() => {
-    if (isDarkMode) {
-      document.body.classList.add("dark");
-      localStorage.setItem("darkMode", "true");
-    } else {
-      document.body.classList.remove("dark");
-      localStorage.setItem("darkMode", "false");
-    }
-  }, [isDarkMode]);
+  // useEffect(() => {
+  //   if (isDarkMode) {
+  //     document.body.classList.add("dark");
+  //     localStorage.setItem("darkMode", "true");
+  //   } else {
+  //     document.body.classList.remove("dark");
+  //     localStorage.setItem("darkMode", "false");
+  //   }
+  // }, [isDarkMode]);
 
-  const handleThemeChange = () => {
-    setIsDarkMode(!isDarkMode);
-  };
+  // const handleThemeChange = () => {
+  //   setIsDarkMode(!isDarkMode);
+  // };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
