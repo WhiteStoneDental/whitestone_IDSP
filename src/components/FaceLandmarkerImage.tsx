@@ -26,7 +26,7 @@ export default function FaceLandmarker() {
   const webcamRef = useRef<Webcam>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [imgSrc, setImgSrc] = useState(null);
+  const [imgSrc, setImgSrc] = useState<string | null>(null);
 
   function cropImg(landmarkManager: FaceLandmarkManager) {
     console.log(landmarkManager.getResults())
@@ -36,7 +36,16 @@ export default function FaceLandmarker() {
     if (canvasRef.current != null) {
       console.log(canvasRef.current)
     }
+    if (!canvasRef.current) {
+      return;
+    }
+    if (!imageRef.current) {
+      return;
+    }
     const ctx = canvasRef.current.getContext("2d");
+    if (!ctx) {
+      return;
+    }
     const denormalizedCoordinates = denormalizeCoordinates(
       { x: landmarkCoordinates.x, y: landmarkCoordinates.y },
       600,
@@ -56,9 +65,10 @@ export default function FaceLandmarker() {
   }
 
   const capture = useCallback(() => {
-    // yea too lazy to fix rn
-    const imageSrc = webcamRef.current.getScreenshot();
-    setImgSrc(imageSrc);
+    if (webcamRef.current) {
+      const imageSrc = webcamRef.current.getScreenshot();
+      setImgSrc(imageSrc);
+    }
   }, [webcamRef]);
 
   useEffect(() => {
@@ -68,10 +78,10 @@ export default function FaceLandmarker() {
       
         console.log(imageRef.current)
         setTimeout(() => {
-          faceLandmarkManager.detectLandmarks(imageRef.current);
+          // faceLandmarkManager.detectLandmarks(imageRef.current);
           const blendshapeObject = faceLandmarkManager.getResults().faceBlendshapes;
           if (blendshapeObject[0].categories[35].score >= 0.14) {
-            cropImg(faceLandmarkManager, imgSrc);
+            // cropImg(faceLandmarkManager, imgSrc);
           } else {
             alert("confidence score was not high enough, retake picture");
             setImgSrc(null);
