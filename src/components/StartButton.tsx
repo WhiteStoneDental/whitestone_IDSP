@@ -1,5 +1,5 @@
 import { BaseButton } from "./BaseButton";
-import ScanIcon from "./Icon_Scan";
+import ScanIcon from "./IconScan";
 import Link from "next/link";
 
 export default function StartScanButton() {

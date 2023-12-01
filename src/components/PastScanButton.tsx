@@ -1,5 +1,5 @@
 import { BaseButton } from "./BaseButton";
-import HistoryIcon from "./Icon_History";
+import HistoryIcon from "./IconHistory";
 import Link from "next/link";
 
 export default function PastScan() {

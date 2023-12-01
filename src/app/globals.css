@@ -8,11 +8,6 @@
     --foreground-rgb: 0, 0, 0; /* Default to black for light mode */
     --background-start-rgb: 255, 255, 255; /* Default to white for light mode */
     --background-end-rgb: 255, 255, 255; /* Default to white for light mode */
-    --primary1: #00154c;
-    --primary2: #24008c;
-    --primary3: #641a99;
-    --primary4: #9d32a5;
-    --primary5: #e3baf5;
     --mainphrase-bg: var(--mainphraseWhite-bg);
     --homepage-gradient: linear-gradient(to bottom, #9d32a5, #641a99, #24008c);
   }
@@ -30,12 +25,6 @@
 
   body {
     color: rgb(var(--foreground-rgb));
-    background: linear-gradient(
-        to bottom,
-        transparent,
-        rgb(var(--background-end-rgb))
-      )
-      rgb(var(--background-start-rgb));
   }
 }
 
