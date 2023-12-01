@@ -31,7 +31,7 @@ const jsonExample = `
 
 export const runtime = "edge";
 
-export default async function POST(req: NextRequest) {
+export async function POST(req: NextRequest) {
   console.log("hitting openai");
 
   const systemMessages: Message[] = [
