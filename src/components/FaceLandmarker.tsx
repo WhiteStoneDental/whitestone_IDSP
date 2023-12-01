@@ -5,7 +5,7 @@ import Image from "next/image";
 import FaceLandmarkManager from "@/class/FaceLandmarkManager";
 import { twMerge } from "tailwind-merge";
 import { getResponse } from "@/app/actions";
-import Prompt from "./Prompt";
+import Prompt from "./ScanPrompt";
 
 const isMouthOpen = (score: number) => {
   return score >= 0.0001;
@@ -234,7 +234,6 @@ export default function FaceLandmarker() {
         </button>
       </div>
       {sending && <h2>Sending...</h2>}
-
       <Prompt message={message} imageURL={imageURL} onMessageChange={(e) => setMessage(e.target.value)} onImageChange={(e) => setImageURL(e.target.value)} />
     </div>
   );
