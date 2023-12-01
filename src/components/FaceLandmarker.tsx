@@ -7,7 +7,7 @@ import { twMerge } from "tailwind-merge";
 import { getResponse } from "@/app/actions";
 
 const isMouthOpen = (score: number) => {
-  return true;
+  return score >= 0.007;
 };
 
 export default function FaceLandmarker() {
@@ -96,7 +96,12 @@ export default function FaceLandmarker() {
           );
           const results = faceLandmarkManager.getResults();
           if (results.faceBlendshapes[0]) {
-            console.log(results.faceBlendshapes[0].categories)
+            // console.log("START -----------------------------------------------------------------")
+            // console.log("mouthClose: ", results.faceBlendshapes[0].categories[27].score)
+            // console.log("mouthLeft: ", results.faceBlendshapes[0].categories[33].score)
+            // console.log("mouthRight: ", results.faceBlendshapes[0].categories[39].score)
+            // console.log("mouthSmileLeft: ", results.faceBlendshapes[0].categories[44].score)
+            // console.log("mouthSmileRight: ", results.faceBlendshapes[0].categories[45].score)
             const mouthOpenScore =
               results.faceBlendshapes[0].categories[27].score;
             if (isMouthOpen(mouthOpenScore)) {
