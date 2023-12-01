@@ -1,6 +1,6 @@
 import { twMerge } from "tailwind-merge";
 
-export default function Prompt({
+export default function ScanPrompt({
   message,
   imageURL,
   onMessageChange,

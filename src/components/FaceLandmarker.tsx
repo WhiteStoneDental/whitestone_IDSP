@@ -5,7 +5,7 @@ import Image from "next/image";
 import FaceLandmarkManager from "@/class/FaceLandmarkManager";
 import { twMerge } from "tailwind-merge";
 import { getResponse } from "@/app/actions";
-import Prompt from "./ScanPrompt";
+import ScanPrompt from "./ScanPrompt";
 
 const isMouthOpen = (score: number) => {
   return score >= 0.0001;
@@ -24,7 +24,6 @@ export default function FaceLandmarker() {
   const [message, setMessage] = useState("");
   const [tip, setTip] = useState<string | null>("");
   const [imageURL, setImageURL] = useState("");
-  const [result, setResult] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [sending, setSending] = useState(false);
 
@@ -39,17 +38,6 @@ export default function FaceLandmarker() {
         ctx.rect(85, 88, 120, 60);
         ctx.stroke();
       }
-    }
-  };
-
-  const handleSubmit = async () => {
-    setSending(true);
-    const result = await getResponse(message, imageURL);
-    if (!result.error && result.response) {
-      setResult(result.response);
-      localStorage.setItem("imageURL", imageURL);
-      localStorage.setItem("results", result.response);
-      router.push("/results");
     }
   };
 
@@ -187,16 +175,33 @@ export default function FaceLandmarker() {
       try {
         setTimeout(() => {
           cropImg();
+
           if (canvasRef.current) {
             setImageURL(canvasRef.current.toDataURL());
-            handleSubmit();
           }
-        }, 1000);
+        }, 2000);
       } catch (error) {
         console.log(error);
       }
     }
-  }, [imgSrc, imageURL, message]);
+  }, [imgSrc]);
+
+  useEffect(() => {
+    const handleSubmit = async () => {
+      setSending(true);
+
+      const result = await getResponse(message, imageURL);
+      if (!result.error && result.response) {
+        localStorage.setItem("imageURL", imageURL);
+        localStorage.setItem("results", result.response);
+        router.push("/results");
+      }
+    };
+
+    if (imageURL) {
+      handleSubmit();
+    }
+  }, [imageURL]);
 
   return (
     <div className="container">
@@ -235,7 +240,7 @@ export default function FaceLandmarker() {
         </button>
       </div>
       {sending && <h2>Scanning...</h2>}
-      <Prompt
+      <ScanPrompt
         message={message}
         imageURL={imageURL}
         onMessageChange={(e) => setMessage(e.target.value)}
