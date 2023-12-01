@@ -1,7 +1,6 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { twMerge } from "tailwind-merge";
 
 const FaceLandmarkCanvas = dynamic(
   () => {
@@ -13,7 +12,7 @@ const FaceLandmarkCanvas = dynamic(
 export default function ScanPage() {
   return (
     <div className="flex flex-col p-5 h-screen items-center gradient-bg">
-      <div className={twMerge("flex flex-col items-center mb-5")}>
+      <div className="flex flex-col items-center mb-5">
         <FaceLandmarkCanvas />
       </div>
     </div>

@@ -25,30 +25,24 @@ export default function ScanPage() {
   };
 
   return (
-    <div
-      className="flex flex-col p-5 h-screen items-center gradient-bg"
-    >
+    <div className="flex flex-col p-5 h-screen items-center gradient-bg">
       <input
         type="text"
         placeholder="What is your question"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
-        className={twMerge(
-          "w-full p-2 mb-4 border rounded bg-white text-black dark:bg-gray-800 dark:text-white"
-        )}
+        className="w-full p-2 mb-4 border rounded bg-white text-black dark:bg-gray-800 dark:text-white"
       />
       <input
         type="text"
         placeholder="Enter an image url"
         value={imageURL}
         onChange={(e) => setImageURL(e.target.value)}
-        className={twMerge(
-          "w-full p-2 mb-4 border rounded bg-white text-black dark:bg-gray-800 dark:text-white"
-        )}
+        className="w-full p-2 mb-4 border rounded bg-white text-black dark:bg-gray-800 dark:text-white"
       />
       <div>
         <button
-          className={twMerge("text-white text-4xl mb-5 dark:text-white")}
+          className="text-white text-4xl mb-5 dark:text-white"
           onClick={handleSubmit}
         >
           Start your scan

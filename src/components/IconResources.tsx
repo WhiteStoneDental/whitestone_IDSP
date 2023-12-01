@@ -10,7 +10,7 @@ export default function ResourcesIcon() {
         d="m12 3 9 4.5-9 4.5-9-4.5zm4.5 7.25 4.5 2.25-9 4.5-9-4.5 4.5-2.25m9 5 4.5 2.25-9 4.5-9-4.5 4.5-2.25"
         fill="none"
         stroke="#000"
-        stroke-width="2"
+        strokeWidth="2"
       ></path>
     </svg>
   );

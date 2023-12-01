@@ -1,5 +1,5 @@
 import { BaseButton } from "./BaseButton";
-import ResourcesIcon from "./Icon_Resources";
+import ResourcesIcon from "./IconResources";
 import Link from "next/link";
 
 export default function ResourceButton() {

@@ -3,7 +3,6 @@ import NavBar from "@/components/NavBar";
 import Accordion from "@/components/Accordion";
 import LoginButton from "@/components/LoginButton";
 
-import { twMerge } from "tailwind-merge";
 import ResultsAccordion from "@/components/ResultsAccordion";
 import { useEffect, useState } from "react";
 import Image from "next/image";
@@ -25,22 +24,12 @@ export default function Results() {
   }, []);
 
   return (
-    <div
-      className="flex flex-col p-5 gradient-bg"
-    >
-      <div
-        className={twMerge(
-          "flex flex-col items-center mt-20 mb-5 font-bold text-6xl text-center text-white"
-        )}
-      >
+    <div className="flex flex-col p-5 gradient-bg">
+      <div className="flex flex-col items-center mt-20 mb-5 font-bold text-6xl text-center text-white">
         Scan Results
       </div>
       <div className="bg-white p-5 rounded-xl h-full w-full overflow-hidden mb-10 dark:bg-[var(--mainphrase-bg)]">
-        <div
-          className={twMerge(
-            "placeholder-content text-black dark:text-white text-center font-bold text-xl mb-5"
-          )}
-        >
+        <div className="placeholder-content text-black dark:text-white text-center font-bold text-xl mb-5">
           {results.date}
         </div>
         {imgSrc && (

@@ -5,7 +5,7 @@ import React from 'react';
 export default function Loading() {
   return (
     <div 
-    className={twMerge("h-screen flex flex-col items-center justify-center min-h-screen bg-[var(--mainphrase-bg)]")}
+    className="h-screen flex flex-col items-center justify-center min-h-screen bg-[var(--mainphrase-bg)]"
     >
       <Logo />
       <div className="items-center justify-center text-center">
