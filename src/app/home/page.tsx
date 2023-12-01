@@ -43,11 +43,7 @@ export default function HomePage() {
 
   return (
     <div
-      className="flex flex-col items-center p-8  h-full relative overflow-y-auto"
-      style={{
-        backgroundImage:
-          "var(--homepage-gradient, gradient-from-24008C via-9D32A5 to-641A99)",
-      }}
+      className="flex flex-col items-center p-8 h-full relative overflow-y-auto gradient-bg"
     >
       {/* <LoginButton/> */}
 

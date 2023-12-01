@@ -1,15 +1,18 @@
 import Webcam from "react-webcam";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import FaceLandmarkManager from "@/class/FaceLandmarkManager";
 import { twMerge } from "tailwind-merge";
 import { getResponse } from "@/app/actions";
+import ScanPrompt from "./ScanPrompt";
 
 const isMouthOpen = (score: number) => {
-  return score >= 0.005;
+  return score >= 0.0001;
 };
 
 export default function FaceLandmarker() {
+  const router = useRouter();
   const webcamRef = useRef<Webcam>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -18,36 +21,13 @@ export default function FaceLandmarker() {
   const requestRef = useRef(0);
   const [imgSrc, setImgSrc] = useState<string | null>(null);
   const [mouthOpen, setMouthOpen] = useState("mouth not open");
-  const [message, setMessage] = useState<string>("");
-  const [imageURL, setImageURL] = useState<string>("");
-  const [result, setResult] = useState<string | null>(null);
+  const [message, setMessage] = useState("");
+  const [tip, setTip] = useState<string | null>("");
+  const [imageURL, setImageURL] = useState("");
   const [loading, setLoading] = useState(false);
+  const [sending, setSending] = useState(false);
 
-  const capture = useCallback(() => {
-    setLoading(true);
-
-    setTimeout(() => {
-      if (webcamRef.current && canvasRef.current) {
-        try {
-          const faceLandmarkManager = FaceLandmarkManager.getInstance();
-          const results = faceLandmarkManager.getResults();
-          const mouthOpenScore =
-            results.faceBlendshapes[0].categories[27].score;
-
-          if (isMouthOpen(mouthOpenScore)) {
-            const imageSrc = webcamRef.current.getScreenshot();
-            setImgSrc(imageSrc);
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      }
-
-      setLoading(false);
-    }, 2000);
-  }, [webcamRef]);
-
-  useEffect(() => {
+  const createOutlineBox = () => {
     if (canvasBoxRef.current) {
       const ctx = canvasBoxRef.current.getContext("2d");
 
@@ -59,12 +39,37 @@ export default function FaceLandmarker() {
         ctx.stroke();
       }
     }
+  };
+
+  const capture = useCallback(() => {
+    setLoading(true);
+
+    if (webcamRef.current && canvasRef.current) {
+      try {
+        const faceLandmarkManager = FaceLandmarkManager.getInstance();
+        const results = faceLandmarkManager.getResults();
+        const mouthOpenScore = results.faceBlendshapes[0].categories[27].score;
+
+        if (isMouthOpen(mouthOpenScore)) {
+          const imageSrc = webcamRef.current.getScreenshot();
+          setImgSrc(imageSrc);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    setLoading(false);
+  }, [webcamRef]);
+
+  useEffect(() => {
+    createOutlineBox();
   }, [canvasBoxRef]);
 
   useEffect(() => {
-    const getUserWebcam = async () => {
+    const waitForWebcam = async () => {
       try {
-        const stream = await navigator.mediaDevices.getUserMedia({
+        await navigator.mediaDevices.getUserMedia({
           video: true,
         });
 
@@ -73,10 +78,10 @@ export default function FaceLandmarker() {
         }
       } catch (error) {
         console.log(error);
-        alert("failed to load webcam");
+        alert("failed to load webcam, refresh maybe");
       }
     };
-    getUserWebcam();
+    waitForWebcam();
 
     const getResults = () => {
       if (
@@ -94,15 +99,24 @@ export default function FaceLandmarker() {
           );
           const results = faceLandmarkManager.getResults();
           if (results.faceBlendshapes[0]) {
+            // console.log("START -----------------------------------------------------------------")
+            // console.log("mouthClose: ", results.faceBlendshapes[0].categories[27].score)
+            // console.log("mouthLeft: ", results.faceBlendshapes[0].categories[33].score)
+            // console.log("mouthRight: ", results.faceBlendshapes[0].categories[39].score)
+            // console.log("mouthSmileLeft: ", results.faceBlendshapes[0].categories[44].score)
+            // console.log("mouthSmileRight: ", results.faceBlendshapes[0].categories[45].score)
             const mouthOpenScore =
               results.faceBlendshapes[0].categories[27].score;
             if (isMouthOpen(mouthOpenScore)) {
               setMouthOpen("mouth open");
+              setTip(null);
             } else {
               setMouthOpen("mouth not open");
+              setTip("try getting closer or farther from the camera");
             }
           } else {
             setMouthOpen("face not detected");
+            setTip(null);
           }
         } catch (error) {
           console.log(error);
@@ -157,30 +171,37 @@ export default function FaceLandmarker() {
       );
     };
 
-    const handleSubmit = async () => {
-      const result = await getResponse(message, imageURL);
-      if (!result.error && result.response) {
-        setResult(result.response)
-        localStorage.setItem("imageURL", imageURL);
-        localStorage.setItem("results", result.response);
-        window.location.href = "/results";
-      }
-    };
-
     if (imgSrc) {
       try {
         setTimeout(() => {
           cropImg();
+
           if (canvasRef.current) {
             setImageURL(canvasRef.current.toDataURL());
-            handleSubmit();
           }
-        }, 1000);
+        }, 2000);
       } catch (error) {
         console.log(error);
       }
     }
-  }, [imgSrc, imageURL, message]);
+  }, [imgSrc]);
+
+  useEffect(() => {
+    const handleSubmit = async () => {
+      setSending(true);
+
+      const result = await getResponse(message, imageURL);
+      if (!result.error && result.response) {
+        localStorage.setItem("imageURL", imageURL);
+        localStorage.setItem("results", result.response);
+        router.push("/results");
+      }
+    };
+
+    if (imageURL) {
+      handleSubmit();
+    }
+  }, [imageURL]);
 
   return (
     <div className="container">
@@ -190,15 +211,16 @@ export default function FaceLandmarker() {
         style={{ width: 600, height: 450, transform: "scaleX(-1)" }}
       ></canvas>
       <Webcam
+        className="rounded-xl shadow-xl dark:bg-[var(--box-color)]"
         height={600}
         width={600}
         ref={webcamRef}
-        screenshotFormat="image/jpeg"
+        screenshotFormat="image/png"
         playsInline={true}
       />
       {imgSrc && (
         <Image
-          className="invisible"
+          className="invisible absolute"
           ref={imageRef}
           src={imgSrc}
           alt="webcam image"
@@ -206,39 +228,24 @@ export default function FaceLandmarker() {
           height={600}
         />
       )}
-      <canvas ref={canvasRef}></canvas>
+      <canvas
+        className={twMerge(imgSrc ? "" : "invisible absolute")}
+        ref={canvasRef}
+      ></canvas>
       <h2>{mouthOpen}</h2>
+      {tip && <h2>{tip}</h2>}
       <div className="btn-container">
         <button onClick={capture}>
           {loading ? "Cropping..." : "Capture photo"}
         </button>
       </div>
-
-      <input
-        type="text"
-        placeholder="What is your question"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        className={twMerge(
-          "w-full p-2 mb-4 border rounded bg-white text-black dark:bg-gray-800 dark:text-white"
-        )}
+      {sending && <h2>Scanning...</h2>}
+      <ScanPrompt
+        message={message}
+        imageURL={imageURL}
+        onMessageChange={(e) => setMessage(e.target.value)}
+        onImageChange={(e) => setImageURL(e.target.value)}
       />
-      <input
-        type="text"
-        placeholder="Enter an image url"
-        value={imageURL}
-        onChange={(e) => setImageURL(e.target.value)}
-        className={twMerge(
-          "w-full p-2 mb-4 border rounded bg-white text-black dark:bg-gray-800 dark:text-white"
-        )}
-      />
-      <div></div>
-      {result && (
-        <div>
-          <h2>Result:</h2>
-          <p>{result}</p>
-        </div>
-      )}
     </div>
   );
 }

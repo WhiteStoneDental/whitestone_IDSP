@@ -26,11 +26,7 @@ export default function ScanPage() {
 
   return (
     <div
-      className={twMerge("flex flex-col p-5 h-screen items-center")}
-      style={{
-        backgroundImage:
-          "var(--homepage-gradient, gradient-from-24008C via-9D32A5 to-641A99)",
-      }}
+      className="flex flex-col p-5 h-screen items-center gradient-bg"
     >
       <input
         type="text"
