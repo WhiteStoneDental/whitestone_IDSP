@@ -7,7 +7,7 @@ export const submitImage = async (
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Content-Length": JSON.stringify({
+      "Content-Length": Buffer.from(JSON.stringify({
         messages: [
           {
             role: "user",
@@ -25,7 +25,7 @@ export const submitImage = async (
             ],
           },
         ],
-      }).length.toString(),
+      }).length.toString()).toString()
     },
     body: JSON.stringify({
       messages: [
