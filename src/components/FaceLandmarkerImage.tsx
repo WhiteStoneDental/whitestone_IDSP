@@ -1,3 +1,5 @@
+"use client";
+
 import Webcam from "react-webcam";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
@@ -26,7 +28,7 @@ export default function FaceLandmarker() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [imgSrc, setImgSrc] = useState(null);
 
-  function cropImg(landmarkManager: FaceLandmarkManager, imageSrc: ImageData) {
+  function cropImg(landmarkManager: FaceLandmarkManager) {
     console.log(landmarkManager.getResults())
     const landmarkCoordinates =
       landmarkManager.getResults().faceLandmarks[0][35];

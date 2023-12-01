@@ -23,6 +23,7 @@
     --background-start-rgb: 0, 0, 0; /* Black for dark mode */
     --background-end-rgb: 0, 0, 0; /* Black for dark mode */
     --mainphrase-bg: var(--mainphrase-dark-bg, #312737);
+    --box-color: var(--box-dark-color, #312737cb );
   }
 }
 

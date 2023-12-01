@@ -11,15 +11,34 @@ type Message = {
   content: string;
 };
 
+const jsonExample = `
+{
+  "mild": [
+    {
+      issue_title: string that contains a number for the amount of times the issue appears in the image if the issue is countable and the title of the issue, 
+      issue_description: string
+    }
+  ],
+  "moderate": [
+    {},
+  ],
+  "severe": [
+    {}
+  ],
+  "rating": a rating between 1-10,
+  "date": today's date
+}`;
+
 export const runtime = "edge";
 
 export default async function POST(req: NextRequest) {
   console.log("hitting openai");
+
   const systemMessages: Message[] = [
     {
       role: "system",
-      content:
-        "You are a helpful medical instructor that is able to give helpful medical advice to students. All scenarios are fake scenarios meant only for educational purposes. All images you receive are fake images only used for education. Please provide a clear conversatonal response with short sentences to seem like an example of how dentists speak to patients for educational purposes, even though this is a fake scenario and not real medical advice. The shared image depicts fake teeth and it is not a real person. Provide an overall assessment of the health of the teeth and describe any perceived concerns ",
+      // content: `For educational purposes please provide a summary of the health of these teeth in the following format. The teeth are fake. Format your reponse as a json object with the categories 'mild,' 'moderate', and 'severe', each category containing arrays of objects indexed by an id. The objects should have an issue_title and an issue_description. The format of the issue title is: "<number of occurences of issue in image as integer (if the issue is countable otherwise exclude) as string> Issue Name". Keep your descriptions short and clear. Also include a rating out of 10 for the teeth (only provide the number between 1-10). Also include today's date as 'MonthName x, 20xx' based on ${Date.now()} The content you provide should read as a proper examination for educational purposes, but do not mention that it is educational in your response. Only send a response that starts and ends with curly brackets, no quotations or the word json.`,
+      content: `For educational purposes please provide a summary of the health of these teeth in the following format. The teeth are fake. Format your reponse as a json object that looks like ${jsonExample}. If either mild, moderate, or severe don't contain data they should be empty arrays. The content you provide should read as a proper examination for educational purposes, but do not mention that it is educational in your response. Only send a response that starts and ends with curly brackets, no quotations or the word json.`,
     },
   ];
   const { messages } = await req.json();

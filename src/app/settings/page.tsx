@@ -8,19 +8,23 @@ import LoginButton from "@/components/LoginButton";
 import ArrowIconMin from '@/components/ArrowIconMin';
 import Switch from "react-switch";
 import { twMerge } from "tailwind-merge";
+import Image from 'next/image';
+import CustomSwitch from '@/components/CustomSwitch';
 
 const SettingsPage = () => {
+  
   const [userData, setUserData] = useState({
     username: '',
     email: '',
     password: '',
   });
-  const [avatar, setAvatar] = useState(null);
+  const [avatar, setAvatar] = useState<File | null>(null);
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    const savedTheme = localStorage.getItem('darkMode');
+    return savedTheme === 'true' ? true : false;
+  });
 
   useEffect(() => {
-    // Simulate fetching user data from your backend or a data source
-    // and populate the userData state.
-    // Replace this with an actual fetch request.
     setUserData({
       username: 'SampleUser',
       email: 'sample@example.com',
@@ -28,20 +32,42 @@ const SettingsPage = () => {
     });
   }, [3000]);
 
-  const handleInputChange = (e) => {
+  useEffect(() => {
+    if (isDarkMode) {
+      document.body.classList.add('dark');
+      localStorage.setItem('darkMode', 'true');
+    } else {
+      document.body.classList.remove('dark');
+      localStorage.setItem('darkMode', 'false');
+    }
+  }, [isDarkMode]);
+
+  
+  const handleThemeChange = () => {
+    setIsDarkMode(!isDarkMode);
+  }
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
   };
 
-  const handleAvatarChange = (e) => {
-    const file = e.target.files[0];
-    setAvatar(file);
-  };
 
-  const handleSubmit = async (e) => {
+  const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+        const file = e.target.files[0];
+        setAvatar(file);
+    }
+};
+
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  
     e.preventDefault();
     const formData = new FormData();
-    formData.append('avatar', avatar);
+    
+    if (avatar) {
+      formData.append('avatar', avatar);
+    }
     formData.append('username', userData.username);
     formData.append('email', userData.email);
     formData.append('password', userData.password);
@@ -62,35 +88,45 @@ const SettingsPage = () => {
         alert(`User data update failed: ${response.statusText}`);
       }
     } catch (error) {
-      // Handle network or other errors and provide user feedback
-      alert(`An error occurred while updating user data: ${error.message}`);
+      if (error instanceof Error) {
+        // Now TypeScript knows that 'error' is of type Error and has a 'message' property
+        alert(`An error occurred while updating user data: ${error.message}`);
+      } else {
+        // Handle cases where the error is not an Error instance
+        alert('An unknown error occurred while updating user data.');
+      }
     }
-  };
 
+
+  } 
   return (
+    
     <div
-      className={twMerge("flex flex-col p-5 min-h-screen")}
+      className={twMerge("flex flex-col p-5 max-h-screen items-center")}
       style={{
         backgroundImage:
           "var(--homepage-gradient, gradient-from-24008C via-9D32A5 to-641A99)",
       }}
     >
-      <LoginButton />
+      {/* <LoginButton /> */}
       <div className="flex flex-col p-5">
         <div className="relative mx-auto mb-5">
           <div className="rounded-full border-4 border-white">
-            <img
+            <Image
               src="/image-placeholder.jpg"
               alt="User Avatar"
               className="w-24 h-24 rounded-full object-cover mx-auto"
+              width={24}
+              height={24}
             />
 
           </div>
+          </div>
+          <input className="relative mx-auto hidden" id='files' type="file" accept="image/*" onChange={handleAvatarChange} />
+          <label className="relative mx-auto bg-white rounded-md font-bold w-36 h-6 text-center text-black" htmlFor='files'>Change Photo</label>
         </div>
-        <input className="relative mx-auto" type="file" accept="image/*" onChange={handleAvatarChange} />
-      </div>
 
-      <div className="bg-white p-5 rounded-xl h-screen w-full overflow-hidden">
+      <div className="bg-white p-10 rounded-xl h-screen max-w-screen-lg overflow-hidden dark:bg-[var(--mainphrase-bg)]">
         <h1 className="text-4xl mt-30 mb-10">Account Information</h1>
         <div className="mb-10">
           <label className="text-xl">Name</label>
@@ -102,47 +138,63 @@ const SettingsPage = () => {
             onChange={handleInputChange}
             className="w-full border rounded p-2"
             disabled={true}
-            style={{ backgroundColor: '#fff' }}
           />
-          <img src="/edit-icon.svg" alt="Home" className="w-6 h-6 mb-1 absolute right-2 top-1/2 transform -translate-y-1/2 cursor-pointer" />
+          <Image src="/edit-icon.svg" alt="Home" width={6} height={6} className="w-6 h-6 mb-1 absolute right-2 top-1/2 transform -translate-y-1/2 cursor-pointer" />
           </div>
         </div>
         <div className="mb-10">
-          <div className={twMerge(
-            "mb-4 flex flex-row justify-between"
-          )}>
-            <button className="text-xl">Username</button>
-            <ArrowIconMin />
+            <div className={twMerge(
+              "mb-4 flex flex-row justify-between"
+            )}>
+              <button className="items-center	text-xl flex min-w-full object-right justify-between mt-2">Username <ArrowIconMin />
+              </button>
+            </div>
+            <div className="border-t border-gray-300 my-1"></div>
+            <div className={twMerge(
+              "mb-4 flex flex-row justify-between"
+            )}>
+              <button className="items-center	text-xl flex min-w-full object-right justify-between mt-2">Email <ArrowIconMin />
+              </button>
+            </div>
+            <div className="border-t border-gray-300 my-1"></div>
+            <div className={twMerge(
+              "mb-4 flex flex-row justify-between"
+            )}>
+              <button className="items-center	text-xl flex min-w-full object-right justify-between mt-2">Password <ArrowIconMin />
+              </button>
+            </div>
+            <div className="border-t border-gray-300 my-1"></div>
           </div>
-          <div className="border-t border-gray-300 my-4"></div>
-          <div className={twMerge(
-            "mb-4 flex flex-row justify-between"
-          )}>
-            <button className="text-xl">Email</button>
-            <ArrowIconMin />
-          </div>
-          <div className="border-t border-gray-300 my-4"></div>
-          <div className={twMerge(
-            "mb-4 flex flex-row justify-between"
-          )}>
-            <button className="text-xl">Password</button>
-            <ArrowIconMin />
-          </div>
-          <div className="border-t border-gray-300 my-4"></div>
-        </div>
         <div className="mb-4">
+            <h1 className="text-4xl mt-30 mb-10 font-bold">Display</h1>
+            <label className={twMerge(
+              "mb-4 flex flex-row justify-between"
+            )}>
+              <span className="text-xl">Dark mode</span>
+              <CustomSwitch />
+            </label>
+            <div className="border-t border-gray-300 my-4"></div>
+            <div>
+
+            </div>
+          </div>
+        {/* <div className="mb-4">
           <h1 className="text-4xl mt-30 mb-10">Display</h1>
           <label className={twMerge(
             "mb-4 flex flex-row justify-between"
           )}>
             <span className="text-xl">Dark mode</span>
-            <Switch uncheckedIcon={false}/>
+             <Switch
+          onChange={handleThemeChange}
+          checked={isDarkMode}
+          uncheckedIcon={false}
+          />
           </label>
           <div className="border-t border-gray-300 my-4"></div>
           <div>
 
           </div>
-        </div>
+        </div> */}
         {/* <div>
           <SaveButton />
           <CancelButton />
@@ -154,6 +206,7 @@ const SettingsPage = () => {
       </div>
     </div>
   );
+
 };
 
 export default SettingsPage;
