@@ -1,7 +1,7 @@
 // components/TextBox.jsx
 import React from 'react';
 
-export default function TextBox = () => {
+export default function TextBox() {
   return (
     <div className="p-4">
       <label htmlFor="textbox" className="block text-gray-600 font-medium">
