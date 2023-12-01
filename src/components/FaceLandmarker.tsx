@@ -1,15 +1,17 @@
 import Webcam from "react-webcam";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useRouter } from 'next/navigation'
 import Image from "next/image";
 import FaceLandmarkManager from "@/class/FaceLandmarkManager";
 import { twMerge } from "tailwind-merge";
 import { getResponse } from "@/app/actions";
 
 const isMouthOpen = (score: number) => {
-  return score >= 0.005;
+  return true;
 };
 
 export default function FaceLandmarker() {
+  const router = useRouter();
   const webcamRef = useRef<Webcam>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -64,7 +66,7 @@ export default function FaceLandmarker() {
   useEffect(() => {
     const getUserWebcam = async () => {
       try {
-        const stream = await navigator.mediaDevices.getUserMedia({
+        await navigator.mediaDevices.getUserMedia({
           video: true,
         });
 
@@ -73,7 +75,7 @@ export default function FaceLandmarker() {
         }
       } catch (error) {
         console.log(error);
-        alert("failed to load webcam");
+        alert("failed to load webcam, refresh maybe");
       }
     };
     getUserWebcam();
@@ -94,6 +96,7 @@ export default function FaceLandmarker() {
           );
           const results = faceLandmarkManager.getResults();
           if (results.faceBlendshapes[0]) {
+            console.log(results.faceBlendshapes[0].categories)
             const mouthOpenScore =
               results.faceBlendshapes[0].categories[27].score;
             if (isMouthOpen(mouthOpenScore)) {
@@ -163,7 +166,7 @@ export default function FaceLandmarker() {
         setResult(result.response)
         localStorage.setItem("imageURL", imageURL);
         localStorage.setItem("results", result.response);
-        window.location.href = "/results";
+        router.push("/results")
       }
     };
 
