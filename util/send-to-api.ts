@@ -3,7 +3,6 @@ export const submitImage = async (
   message: string,
   image: string,
 ) => {
-  console.log("ran")
   const res = await fetch(url, {
     method: "POST",
     headers: {
