@@ -1,11 +1,9 @@
-import { useTheme } from "next-themes";
 import { twMerge } from 'tailwind-merge';
 import SaveButton from "@/components/SaveButton";
 import CancelButton from "@/components/CancelButton";
 import NavBar from "@/components/NavBar";
 
 export default function ChangeUsernamePage() {
-
     return (
         <div className={twMerge('flex flex-col items-center mb-5')}>
             <h1 className={twMerge('text-black text-4xl mt-30 mb-10 dark:text-white')}>Change Username</h1>
