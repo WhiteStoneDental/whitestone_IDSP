@@ -1,6 +1,7 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
-const NavBar: React.FC = () => {
+export default function NavBar() {
   return (
     <nav className="fixed bottom-0 left-0 right-0 bg-white text-black flex justify-between p-4 shadow-t border-t border-black-10">
       <Link href="/settings">
@@ -24,5 +25,3 @@ const NavBar: React.FC = () => {
     </nav>
   );
 };
-
-export default NavBar;
