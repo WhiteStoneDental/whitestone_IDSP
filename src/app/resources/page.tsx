@@ -1,8 +1,8 @@
 import NavBar from "@/components/NavBar";
-import Accordion from "@/components/Accordion";
+import CollapsibleList from "@/components/CollapsibleListItem";
 import LoginButton from "@/components/LoginButton";
-
-import { twMerge } from "tailwind-merge";
+import Accordion from "@/components/Accordion";
+import { twMerge } from 'tailwind-merge';
 
 export default function ResourcePage() {
   return (
