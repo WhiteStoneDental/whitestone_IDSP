@@ -4,8 +4,8 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import FaceLandmarkManager from "@/class/FaceLandmarkManager";
 import { twMerge } from "tailwind-merge";
-import { getResponse } from "@/app/actions";
 import ScanPrompt from "./ScanPrompt";
+import { submitImage } from "../../util/send-to-api";
 
 const isMouthOpen = (score: number) => {
   return score >= 0.0001;
@@ -190,11 +190,21 @@ export default function FaceLandmarker() {
     const handleSubmit = async () => {
       setSending(true);
 
-      const result = await getResponse(message, imageURL);
-      if (!result.error && result.response) {
+      try {
+        // console.log(message);
+        // console.log(imageURL);
+        const streamIterator = await submitImage("/api", message, imageURL);
+        let result = "";
+        for await (const chunk of streamIterator) {
+          result += chunk;
+        }
         localStorage.setItem("imageURL", imageURL);
-        localStorage.setItem("results", result.response);
+        localStorage.setItem("results", result);
         router.push("/results");
+        // setResult(result);
+      } catch (error) {
+        console.error("Error submitting image:", error);
+        // setResult("Error submitting image");
       }
     };
 

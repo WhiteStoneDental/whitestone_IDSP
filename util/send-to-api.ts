@@ -7,25 +7,6 @@ export const submitImage = async (
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Content-Length": Buffer.from(JSON.stringify({
-        messages: [
-          {
-            role: "user",
-            content: [
-              {
-                type: "text",
-                text: message,
-              },
-              {
-                type: "image_url",
-                image_url: {
-                  url: image,
-                },
-              },
-            ],
-          },
-        ],
-      }).length.toString()).toString()
     },
     body: JSON.stringify({
       messages: [
