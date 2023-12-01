@@ -39,11 +39,7 @@ export default function Landing() {
 
   return (
     <div
-      className={twMerge("flex flex-col p-5 h-screen sm:p-3")}
-      style={{
-        backgroundImage:
-          "var(--homepage-gradient, gradient-from-24008C via-9D32A5 to-641A99)",
-      }}
+      className="flex flex-col p-5 h-screen sm:p-3 gradient-bg"
     >
       <div className="bg-white p-8 rounded shadow-lg text-center items-center justify-center max-h-screen overflow-y-scroll sm:p-4  dark:bg-[var(--mainphrase-bg)]   ">
         <div className="items-center flex justify-center mb-4">
@@ -99,7 +95,7 @@ export default function Landing() {
               </p>
             </div>
             <Image
-              src="/image/ScanPic.png"
+              src="/images/ScanPic.png"
               alt="Placeholder"
               width={260}
               height={260}
@@ -109,7 +105,7 @@ export default function Landing() {
         <hr className="mt-4"/>
         <div className="text-center items-center justify-center flex flex-col sm:flex-row">
             <Image
-              src="/image/ScanDetails.png"
+              src="/images/ScanDetails.png"
               alt="Placeholder"
               width={280}
               height={280}
@@ -141,7 +137,7 @@ export default function Landing() {
               </p>
             </div>
             <Image
-              src="/image/HealthResources.png"
+              src="/images/HealthResources.png"
               alt="Placeholder"
               width={270}
               height={270}

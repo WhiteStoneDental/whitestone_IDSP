@@ -26,11 +26,7 @@ export default function Results() {
 
   return (
     <div
-      className={twMerge("flex flex-col p-5")}
-      style={{
-        backgroundImage:
-          "var(--homepage-gradient, gradient-from-24008C via-9D32A5 to-641A99)",
-      }}
+      className="flex flex-col p-5 gradient-bg"
     >
       <div
         className={twMerge(

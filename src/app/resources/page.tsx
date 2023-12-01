@@ -7,11 +7,7 @@ import { twMerge } from 'tailwind-merge';
 export default function ResourcePage() {
   return (
     <div
-      className={twMerge("flex flex-col p-5 mb-5")}
-      style={{
-        backgroundImage:
-          "var(--homepage-gradient, gradient-from-24008C via-9D32A5 to-641A99)",
-      }}
+      className="flex flex-col p-5 mb-5 gradient-bg"
     >
       <div
         className={twMerge(
