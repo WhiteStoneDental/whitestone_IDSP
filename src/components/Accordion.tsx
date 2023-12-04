@@ -1,18 +1,16 @@
-"use client";
+// src/components/Accordion.tsx
+'use client';
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 interface AccordionItemProps {
   title: string;
-  content: string;
-  link?: string;
+  symptoms: string;
+  details: string;
+  treatment: string;
 }
 
-export const AccordionItem: React.FC<AccordionItemProps> = ({
-  title,
-  content,
-  link,
-}) => {
+export const AccordionItem: React.FC<AccordionItemProps> = ({ title, symptoms, details, treatment }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleAccordion = () => {
@@ -20,7 +18,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
   };
 
   return (
-    <div className="mb-5 font-sans ">
+    <div className="mb-5 font-sans">
       <div
         className="flex items-center justify-between p-3 bg-white-300 cursor-pointer rounded"
         onClick={toggleAccordion}
@@ -41,12 +39,9 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
       </div>
       {isOpen && (
         <div className="p-4 bg-white border rounded-b-lg dark: dark:bg-[var(--mainphrase-bg)]">
-          <p className="text-black dark:text-white">{content}</p>
-          {link && (
-            <div className="text-right underline text-purple-700 hover:text-purple-900">
-              <Link href={link}>Read more</Link>
-            </div>
-          )}
+          <p className="text-black dark:text-white"><strong>Main Symptoms:</strong> {symptoms}</p>
+          <p className="text-black dark:text-white mt-2"><strong>Treatment:</strong> {treatment}</p>
+          <p className="text-black dark:text-white mt-2"><strong>Details:</strong> {details}</p>
         </div>
       )}
     </div>
@@ -54,24 +49,30 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
 };
 
 const Accordion = () => {
-  const items = [
-    {
-      title: "Bleeding Gums",
-      content: "Main Symptoms: bleeding, swollen, red, bad breath, tenderness",
-    },
-    { title: "Swollen and Red Gums", content: "Content" },
-    { title: "Gum Sensitivity", content: "Content" },
-    { title: "Gum Inflammation", content: "Content" },
-    { title: "Gap Between Teeth and Gums", content: "Content" },
-    { title: "Gum Recession", content: "Content" },
-    { title: "Cavities", content: "Content" },
-    { title: "Section 8", content: "Content" },
-  ];
+  const [data, setData] = useState<{ issues: AccordionItemProps[] } | null>(null);
+
+  useEffect(() => {
+    import("../../public/data/dentalIssues.json").then((module) => {
+      setData(module.default);
+    });
+  }, []);
+
+  if (!data) {
+    return null;
+  }
+
+  const items = data.issues;
 
   return (
     <div className="w-full max-w-md mx-auto">
       {items.map((item, index) => (
-        <AccordionItem key={index} title={item.title} content={item.content} />
+        <AccordionItem
+          key={index}
+          title={item.title}
+          symptoms={item.symptoms}
+          treatment={item.treatment}
+          details={item.details}
+        />
       ))}
     </div>
   );

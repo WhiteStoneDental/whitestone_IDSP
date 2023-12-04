@@ -1,0 +1,76 @@
+{
+  "issues": [
+    {
+      "title": "Bleeding Gum",
+      "symptoms": "bleeding, swollen, red, bad breath, tenderness",
+      "treatment": "professional cleanings, improved oral hygiene practices, and addressing contributing factors.",
+      "details": "Gum issues can be a sign of gum disease. Consult with a dentist for proper diagnosis and treatment. Causes include poor oral hygiene, gingivitis, or underlying health conditions."
+    },
+    {
+      "title": "Gum Inflammation",
+      "symptoms": "redness, swelling, tenderness",
+      "treatment": "professional cleanings, antimicrobial therapy, and improved oral care practices.",
+      "details": "Inflammation of the gums can be a sign of gum disease. Proper oral hygiene and regular dental visits are essential for preventing and treating gum inflammation. Causes include plaque buildup, infections, or certain medications."
+    },
+    {
+      "title": "Gum Sensitivity",
+      "symptoms": "pain or discomfort when eating or drinking hot or cold substances",
+      "treatment": "identifying and addressing the underlying cause, along with desensitizing agents and preventive measures.",
+      "details": "Gum sensitivity can be caused by various factors, including tooth decay or exposed tooth roots. Seeking professional advice is crucial for managing sensitivity. Common treatments include desensitizing toothpaste, fluoride treatments, or dental procedures to address underlying issues. Identifying and addressing the underlying cause is essential for effective management."
+    },
+    {
+      "title": "Tooth Decay",
+      "symptoms": "toothache, sensitivity to sweet, hot, or cold foods",
+      "treatment": "removing the decayed portion and restoring the tooth with fillings, crowns, or other dental procedures.",
+      "details": "Tooth decay, also known as cavities, is the destruction of tooth enamel. It can lead to various symptoms, including toothache and sensitivity. Causes include bacteria in the mouth, sugary foods, or poor oral hygiene."
+    },
+    {
+      "title": "Tooth Erosion",
+      "symptoms": "tooth sensitivity, discoloration, rounded teeth edges",
+      "treatment": "addressing the underlying cause, using fluoride treatments, and practicing good oral hygiene.",
+      "details": "Tooth erosion is the gradual loss of tooth enamel, often caused by acid. Symptoms include tooth sensitivity, discoloration, and rounded edges. Common causes include acidic foods, beverages, or conditions like acid reflux."
+    },
+    {
+      "title": "Tooth Fracture",
+      "symptoms": "tooth pain, sensitivity, difficulty chewing",
+      "treatment": "depends on the severity and location of the fracture and may involve bonding, crowns, or, in severe cases, extraction.",
+      "details": "A tooth fracture involves a crack or break in the tooth structure. Symptoms include tooth pain, sensitivity, and difficulty chewing. Causes vary and may include trauma, biting on hard objects, or weakened teeth."
+    },
+    {
+      "title": "Bruxism (Teeth Grinding)",
+      "symptoms": "tooth wear, jaw pain, headaches",
+      "treatment": "addressing the underlying cause, using mouthguards to protect teeth, and stress management techniques.",
+      "details": "Bruxism is the habit of grinding or clenching teeth, often during sleep. It can lead to tooth wear, jaw pain, and headaches. Causes may include stress, misaligned teeth, or sleep disorders."
+    },
+    {
+      "title": "Tooth Sensitivity",
+      "symptoms": "pain or discomfort with hot, cold, sweet, or acidic foods",
+      "treatment": "may include desensitizing toothpaste, fluoride treatments, and addressing underlying causes.",
+      "details": "Tooth sensitivity is characterized by pain or discomfort when consuming hot, cold, sweet, or acidic foods. It can result from various factors, including exposed tooth roots, gum recession, or enamel erosion."
+    },
+    {
+      "title": "Malocclusion (Bad Bite)",
+      "symptoms": "difficulty chewing, jaw pain, speech problems",
+      "treatment": "options include braces, orthodontic appliances, or, in severe cases, oral surgery.",
+      "details": "Malocclusion refers to misalignment or incorrect positioning of teeth when the jaws are closed. Symptoms include difficulty chewing, jaw pain, and speech problems. Causes may include genetics, thumb-sucking, or dental issues."
+    },
+    {
+      "title": "Gap Between Teeth and Gums",
+      "symptoms": "noticeable gap or space between teeth and gums",
+      "treatment": "options depend on the severity and underlying cause, and may include orthodontic treatments, dental bonding, or periodontal procedures.",
+      "details": "Gaps between teeth and gums may lead to food impaction and gum issues. Dentists can recommend suitable treatments to address this concern, such as braces, dental bonding, or periodontal procedures. Causes include gum recession, tooth misalignment, or genetics."
+    },
+    {
+      "title": "Gum Recession",
+      "symptoms": "exposed tooth roots, increased tooth sensitivity",
+      "treatment": "gum grafting, desensitizing agents, and addressing contributing factors.",
+      "details": "Gum recession can expose tooth roots and lead to increased sensitivity. Dentists can assess the extent of recession and recommend appropriate interventions. Causes include aggressive brushing, gum disease, or genetic predisposition."
+    },
+    {
+      "title": "Dental Abscess",
+      "symptoms": "severe toothache, swelling, pus drainage, fever",
+      "treatment": "draining the abscess, removing the source of infection, and, in some cases, root canal therapy or tooth extraction.",
+      "details": "A dental abscess is a pocket of pus caused by a bacterial infection. It can lead to severe toothache, swelling, and fever. Common causes include untreated cavities or advanced gum disease."
+    }
+  ]
+}
