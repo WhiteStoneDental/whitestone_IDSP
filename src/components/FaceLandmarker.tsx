@@ -6,6 +6,7 @@ import FaceLandmarkManager from "@/class/FaceLandmarkManager";
 import { twMerge } from "tailwind-merge";
 import ScanPrompt from "./ScanPrompt";
 import { submitImage } from "../../util/send-to-api";
+import ScanBox from "./ScanBox";
 
 const isMouthOpen = (score: number) => {
   return score >= 0.0001;
@@ -27,20 +28,6 @@ export default function FaceLandmarker() {
   const [loading, setLoading] = useState(false);
   const [sending, setSending] = useState(false);
 
-  const createOutlineBox = () => {
-    if (canvasBoxRef.current) {
-      const ctx = canvasBoxRef.current.getContext("2d");
-
-      if (ctx) {
-        ctx.beginPath();
-        ctx.lineWidth = 2;
-        ctx.strokeStyle = "red";
-        ctx.rect(85, 88, 120, 60);
-        ctx.stroke();
-      }
-    }
-  };
-
   const capture = useCallback(() => {
     setLoading(true);
 
@@ -61,10 +48,6 @@ export default function FaceLandmarker() {
 
     setLoading(false);
   }, [webcamRef]);
-
-  useEffect(() => {
-    createOutlineBox();
-  }, [canvasBoxRef]);
 
   useEffect(() => {
     const waitForWebcam = async () => {
@@ -215,19 +198,19 @@ export default function FaceLandmarker() {
 
   return (
     <div className="container">
-      <canvas
-        ref={canvasBoxRef}
-        className="absolute"
-        style={{ width: 600, height: 450, transform: "scaleX(-1)" }}
-      ></canvas>
-      <Webcam
-        className="rounded-xl shadow-xl dark:bg-[var(--box-color)]"
-        height={600}
-        width={600}
-        ref={webcamRef}
-        screenshotFormat="image/png"
-        playsInline={true}
-      />
+      <div className="relative">
+        <Webcam
+          className="rounded-xl shadow-xl dark:bg-[var(--box-color)]"
+          height={600}
+          width={600}
+          ref={webcamRef}
+          screenshotFormat="image/png"
+          playsInline={true}
+        />
+        <div className="absolute bottom-4 left-44">
+          <ScanBox />
+        </div>
+      </div>
       {imgSrc && (
         <Image
           className="invisible absolute"
