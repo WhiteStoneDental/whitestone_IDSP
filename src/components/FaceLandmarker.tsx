@@ -3,8 +3,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import FaceLandmarkManager from "@/class/FaceLandmarkManager";
-import { twMerge } from "tailwind-merge";
-import ScanPrompt from "./ScanPrompt";
 import { submitImage } from "../../util/send-to-api";
 import ScanBox from "./ScanBox";
 
@@ -17,7 +15,6 @@ export default function FaceLandmarker() {
   const webcamRef = useRef<Webcam>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const canvasBoxRef = useRef<HTMLCanvasElement>(null);
   const lastVideoTimeRef = useRef(-1);
   const requestRef = useRef(0);
   const [imgSrc, setImgSrc] = useState<string | null>(null);
@@ -143,10 +140,10 @@ export default function FaceLandmarker() {
 
       ctx.drawImage(
         imageRef.current,
-        250,
-        300,
-        120,
-        100,
+        415,
+        425,
+        150,
+        150,
         0,
         0,
         canvasRef.current.width,
@@ -198,16 +195,16 @@ export default function FaceLandmarker() {
 
   return (
     <div className="container">
-      <div className="relative">
+      <div className="relative w-full">
         <Webcam
           className="rounded-xl shadow-xl dark:bg-[var(--box-color)]"
-          height={600}
-          width={600}
+          height="100%"
+          width="100%"
           ref={webcamRef}
           screenshotFormat="image/png"
           playsInline={true}
         />
-        <div className="absolute bottom-4 left-44">
+        <div className="absolute bottom-36 left-[23rem]">
           <ScanBox />
         </div>
       </div>
@@ -222,7 +219,7 @@ export default function FaceLandmarker() {
         />
       )}
       <canvas
-        className={twMerge(imgSrc ? "" : "invisible absolute")}
+        className={imgSrc ? "" : "invisible absolute"}
         ref={canvasRef}
       ></canvas>
       <h2>{mouthOpen}</h2>
@@ -233,12 +230,6 @@ export default function FaceLandmarker() {
         </button>
       </div>
       {sending && <h2>Scanning...</h2>}
-      <ScanPrompt
-        message={message}
-        imageURL={imageURL}
-        onMessageChange={(e) => setMessage(e.target.value)}
-        onImageChange={(e) => setImageURL(e.target.value)}
-      />
     </div>
   );
 }
