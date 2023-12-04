@@ -23,7 +23,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
  
  
 //   const toggleAccordion = () => setIsOpen(!isOpen);
- 
+ //
 
   return (
     <div className="mb-5 font-sans">
