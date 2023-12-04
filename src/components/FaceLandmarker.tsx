@@ -215,8 +215,8 @@ export default function FaceLandmarker() {
           ref={imageRef}
           src={imgSrc}
           alt="webcam image"
-          width={600}
-          height={600}
+          fill
+          sizes="100%"
         />
       )}
       <canvas
