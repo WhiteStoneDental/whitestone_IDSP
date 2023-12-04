@@ -8,21 +8,21 @@ interface AccordionItemProps {
   link?: string;
 }
 
-// export const AccordionItem: React.FC<AccordionItemProps> = ({
-//   title,
-//   content,
-//   link,
-// }) => {
-//   const [isOpen, setIsOpen] = useState(false);
-
-//   const toggleAccordion = () => {
-//     setIsOpen((prev) => !prev);
-//   };
-const AccordionItem: React.FC<AccordionItemProps> = ({ title, content, link }) => {
+export const AccordionItem: React.FC<AccordionItemProps> = ({
+  title,
+  content,
+  link,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const toggleAccordion = () => {
+    setIsOpen((prev) => !prev);
+  };
+// const AccordionItem: React.FC<AccordionItemProps> = ({ title, content, link }) => {
+//   const [isOpen, setIsOpen] = useState(false);
  
  
-  const toggleAccordion = () => setIsOpen(!isOpen);
+//   const toggleAccordion = () => setIsOpen(!isOpen);
  
 
   return (
