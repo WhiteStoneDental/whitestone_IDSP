@@ -203,6 +203,7 @@ export default function FaceLandmarker() {
           ref={webcamRef}
           screenshotFormat="image/png"
           playsInline={true}
+          mirrored={true}
         />
         <div className="absolute bottom-36 left-[23rem]">
           <ScanBox />
