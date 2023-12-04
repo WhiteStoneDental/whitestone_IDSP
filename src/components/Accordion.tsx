@@ -8,19 +8,25 @@ interface AccordionItemProps {
   link?: string;
 }
 
-export const AccordionItem: React.FC<AccordionItemProps> = ({
-  title,
-  content,
-  link,
-}) => {
-  const [isOpen, setIsOpen] = useState(false);
+// export const AccordionItem: React.FC<AccordionItemProps> = ({
+//   title,
+//   content,
+//   link,
+// }) => {
+//   const [isOpen, setIsOpen] = useState(false);
 
-  const toggleAccordion = () => {
-    setIsOpen((prev) => !prev);
-  };
+//   const toggleAccordion = () => {
+//     setIsOpen((prev) => !prev);
+//   };
+const AccordionItem: React.FC<AccordionItemProps> = ({ title, content, link }) => {
+  const [isOpen, setIsOpen] = useState(false);
+ 
+ 
+  const toggleAccordion = () => setIsOpen(!isOpen);
+ 
 
   return (
-    <div className="mb-5 font-sans ">
+    <div className="mb-5 font-sans">
       <div
         className="flex items-center justify-between p-3 bg-white-300 cursor-pointer rounded"
         onClick={toggleAccordion}
@@ -29,7 +35,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
           {title}
         </span>
         <svg
-          className="w-4 h-4 transform transition-transform"
+          className={`w-4 h-4 transform transition-transform ${isOpen ? 'rotate-180' : ''}`}
           fill="currentColor"
           viewBox="0 0 20 20"
         >
@@ -40,11 +46,13 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
         </svg>
       </div>
       {isOpen && (
-        <div className="p-4 bg-white border rounded-b-lg dark: dark:bg-[var(--mainphrase-bg)]">
+        <div className="p-4 bg-white border rounded-b-lg dark:bg-[var(--mainphrase-bg)]">
           <p className="text-black dark:text-white">{content}</p>
           {link && (
             <div className="text-right underline text-purple-700 hover:text-purple-900">
-              <Link href={link}>Read more</Link>
+              <Link href={link}>
+                <a>Read more</a>
+              </Link>
             </div>
           )}
         </div>
@@ -52,6 +60,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
     </div>
   );
 };
+
 
 const Accordion: React.FC = () => {
   const items = [
