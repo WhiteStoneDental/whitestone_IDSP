@@ -30,6 +30,7 @@ export default function FaceLandmarker() {
     null
   );
   const [activeWebcam, setActiveWebcam] = useState(true);
+  const [loadingWebcam, setLoadingWebcam] = useState(true);
 
   const capture = useCallback(() => {
     setIsAbleToCapture(true);
@@ -81,26 +82,6 @@ export default function FaceLandmarker() {
   };
 
   useEffect(() => {
-    const waitForWebcam = async () => {
-      setIsAbleToCapture(true);
-
-      try {
-        await navigator.mediaDevices.getUserMedia({
-          video: true,
-        });
-
-        if (webcamRef.current) {
-          requestRef.current = requestAnimationFrame(getResults);
-        }
-      } catch (error) {
-        console.log(error);
-        alert("failed to load webcam, refresh maybe");
-      } finally {
-        setIsAbleToCapture(false);
-      }
-    };
-    waitForWebcam();
-
     const getResults = () => {
       if (
         webcamRef.current &&
@@ -144,21 +125,23 @@ export default function FaceLandmarker() {
       }
       requestRef.current = requestAnimationFrame(getResults);
     };
-    // if (imgSrc && webcamRef.current) {
-    //   try {
-    //     setTimeout(() => {
-    //       faceLandmarkManager.detectLandmarks(webcamRef.current.video, Date.now());
-    //       const blendshapeObject = faceLandmarkManager.getResults().faceBlendshapes;
-    //       if (blendshapeObject[0].categories[35].score >= 0.14) {
-    //       } else {
-    //         alert("confidence score was not high enough, retake picture");
-    //         setImgSrc(null);
-    //       }
-    //     }, 1000)
-    //   } catch (e) {
-    //     console.log(e);
-    //   }
-    // }
+
+    const waitForWebcam = async () => {
+      try {
+        await navigator.mediaDevices.getUserMedia({
+          video: true,
+        });
+
+        if (webcamRef.current) {
+          requestRef.current = requestAnimationFrame(getResults);
+        }
+      } catch (error) {
+        console.log(error);
+        alert("failed to load webcam, refresh maybe");
+      }
+    };
+
+    waitForWebcam();
 
     return () => cancelAnimationFrame(requestRef.current);
   }, []);
@@ -218,6 +201,15 @@ export default function FaceLandmarker() {
     }
   }, [imageURL]);
 
+  if (loadingWebcam) {
+    return (
+      <>
+        <Webcam className="invisible absolute" onUserMedia={() => setLoadingWebcam(false)} onUserMediaError={() => alert("Failed to load webcam, maybe refresh")} />
+        <h1>loading webcam</h1>
+      </>
+    );
+  }
+
   return (
     <div className="container">
       <div className="relative w-full flex justify-center items-center">
@@ -230,6 +222,7 @@ export default function FaceLandmarker() {
             screenshotFormat="image/png"
             playsInline={true}
             mirrored={true}
+            screenshotQuality={1}
           />
         )}
         <div className="absolute bottom-36">
