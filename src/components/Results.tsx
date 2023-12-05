@@ -2,7 +2,7 @@
 import NavBar from "@/components/NavBar";
 import Accordion from "@/components/Accordion";
 import LoginButton from "@/components/LoginButton";
-import html2pdf from "html2pdf.js";
+
 import ResultsAccordion from "@/components/ResultsAccordion";
 import { useEffect, useState } from "react";
 import Image from "next/image";
@@ -37,19 +37,6 @@ export default function Results() {
     URL.revokeObjectURL(url);
   };
 
-  const handleDownloadPDF = () => {
-    const content = document.getElementById("results-content"); // Specify the ID of the content to convert
-    const pdfOptions = {
-      margin: 10,
-      filename: "scan_results.pdf",
-      image: { type: "jpeg", quality: 0.98 },
-      html2canvas: { scale: 2 },
-      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-    };
-
-    html2pdf(content, pdfOptions);
-  };
-
   return (
     <div className="flex flex-col p-5 gradient-bg">
       <div className="flex flex-col items-center mt-20 mb-5 font-bold text-6xl text-center text-white">
@@ -63,13 +50,13 @@ export default function Results() {
         )}
         <hr className="border-t border-white dark:border-white border-solid my-5"></hr>
         <div className="flex justify-center">
-          {/* Download button */}
+          
           <button
-          onClick={handleDownloadPDF}
-          className="border mb-2  hover:bg-purple-900 text-white font-bold py-2 px-4 rounded"
-        >
-          Download as PDF
-        </button>
+            onClick={handleDownload}
+            className="mb-3 border hover:bg-purple-900 text-white font-bold py-2 px-4 rounded"
+          >
+            Download Results
+          </button>
         </div>
         <div className="placeholder-content text-black dark:text-white text-center font-bold text-xl mb-5">
           {results.date}
