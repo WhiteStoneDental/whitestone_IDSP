@@ -22,10 +22,10 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
   return (
     <div className="mb-5 font-sans">
       <div
-        className="flex items-center justify-between px-4 py-2 text-left text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
+        className="flex items-center justify-between px-4 py-2 text-left bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
         onClick={toggleAccordion}
       >
-        <span className="font-semibold text-l text-black dark:text-white">
+        <span className="font-semibold text-l text-gray-800 dark:text-gray-200">
           {title}
         </span>
         <svg
@@ -39,10 +39,10 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
           />
         </svg>
       </div>
-      <div className={`${isOpen ? 'block' : 'hidden'} px-4 pt-4 pb-2 text-gray-800 bg-white rounded-b-lg`}>
-        <p className="text-black dark:text-white">{content}</p>
+      <div className={`${isOpen ? 'block' : 'hidden'} px-4 pt-4 pb-2 bg-white dark:bg-gray-800 rounded-b-lg`}>
+        <div className="text-gray-800 dark:text-gray-300">{content}</div>
         {link && (
-          <div className="text-right underline text-purple-700 hover:text-purple-900">
+          <div className="mt-2 text-right underline text-purple-700 hover:text-purple-900 dark:hover:text-purple-300">
             <Link href={link}>
               <a>Read more</a>
             </Link>
@@ -52,6 +52,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
     </div>
   );
 };
+
 
 const Accordion: React.FC = () => {
   const issues = [
@@ -122,9 +123,9 @@ const Accordion: React.FC = () => {
     title: issue.title,
     content: (
       <div>
-        <div className="mb-2"><strong>Symptoms:</strong> {issue.symptoms}</div>
-        <div className="mb-2"><strong>Treatment:</strong> {issue.treatment}</div>
-        <div><strong>Details:</strong> {issue.details}</div>
+        <p className="mb-2 text-gray-800 dark:text-gray-300"><strong>Symptoms:</strong> {issue.symptoms}</p>
+        <p className="mb-2 text-gray-800 dark:text-gray-300"><strong>Treatment:</strong> {issue.treatment}</p>
+        <p className="text-gray-800 dark:text-gray-300"><strong>Details:</strong> {issue.details}</p>
       </div>
     ),
   }));
@@ -137,6 +138,8 @@ const Accordion: React.FC = () => {
     </div>
   );
 };
+
+
 
 
 export default Accordion;
