@@ -20,11 +20,11 @@ export default function FaceLandmarker() {
   const lastVideoTimeRef = useRef(-1);
   const requestRef = useRef(0);
   const [imgSrc, setImgSrc] = useState<string | null>(null);
-  const [mouthOpen, setMouthOpen] = useState("mouth not open");
+  const [mouthOpen, setMouthOpen] = useState<string | null>("mouth not open");
   const [message, setMessage] = useState("");
   const [tip, setTip] = useState<string | null>("");
   const [imageURL, setImageURL] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [isAbleToCapture, setIsAbleToCapture] = useState<boolean | null>(false);
   const [sending, setSending] = useState(false);
   const [verifiedSelection, setVerifiedSelection] = useState<boolean | null>(
     null
@@ -32,7 +32,7 @@ export default function FaceLandmarker() {
   const [activeWebcam, setActiveWebcam] = useState(true);
 
   const capture = useCallback(() => {
-    setLoading(true);
+    setIsAbleToCapture(true);
 
     if (webcamRef.current && canvasRef.current) {
       try {
@@ -44,6 +44,8 @@ export default function FaceLandmarker() {
         if (isMouthOpen(mouthOpenScore)) {
           const imageSrc = webcamRef.current.getScreenshot();
           setImgSrc(imageSrc);
+        } else {
+          setIsAbleToCapture(false);
         }
       } catch (error) {
         console.log(error);
@@ -80,6 +82,8 @@ export default function FaceLandmarker() {
 
   useEffect(() => {
     const waitForWebcam = async () => {
+      setIsAbleToCapture(true);
+
       try {
         await navigator.mediaDevices.getUserMedia({
           video: true,
@@ -91,6 +95,8 @@ export default function FaceLandmarker() {
       } catch (error) {
         console.log(error);
         alert("failed to load webcam, refresh maybe");
+      } finally {
+        setIsAbleToCapture(false);
       }
     };
     waitForWebcam();
@@ -117,6 +123,7 @@ export default function FaceLandmarker() {
             // console.log("mouthRight: ", results.faceBlendshapes[0].categories[39].score)
             // console.log("mouthSmileLeft: ", results.faceBlendshapes[0].categories[44].score)
             // console.log("mouthSmileRight: ", results.faceBlendshapes[0].categories[45].score)
+            setIsAbleToCapture(false);
             const mouthOpenScore =
               results.faceBlendshapes[0].categories[mouthOpenArrayIndex].score;
             if (isMouthOpen(mouthOpenScore)) {
@@ -128,6 +135,7 @@ export default function FaceLandmarker() {
             }
           } else {
             setMouthOpen("face not detected");
+            setIsAbleToCapture(null);
             setTip(null);
           }
         } catch (error) {
@@ -172,10 +180,10 @@ export default function FaceLandmarker() {
 
       ctx.drawImage(
         imageRef.current,
-        415,
-        425,
-        150,
-        150,
+        375,
+        350,
+        200,
+        200,
         0,
         0,
         canvasRef.current.width,
@@ -190,8 +198,7 @@ export default function FaceLandmarker() {
 
           if (canvasRef.current) {
             setImageURL(canvasRef.current.toDataURL());
-            setLoading(false);
-            setActiveWebcam(false);
+            setIsAbleToCapture(false);
           }
         }, 2000);
       } catch (error) {
@@ -203,27 +210,29 @@ export default function FaceLandmarker() {
   useEffect(() => {
     if (imageURL) {
       // handleSubmit();
+      setActiveWebcam(false);
+      setMouthOpen(null);
+      setTip(null);
+      setIsAbleToCapture(null);
       setVerifiedSelection(false);
-    } else {
-      setVerifiedSelection(null);
     }
   }, [imageURL]);
 
   return (
     <div className="container">
-      <div className="relative w-full">
+      <div className="relative w-full flex justify-center items-center">
         {activeWebcam && (
           <Webcam
             className="rounded-xl shadow-xl dark:bg-[var(--box-color)]"
-            height="100%"
-            width="100%"
+            height="auto"
+            width="60%"
             ref={webcamRef}
             screenshotFormat="image/png"
             playsInline={true}
             mirrored={true}
           />
         )}
-        <div className="absolute bottom-36 left-[23rem]">
+        <div className="absolute bottom-36">
           <ScanBox />
         </div>
       </div>
@@ -241,17 +250,25 @@ export default function FaceLandmarker() {
         className={imgSrc ? "" : "invisible absolute"}
         ref={canvasRef}
       ></canvas>
-      <h2>{mouthOpen}</h2>
-      {tip && <h2>{tip}</h2>}
+      {mouthOpen && <p>{mouthOpen}</p>}
+      {tip && <p>{tip}</p>}
       <div className="btn-container">
-        <button onClick={capture}>
-          {loading ? "Cropping..." : "Capture photo"}
-        </button>
+        {isAbleToCapture !== null && (
+          <button onClick={capture}>
+            {isAbleToCapture ? "Cropping..." : "Capture photo"}
+          </button>
+        )}
       </div>
       {verifiedSelection !== null && (
         <div className="flex justify-center items-center">
           <h2 className="pr-4">Do you want to use this image to scan?</h2>
-          <button className="pr-8" onClick={() => handleSubmit()}>
+          <button
+            className="pr-8"
+            onClick={() => {
+              setVerifiedSelection(null);
+              handleSubmit();
+            }}
+          >
             Yes
           </button>
           <button onClick={() => reset()}>No</button>
