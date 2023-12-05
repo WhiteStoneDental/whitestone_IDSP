@@ -16,9 +16,9 @@ export default function ScanPage() {
       <div className="flex flex-col items-center mb-5 w-3/5">
         <FaceLandmarkCanvas />
       </div>
-      {/* <div className="mt-auto">
+      <div className="mt-auto">
         <NavBar />
-      </div> */}
+      </div>
     </div>
   );
 }
