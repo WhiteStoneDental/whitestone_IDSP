@@ -7,7 +7,7 @@ import { submitImage } from "../../util/send-to-api";
 import ScanBox from "./ScanBox";
 
 const isMouthOpen = (score: number) => {
-  return score >= 0.0001;
+  return score >= 0.2;
 };
 
 export default function FaceLandmarker() {
@@ -32,7 +32,7 @@ export default function FaceLandmarker() {
       try {
         const faceLandmarkManager = FaceLandmarkManager.getInstance();
         const results = faceLandmarkManager.getResults();
-        const mouthOpenScore = results.faceBlendshapes[0].categories[27].score;
+        const mouthOpenScore = results.faceBlendshapes[0].categories[44].score;
 
         if (isMouthOpen(mouthOpenScore)) {
           const imageSrc = webcamRef.current.getScreenshot();
@@ -86,7 +86,7 @@ export default function FaceLandmarker() {
             // console.log("mouthSmileLeft: ", results.faceBlendshapes[0].categories[44].score)
             // console.log("mouthSmileRight: ", results.faceBlendshapes[0].categories[45].score)
             const mouthOpenScore =
-              results.faceBlendshapes[0].categories[27].score;
+              results.faceBlendshapes[0].categories[44].score;
             if (isMouthOpen(mouthOpenScore)) {
               setMouthOpen("mouth open");
               setTip(null);
