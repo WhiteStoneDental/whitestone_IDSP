@@ -20,7 +20,7 @@ export default function FaceLandmarker() {
   const lastVideoTimeRef = useRef(-1);
   const requestRef = useRef(0);
   const [imgSrc, setImgSrc] = useState<string | null>(null);
-  const [mouthOpen, setMouthOpen] = useState<string | null>("mouth not open");
+  const [mouthOpen, setMouthOpen] = useState<string | null>("Loading face detection...");
   const [message, setMessage] = useState("");
   const [tip, setTip] = useState<string | null>("");
   const [imageURL, setImageURL] = useState("");
@@ -205,7 +205,7 @@ export default function FaceLandmarker() {
     return (
       <>
         <Webcam className="invisible absolute" onUserMedia={() => setLoadingWebcam(false)} onUserMediaError={() => alert("Failed to load webcam, maybe refresh")} />
-        <h1>loading webcam</h1>
+        <h1>Loading webcam...</h1>
       </>
     );
   }
