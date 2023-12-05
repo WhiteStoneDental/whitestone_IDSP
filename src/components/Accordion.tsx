@@ -122,9 +122,9 @@ const Accordion: React.FC = () => {
     title: issue.title,
     content: (
       <div>
-        <p><strong>Symptoms:</strong> {issue.symptoms}</p>
-        <p><strong>Treatment:</strong> {issue.treatment}</p>
-        <p><strong>Details:</strong> {issue.details}</p>
+        <div className="mb-2"><strong>Symptoms:</strong> {issue.symptoms}</div>
+        <div className="mb-2"><strong>Treatment:</strong> {issue.treatment}</div>
+        <div><strong>Details:</strong> {issue.details}</div>
       </div>
     ),
   }));
@@ -137,5 +137,6 @@ const Accordion: React.FC = () => {
     </div>
   );
 };
+
 
 export default Accordion;
