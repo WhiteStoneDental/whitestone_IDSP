@@ -44,7 +44,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
         {link && (
           <div className="mt-2 text-right underline text-purple-700 hover:text-purple-900 dark:hover:text-purple-300">
             <Link href={link}>
-              <a>Read more</a>
+              <div>Read more</div>
             </Link>
           </div>
         )}

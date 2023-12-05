@@ -29,19 +29,20 @@ export default function Results() {
         Scan Results
       </div>
       <div className="bg-white p-5 rounded-xl h-full w-full overflow-hidden mb-10 dark:bg-[var(--mainphrase-bg)]">
-        <div className="placeholder-content text-black dark:text-white text-center font-bold text-xl mb-5">
-          {results.date}
-        </div>
+        
         {imgSrc && (
           <div className="mx-auto flex items-center justify-center mb-5">
-            <Image src={imgSrc} alt="webcam image" width={600} height={600} />
+            <Image src={imgSrc} alt="webcam image" width={400} height={400} />
           </div>
         )}
         <hr className="border-t border-white dark:border-white border-solid my-5"></hr>
+        <div className="placeholder-content text-black dark:text-white text-center font-bold text-xl mb-5">
+          {results.date}
+        </div>
         <ResultsAccordion results={results} />
-      </div>
       <div>
         <NavBar />
+      </div>
       </div>
     </div>
   );
