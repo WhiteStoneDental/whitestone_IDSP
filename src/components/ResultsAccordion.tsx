@@ -1,6 +1,6 @@
 import React from "react";
 import { OpenAIResult, Issue } from "./Results";
-import { AccordionItem } from "./Accordion";
+import { AccordionItem } from "@/components/Accordion";
 
 export default function ResultsAccordion({
   results,
@@ -18,7 +18,7 @@ export default function ResultsAccordion({
             <AccordionItem
               key={index}
               title={item.issue_title}
-              content={item.issue_description}
+              content={<p>{item.issue_description}</p>}
               link={"/resources"}
             />
           ))}
@@ -34,7 +34,7 @@ export default function ResultsAccordion({
             <AccordionItem
               key={index}
               title={item.issue_title}
-              content={item.issue_description}
+              content={<p>{item.issue_description}</p>}
               link={"/resources"}
             />
           ))}
@@ -50,7 +50,7 @@ export default function ResultsAccordion({
             <AccordionItem
               key={index}
               title={item.issue_title}
-              content={item.issue_description}
+              content={<p>{item.issue_description}</p>}
               link={"/resources"}
             />
           ))}
