@@ -40,9 +40,9 @@ export default function Results() {
           {results.date}
         </div>
         <ResultsAccordion results={results} />
-      </div>
       <div>
         <NavBar />
+      </div>
       </div>
     </div>
   );

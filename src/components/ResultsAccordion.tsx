@@ -8,7 +8,8 @@ export default function ResultsAccordion({
   results: OpenAIResult;
 }) {
   return (
-    <div className="w-full max-w-md max-h-screen overflow-y-hidden mx-auto">
+    <div 
+    className="w-full max-w-md max-h-full overflow-auto mx-auto " >
       {results.severe && results.severe.length > 0 && (
         <div>
           <h3 className="text-black font-bold text-2xl mb-3 dark:text-white cursor-pointer">
