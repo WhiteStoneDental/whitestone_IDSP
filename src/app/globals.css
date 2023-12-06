@@ -39,3 +39,17 @@
     @apply bg-gradient-to-b from-[#9D32A5] via-[#641A99] to-[#24008C];
   }
 }
+@keyframes zoomOut {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+.zoomOutAnimation {
+  animation: zoomOut 2s forwards; /* Adjust time as needed */
+}
