@@ -38,7 +38,7 @@ export default function History() {
   // console.log(history);
 
   return (
-    <div className="flex flex-col gradient-bg overflow-y-auto w-full items-center relative p-8">
+    <div className="flex flex-col gradient-bg overflow-y-auto  w-full items-center relative p-8">
       <div
         className="bg-white p-5 rounded-xl h-screen w-screen-full-xlg overflow-hidden mt-20 dark:bg-[var(--mainphrase-bg)]"
         id="history"
@@ -46,23 +46,26 @@ export default function History() {
         <h1 className="text-black font-bold text-2xl mb-5 dark:text-white">
           History
         </h1>
-        <div id="all-scans-content">
+        <div id="all-scans-content ">
           {results && (
             <div className="gap-4 mt-1">
               <div className="pl-20 pr-20 p-5">
-                <h3 className="text-black font-bold text-xl dark:text-white mb-3">
+                <h3 className="text-black font-bold text-sm sm:text-xl sm:font-bold dark:text-white mb-3">
                   {results.date}
                 </h3>
                 {results.mild && (
                   <>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
                       {results.mild.map((issue) => (
-                        <h3
-                          className="text-black text-sm dark:text-white"
-                          key={issue.id}
-                        >
+                        <>
                           Mild Issue: {issue.issue_title}
-                        </h3>
+                          <h3
+                            className="text-black text-sm dark:text-white mb-3"
+                            key={issue.id}
+                          >
+                            {issue.issue_description}
+                          </h3>
+                        </>
                       ))}
                     </div>
                   </>
@@ -71,12 +74,15 @@ export default function History() {
                   <>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
                       {results.moderate.map((issue) => (
-                        <h3
-                          className="text-black text-sm dark:text-white"
-                          key={issue.id}
-                        >
+                        <>
                           Moderate Issue: {issue.issue_title}
-                        </h3>
+                          <h3
+                            className="text-black text-sm dark:text-white mb-3"
+                            key={issue.id}
+                          >
+                            {issue.issue_description}
+                          </h3>
+                        </>
                       ))}
                     </div>
                   </>
@@ -85,17 +91,20 @@ export default function History() {
                   <>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
                       {results.severe.map((issue) => (
-                        <h3
-                          className="text-black text-sm dark:text-white"
-                          key={issue.id}
-                        >
+                        <>
                           Severe Issue: {issue.issue_title}
-                        </h3>
+                          <h3
+                            className="text-black text-sm dark:text-white mb-3"
+                            key={issue.id}
+                          >
+                            {issue.issue_description}
+                          </h3>
+                        </>
                       ))}
                     </div>
                   </>
                 )}
-              <hr className="mt-3" />
+                <hr className="mt-3" />
               </div>
             </div>
           )}
