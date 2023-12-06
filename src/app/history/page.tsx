@@ -34,12 +34,12 @@ export default function History() {
   console.log(history);
 
   return (
-    <div className="flex flex-col gradient-bg h-screen w-full items-center relative p-8">
+    <div className="flex flex-col gradient-bg overflow-y-auto w-full items-center relative p-8">
       <div
         className="bg-white p-5 rounded-xl h-screen w-screen-full-xlg overflow-hidden mt-20 dark:bg-[var(--mainphrase-bg)]"
         id="history"
       >
-      <h1 className="text-4xl">History</h1>
+      <h1 className="text-black font-bold text-2xl mb-5 dark:text-white">History</h1>
       <div id="latest-scans-content">
           {history.oralScans.slice(0, 4).map((scan) => (
             <div key={scan.id} className="gap-4 mt-1">
