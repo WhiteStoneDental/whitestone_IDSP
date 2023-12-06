@@ -30,6 +30,7 @@ export default function FaceLandmarker() {
     null
   );
   const [activeWebcam, setActiveWebcam] = useState(true);
+  const [loadingWebcam, setLoadingWebcam] = useState(true);
 
   const capture = useCallback(() => {
     setIsAbleToCapture(true);
@@ -199,6 +200,15 @@ export default function FaceLandmarker() {
       setVerifiedSelection(false);
     }
   }, [imageURL]);
+
+  if (loadingWebcam) {
+    return (
+      <>
+        <Webcam className="invisible absolute" onUserMedia={() => setLoadingWebcam(false)} onUserMediaError={() => alert("Failed to load webcam, maybe refresh")} />
+        <h1>Loading webcam...</h1>
+      </>
+    );
+  }
 
   return (
     <div className="container">
