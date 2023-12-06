@@ -7,8 +7,10 @@ import { submitImage } from "../../util/send-to-api";
 import ScanBox from "./ScanBox";
 
 const isMouthOpen = (score: number) => {
-  return score >= 0.0001;
+  return score >= 0.2;
 };
+
+const mouthOpenArrayIndex = 44;
 
 export default function FaceLandmarker() {
   const router = useRouter();
@@ -18,51 +20,68 @@ export default function FaceLandmarker() {
   const lastVideoTimeRef = useRef(-1);
   const requestRef = useRef(0);
   const [imgSrc, setImgSrc] = useState<string | null>(null);
-  const [mouthOpen, setMouthOpen] = useState("mouth not open");
+  const [mouthOpen, setMouthOpen] = useState<string | null>("Loading face detection...");
   const [message, setMessage] = useState("");
   const [tip, setTip] = useState<string | null>("");
   const [imageURL, setImageURL] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [isAbleToCapture, setIsAbleToCapture] = useState<boolean | null>(false);
   const [sending, setSending] = useState(false);
+  const [verifiedSelection, setVerifiedSelection] = useState<boolean | null>(
+    null
+  );
+  const [activeWebcam, setActiveWebcam] = useState(true);
+  const [loadingWebcam, setLoadingWebcam] = useState(true);
 
   const capture = useCallback(() => {
-    setLoading(true);
+    setIsAbleToCapture(true);
 
     if (webcamRef.current && canvasRef.current) {
       try {
         const faceLandmarkManager = FaceLandmarkManager.getInstance();
         const results = faceLandmarkManager.getResults();
-        const mouthOpenScore = results.faceBlendshapes[0].categories[27].score;
+        const mouthOpenScore =
+          results.faceBlendshapes[0].categories[mouthOpenArrayIndex].score;
 
         if (isMouthOpen(mouthOpenScore)) {
           const imageSrc = webcamRef.current.getScreenshot();
           setImgSrc(imageSrc);
+        } else {
+          setIsAbleToCapture(false);
         }
       } catch (error) {
         console.log(error);
       }
     }
-
-    setLoading(false);
   }, [webcamRef]);
 
-  useEffect(() => {
-    const waitForWebcam = async () => {
-      try {
-        await navigator.mediaDevices.getUserMedia({
-          video: true,
-        });
+  const handleSubmit = async () => {
+    setSending(true);
 
-        if (webcamRef.current) {
-          requestRef.current = requestAnimationFrame(getResults);
-        }
-      } catch (error) {
-        console.log(error);
-        alert("failed to load webcam, refresh maybe");
+    try {
+      // console.log(message);
+      // console.log(imageURL);
+      const streamIterator = await submitImage("/api", message, imageURL);
+      let result = "";
+      for await (const chunk of streamIterator) {
+        result += chunk;
       }
-    };
-    waitForWebcam();
+      localStorage.setItem("imageURL", imageURL);
+      localStorage.setItem("results", result);
+      router.push("/results");
+      // setResult(result);
+    } catch (error) {
+      console.error("Error submitting image:", error);
+      // setResult("Error submitting image");
+    }
+  };
 
+  const reset = () => {
+    setImgSrc(null);
+    setVerifiedSelection(null);
+    setActiveWebcam(true);
+  };
+
+  useEffect(() => {
     const getResults = () => {
       if (
         webcamRef.current &&
@@ -85,8 +104,9 @@ export default function FaceLandmarker() {
             // console.log("mouthRight: ", results.faceBlendshapes[0].categories[39].score)
             // console.log("mouthSmileLeft: ", results.faceBlendshapes[0].categories[44].score)
             // console.log("mouthSmileRight: ", results.faceBlendshapes[0].categories[45].score)
+            setIsAbleToCapture(false);
             const mouthOpenScore =
-              results.faceBlendshapes[0].categories[27].score;
+              results.faceBlendshapes[0].categories[mouthOpenArrayIndex].score;
             if (isMouthOpen(mouthOpenScore)) {
               setMouthOpen("mouth open");
               setTip(null);
@@ -96,6 +116,7 @@ export default function FaceLandmarker() {
             }
           } else {
             setMouthOpen("face not detected");
+            setIsAbleToCapture(null);
             setTip(null);
           }
         } catch (error) {
@@ -104,21 +125,23 @@ export default function FaceLandmarker() {
       }
       requestRef.current = requestAnimationFrame(getResults);
     };
-    // if (imgSrc && webcamRef.current) {
-    //   try {
-    //     setTimeout(() => {
-    //       faceLandmarkManager.detectLandmarks(webcamRef.current.video, Date.now());
-    //       const blendshapeObject = faceLandmarkManager.getResults().faceBlendshapes;
-    //       if (blendshapeObject[0].categories[35].score >= 0.14) {
-    //       } else {
-    //         alert("confidence score was not high enough, retake picture");
-    //         setImgSrc(null);
-    //       }
-    //     }, 1000)
-    //   } catch (e) {
-    //     console.log(e);
-    //   }
-    // }
+
+    const waitForWebcam = async () => {
+      try {
+        await navigator.mediaDevices.getUserMedia({
+          video: true,
+        });
+
+        if (webcamRef.current) {
+          requestRef.current = requestAnimationFrame(getResults);
+        }
+      } catch (error) {
+        console.log(error);
+        alert("failed to load webcam, refresh maybe");
+      }
+    };
+
+    waitForWebcam();
 
     return () => cancelAnimationFrame(requestRef.current);
   }, []);
@@ -140,10 +163,10 @@ export default function FaceLandmarker() {
 
       ctx.drawImage(
         imageRef.current,
-        415,
-        425,
-        150,
-        150,
+        375,
+        350,
+        200,
+        200,
         0,
         0,
         canvasRef.current.width,
@@ -158,6 +181,7 @@ export default function FaceLandmarker() {
 
           if (canvasRef.current) {
             setImageURL(canvasRef.current.toDataURL());
+            setIsAbleToCapture(false);
           }
         }, 2000);
       } catch (error) {
@@ -167,45 +191,41 @@ export default function FaceLandmarker() {
   }, [imgSrc]);
 
   useEffect(() => {
-    const handleSubmit = async () => {
-      setSending(true);
-
-      try {
-        // console.log(message);
-        // console.log(imageURL);
-        const streamIterator = await submitImage("/api", message, imageURL);
-        let result = "";
-        for await (const chunk of streamIterator) {
-          result += chunk;
-        }
-        localStorage.setItem("imageURL", imageURL);
-        localStorage.setItem("results", result);
-        router.push("/results");
-        // setResult(result);
-      } catch (error) {
-        console.error("Error submitting image:", error);
-        // setResult("Error submitting image");
-      }
-    };
-
     if (imageURL) {
-      handleSubmit();
+      // handleSubmit();
+      setActiveWebcam(false);
+      setMouthOpen(null);
+      setTip(null);
+      setIsAbleToCapture(null);
+      setVerifiedSelection(false);
     }
   }, [imageURL]);
 
+  if (loadingWebcam) {
+    return (
+      <>
+        <Webcam className="invisible absolute" onUserMedia={() => setLoadingWebcam(false)} onUserMediaError={() => alert("Failed to load webcam, maybe refresh")} />
+        <h1>Loading webcam...</h1>
+      </>
+    );
+  }
+
   return (
     <div className="container">
-      <div className="relative w-full">
-        <Webcam
-          className="rounded-xl shadow-xl dark:bg-[var(--box-color)]"
-          height="100%"
-          width="100%"
-          ref={webcamRef}
-          screenshotFormat="image/png"
-          playsInline={true}
-          mirrored={true}
-        />
-        <div className="absolute bottom-36 left-[23rem]">
+      <div className="relative w-full flex justify-center items-center">
+        {activeWebcam && (
+          <Webcam
+            className="rounded-xl shadow-xl dark:bg-[var(--box-color)]"
+            height="auto"
+            width="60%"
+            ref={webcamRef}
+            screenshotFormat="image/png"
+            playsInline={true}
+            mirrored={true}
+            screenshotQuality={1}
+          />
+        )}
+        <div className="absolute bottom-36">
           <ScanBox />
         </div>
       </div>
@@ -223,13 +243,30 @@ export default function FaceLandmarker() {
         className={imgSrc ? "" : "invisible absolute"}
         ref={canvasRef}
       ></canvas>
-      <h2>{mouthOpen}</h2>
-      {tip && <h2>{tip}</h2>}
+      {mouthOpen && <p>{mouthOpen}</p>}
+      {tip && <p>{tip}</p>}
       <div className="btn-container">
-        <button onClick={capture}>
-          {loading ? "Cropping..." : "Capture photo"}
-        </button>
+        {isAbleToCapture !== null && (
+          <button onClick={capture}>
+            {isAbleToCapture ? "Cropping..." : "Capture photo"}
+          </button>
+        )}
       </div>
+      {verifiedSelection !== null && (
+        <div className="flex justify-center items-center">
+          <h2 className="pr-4">Do you want to use this image to scan?</h2>
+          <button
+            className="pr-8"
+            onClick={() => {
+              setVerifiedSelection(null);
+              handleSubmit();
+            }}
+          >
+            Yes
+          </button>
+          <button onClick={() => reset()}>No</button>
+        </div>
+      )}
       {sending && <h2>Scanning...</h2>}
     </div>
   );
