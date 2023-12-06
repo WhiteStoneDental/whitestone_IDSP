@@ -5,7 +5,7 @@ import NavBar from "@/components/NavBar";
 
 const FaceLandmarkCanvas = dynamic(
   () => {
-    return import("@/components/FaceLandmarker");
+    return import("../../components/FaceLandmarker");
   },
   { ssr: false }
 );
