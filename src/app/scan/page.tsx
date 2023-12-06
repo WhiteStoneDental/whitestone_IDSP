@@ -12,8 +12,8 @@ const FaceLandmarkCanvas = dynamic(
 
 export default function ScanPage() {
   return (
-    <div className="flex flex-col p-5 h-screen items-center gradient-bg">
-      <div className="flex flex-col items-center mb-5 w-3/5">
+    <div className="flex flex-col p-5 h-screen items-center gradient-bg w-full">
+      <div className="flex flex-col items-center mb-5 w-full">
         <FaceLandmarkCanvas />
       </div>
       <div className="mt-auto">

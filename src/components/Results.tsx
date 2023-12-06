@@ -18,8 +18,11 @@ export default function Results() {
       console.log("no data");
       return;
     }
+    const jsonData = JSON.parse(data);
+    const date = new Date();
+    jsonData["date"] = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
     console.log(data);
-    setResults(JSON.parse(data));
+    setResults(jsonData);
     setImgSrc(imgURL);
   }, []);
 
