@@ -17,6 +17,21 @@ type OpenAIResult = {
   error?: string;
 };
 
+type IssueSeverity = 'red' | 'orange' | 'yellow';
+
+const getDotColor = (severity: IssueSeverity) => {
+  switch (severity) {
+    case 'red':
+      return 'bg-red-500';
+    case 'orange':
+      return 'bg-orange-500';
+    case 'yellow':
+      return 'bg-yellow-500';
+    default:
+      return '';
+  }
+};
+
 export default function History() {
   const [loading, setLoading] = useState(true);
   const [results, setResults] = useState<OpenAIResult | null>(null);
@@ -29,13 +44,8 @@ export default function History() {
     }
 
     const parsedResults = JSON.parse(resultsData);
-    // console.log(parsedResults);
     setResults(parsedResults);
   }, []);
-
-  const isLoggedIn = true;
-
-  // console.log(history);
 
   return (
     <div className="flex flex-col gradient-bg overflow-y-auto  w-full items-center relative p-8">
@@ -55,51 +65,57 @@ export default function History() {
                 </h3>
                 {results.mild && (
                   <>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+                    <div className="grid grid-cols-1  gap-2">
                       {results.mild.map((issue) => (
-                        <>
-                          Mild Issue: {issue.issue_title}
+                        <div key={issue.id}>
+                          <div className={`rounded-full w-3 h-3 inline-block ${getDotColor('yellow')} mr-2`} />
+                          <span className="font-bold text-black text-sm dark:text-white mb-3">
+                            Mild Issue: {issue.issue_title}
+                          </span>
                           <h3
                             className="text-black text-sm dark:text-white mb-3"
-                            key={issue.id}
                           >
                             {issue.issue_description}
                           </h3>
-                        </>
+                        </div>
                       ))}
                     </div>
                   </>
                 )}
                 {results.moderate && (
                   <>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+                    <div className="grid grid-cols-1 gap-2">
                       {results.moderate.map((issue) => (
-                        <>
-                          Moderate Issue: {issue.issue_title}
+                        <div key={issue.id}>
+                          <div className={`rounded-full w-3 h-3 inline-block ${getDotColor('orange')} mr-2`} />
+                          <span className="font-bold text-black text-sm dark:text-white mb-3">
+                            Moderate Issue: {issue.issue_title}
+                          </span>
                           <h3
                             className="text-black text-sm dark:text-white mb-3"
-                            key={issue.id}
                           >
                             {issue.issue_description}
                           </h3>
-                        </>
+                        </div>
                       ))}
                     </div>
                   </>
                 )}
                 {results.severe && (
                   <>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+                    <div className="grid grid-cols-1  gap-2">
                       {results.severe.map((issue) => (
-                        <>
-                          Severe Issue: {issue.issue_title}
+                        <div key={issue.id}>
+                          <div className={`rounded-full w-3 h-3 inline-block ${getDotColor('red')} mr-2`} />
+                          <span className="font-bold text-black text-sm dark:text-white mb-3">
+                            Severe Issue: {issue.issue_title}
+                          </span>
                           <h3
                             className="text-black text-sm dark:text-white mb-3"
-                            key={issue.id}
                           >
                             {issue.issue_description}
                           </h3>
-                        </>
+                        </div>
                       ))}
                     </div>
                   </>
