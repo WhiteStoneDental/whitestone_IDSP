@@ -128,14 +128,14 @@ export default function FaceLandmarker() {
             const mouthOpenScore =
               results.faceBlendshapes[0].categories[mouthOpenArrayIndex].score;
             if (isMouthOpen(mouthOpenScore)) {
-              setMouthOpen("mouth open");
+              setMouthOpen("Mouth open");
               setTip(null);
             } else {
-              setMouthOpen("mouth not open");
-              setTip("try getting closer or farther from the camera");
+              setMouthOpen("Mouth not open");
+              setTip("Try getting closer or farther from the camera");
             }
           } else {
-            setMouthOpen("face not detected");
+            setMouthOpen("Face not detected");
             setIsAbleToCapture(null);
             setTip(null);
           }
@@ -157,7 +157,7 @@ export default function FaceLandmarker() {
         }
       } catch (error) {
         console.log(error);
-        alert("failed to load webcam, refresh maybe");
+        alert("Failed to load webcam, refresh maybe");
       }
     };
 
@@ -224,7 +224,7 @@ export default function FaceLandmarker() {
   return (
     <div className="container">
       <div className="relative w-full flex justify-center items-center">
-        {activeWebcam && (
+        {activeWebcam && windowSize && (
           <Webcam
             className="rounded-xl shadow-xl dark:bg-[var(--box-color)]"
             height="auto"
