@@ -20,7 +20,9 @@ export default function FaceLandmarker() {
   const lastVideoTimeRef = useRef(-1);
   const requestRef = useRef(0);
   const [imgSrc, setImgSrc] = useState<string | null>(null);
-  const [mouthOpen, setMouthOpen] = useState<string | null>("Loading face detection...");
+  const [mouthOpen, setMouthOpen] = useState<string | null>(
+    "Loading face detection..."
+  );
   const [message, setMessage] = useState("");
   const [tip, setTip] = useState<string | null>("");
   const [imageURL, setImageURL] = useState("");
@@ -30,7 +32,10 @@ export default function FaceLandmarker() {
     null
   );
   const [activeWebcam, setActiveWebcam] = useState(true);
-  const [loadingWebcam, setLoadingWebcam] = useState(true);
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
 
   const capture = useCallback(() => {
     setIsAbleToCapture(true);
@@ -80,6 +85,21 @@ export default function FaceLandmarker() {
     setVerifiedSelection(null);
     setActiveWebcam(true);
   };
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     const getResults = () => {
@@ -163,8 +183,8 @@ export default function FaceLandmarker() {
 
       ctx.drawImage(
         imageRef.current,
-        375,
-        350,
+        (imageRef.current.width / 2) / 2.42,
+        (imageRef.current.height / 2) / 1.3,
         200,
         200,
         0,
@@ -201,15 +221,6 @@ export default function FaceLandmarker() {
     }
   }, [imageURL]);
 
-  if (loadingWebcam) {
-    return (
-      <>
-        <Webcam className="invisible absolute" onUserMedia={() => setLoadingWebcam(false)} onUserMediaError={() => alert("Failed to load webcam, maybe refresh")} />
-        <h1>Loading webcam...</h1>
-      </>
-    );
-  }
-
   return (
     <div className="container">
       <div className="relative w-full flex justify-center items-center">
@@ -217,7 +228,7 @@ export default function FaceLandmarker() {
           <Webcam
             className="rounded-xl shadow-xl dark:bg-[var(--box-color)]"
             height="auto"
-            width="60%"
+            width={windowSize.width / 2}
             ref={webcamRef}
             screenshotFormat="image/png"
             playsInline={true}
@@ -225,7 +236,11 @@ export default function FaceLandmarker() {
             screenshotQuality={1}
           />
         )}
-        <div className="absolute bottom-36">
+        <div className="absolute" style={
+          {
+            bottom: windowSize.height / 6
+          }
+        }>
           <ScanBox />
         </div>
       </div>
@@ -239,10 +254,13 @@ export default function FaceLandmarker() {
           sizes="100%"
         />
       )}
-      <canvas
-        className={imgSrc ? "" : "invisible absolute"}
-        ref={canvasRef}
-      ></canvas>
+      <div className="flex justify-center items-center">
+        <canvas
+          className={imgSrc ? "" : "invisible absolute"}
+          ref={canvasRef}
+        ></canvas>
+        {sending && <h2>Scanning...</h2>}
+      </div>
       {mouthOpen && <p>{mouthOpen}</p>}
       {tip && <p>{tip}</p>}
       <div className="btn-container">
@@ -267,7 +285,6 @@ export default function FaceLandmarker() {
           <button onClick={() => reset()}>No</button>
         </div>
       )}
-      {sending && <h2>Scanning...</h2>}
     </div>
   );
 }
