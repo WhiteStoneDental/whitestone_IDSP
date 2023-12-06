@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@heroicons/react": "^1.0.6",
-    "@mediapipe/tasks-vision": "^0.10.7",
+    "@mediapipe/tasks-vision": "^0.10.8",
     "@neondatabase/serverless": "^0.6.0",
     "autoprefixer": "10.4.15",
     "babel": "^6.23.0",
