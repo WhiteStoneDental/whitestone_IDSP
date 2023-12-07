@@ -56,7 +56,7 @@ export default function Results() {
           
           <button
             onClick={handleDownload}
-            className="mb-3 border hover:bg-purple-900 text-white font-bold py-2 px-4 rounded"
+            className="mb-3 border hover:bg-purple-900 hover:text-white dark:text-white text-black font-bold py-2 px-4 rounded"
           >
             Download Results
           </button>
