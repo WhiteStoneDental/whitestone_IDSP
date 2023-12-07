@@ -1,15 +1,15 @@
-export default function HistoryIcon() {
+export default function HistoryIcon({ size = 32, color = 'currentColor' }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="32"
-      height="32"
+      width={size}
+      height={size}
       fill="none"
       viewBox="0 0 48 48"
     >
       <path d="m0 0h48v48h-48z" fill="#fff" fillOpacity=".01" />
       <g
-        stroke="#000"
+        stroke={color}
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="5"
