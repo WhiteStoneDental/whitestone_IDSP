@@ -228,8 +228,7 @@ export default function FaceLandmarker() {
       <h2>{mouthOpen}</h2>
       {tip && <h2>{tip}</h2>}
       <div className="btn-container">
-        {isAbleToCapture !== null && (
-        <button 
+      <button 
         onClick={capture} 
         className="bg-gray-300 hover:bg-gray-400 text-black font-semibold flex justify-center items-center  p-4 rounded-full shadow-lg transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-opacity-50"
         style={{ width: '64px', height: '64px', borderRadius: '50%' }}
@@ -240,10 +239,6 @@ export default function FaceLandmarker() {
 </svg>
 
       </button>
-        )}
-        <button onClick={capture}>
-          {loading ? "Cropping..." : "Capture photo"}
-        </button>
       </div>
       {sending && <h2>Scanning...</h2>}
       <ScanPrompt
