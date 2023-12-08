@@ -110,7 +110,7 @@ export default function HomePage() {
 
       {/* "Latest Scans" section */}
       <div
-        className="bg-white p-5 rounded-xl h-screen w-9/12 mt-10 mb-5 dark:bg-[var(--mainphrase-bg)]"
+        className="bg-white p-5 rounded-xl h-auto w-9/12 mt-10 mb-5 dark:bg-[var(--mainphrase-bg)]"
         id="latest-scans"
       >
         <h3 className="text-black font-bold text-2xl mb-5 text-center dark:text-white">
@@ -119,13 +119,13 @@ export default function HomePage() {
         <div id="all-scans-content">
           {results?.map((resultObject, index) => (
             <div className="gap-4 mt-1" key={String(index)}>
-              <div className="pl-20 pr-20 p-5">
+              <div className="p-2 sm:pl-20 sm:pr-20">
                 <h3 className="text-black font-bold text-xl dark:text-white mb-3">
                   {resultObject.result.date}
                 </h3>
                 {resultObject.result.mild && (
                   <>
-                    <div className="grid grid-cols-1 gap-2">
+                    <div className="grid grid-cols-1 gap-2 ">
                       {resultObject.result.mild.map((issue) => (
                         <div key={issue.id}>
                           <div
