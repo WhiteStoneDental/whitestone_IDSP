@@ -69,8 +69,20 @@ export default function FaceLandmarker() {
       for await (const chunk of streamIterator) {
         result += chunk;
       }
-      localStorage.setItem("imageURL", imageURL);
-      localStorage.setItem("results", result);
+
+      const localResults = localStorage.getItem("results");
+      const newResult = {
+        imageURL,
+        result
+      };
+      if (!localResults) {
+        localStorage.setItem("results", JSON.stringify([newResult]));
+      } else {
+        const localResultJson = JSON.parse(localResults);
+        localResultJson.push(newResult);
+        localStorage.setItem("results", JSON.stringify(localResultJson));
+      }
+
       router.push("/results");
       // setResult(result);
     } catch (error) {

@@ -3,6 +3,7 @@ import NavBar from "@/components/NavBar";
 import { useState, useEffect } from "react";
 import NoScans from "@/components/NoScans";
 
+
 type Issue = {
   id: string;
   issue_title: string;
@@ -18,10 +19,21 @@ type OpenAIResult = {
   error?: string;
 };
 
+type LocalStorageJsonResult = {
+  imageURL: string;
+  result: OpenAIResult;
+}[];
+
 type IssueSeverity = "red" | "orange" | "yellow";
 
 const getDotColor = (severity: IssueSeverity) => {
   switch (severity) {
+    case "red":
+      return "bg-red-500";
+    case "orange":
+      return "bg-orange-500";
+    case "yellow":
+      return "bg-yellow-400";
     case "red":
       return "bg-red-500";
     case "orange":
@@ -35,7 +47,7 @@ const getDotColor = (severity: IssueSeverity) => {
 
 export default function History() {
   const [loading, setLoading] = useState(true);
-  const [results, setResults] = useState<OpenAIResult | null>(null);
+  const [results, setResults] = useState<LocalStorageJsonResult | null>(null);
 
   useEffect(() => {
     let resultsData = localStorage.getItem("results");
@@ -43,9 +55,21 @@ export default function History() {
       console.log("No data in local storage");
       return;
     }
-
     const parsedResults = JSON.parse(resultsData);
-    setResults(parsedResults);
+    const newResults: LocalStorageJsonResult = [];
+    for (const result of parsedResults) {
+      const newResult = {
+        imageURL: result.imageURL,
+        result: JSON.parse(result.result),
+      };
+      const date = new Date();
+      newResult.result[
+        "date"
+      ] = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+      newResults.push(newResult);
+    }
+    console.log(newResults);
+    setResults(newResults);
   }, []);
 
   return (
@@ -58,17 +82,22 @@ export default function History() {
           History
         </h1>
         <div id="all-scans-content ">
-          {results ? (
-            <div className="gap-4 mt-1">
-              <div className="p-5 sm:pl-20 sm:pr-20">
+          {results?.map((resultObject, index) => (
+            <div className="gap-4 mt-1" key={String(index)}>
+              <div className="pl-20 pr-20 p-5">
                 <h3 className="text-black font-bold text-sm sm:text-xl sm:font-bold dark:text-white mb-3">
-                  {results.date}
+                  {resultObject.result.date}
                 </h3>
-                {results.mild && (
+                {resultObject.result.mild && (
                   <>
-                    <div className="grid grid-cols-1  gap-2">
-                      {results.mild.map((issue) => (
+                    <div className="grid grid-cols-1 gap-2">
+                      {resultObject.result.mild.map((issue) => (
                         <div key={issue.id}>
+                          <div
+                            className={`rounded-full w-3 h-3 inline-block ${getDotColor(
+                              "yellow"
+                            )} mr-2`}
+                          />
                           <div
                             className={`rounded-full w-3 h-3 inline-block ${getDotColor(
                               "yellow"
@@ -85,11 +114,16 @@ export default function History() {
                     </div>
                   </>
                 )}
-                {results.moderate && (
+                {resultObject.result.moderate && (
                   <>
                     <div className="grid grid-cols-1 gap-2">
-                      {results.moderate.map((issue) => (
+                      {resultObject.result.moderate.map((issue) => (
                         <div key={issue.id}>
+                          <div
+                            className={`rounded-full w-3 h-3 inline-block ${getDotColor(
+                              "orange"
+                            )} mr-2`}
+                          />
                           <div
                             className={`rounded-full w-3 h-3 inline-block ${getDotColor(
                               "orange"
@@ -106,11 +140,16 @@ export default function History() {
                     </div>
                   </>
                 )}
-                {results.severe && (
+                {resultObject.result.severe && (
                   <>
                     <div className="grid grid-cols-1  gap-2">
-                      {results.severe.map((issue) => (
+                      {resultObject.result.severe.map((issue) => (
                         <div key={issue.id}>
+                          <div
+                            className={`rounded-full w-3 h-3 inline-block ${getDotColor(
+                              "red"
+                            )} mr-2`}
+                          />
                           <div
                             className={`rounded-full w-3 h-3 inline-block ${getDotColor(
                               "red"
@@ -130,9 +169,8 @@ export default function History() {
                 <hr className="mt-3" />
               </div>
             </div>
-          ) : (
-            <NoScans />
-          )}
+          ))}
+          {!results && <NoScans />}
         </div>
       </div>
       <div className="mt-auto">
