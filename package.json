@@ -11,9 +11,14 @@
     "db:push": "drizzle-kit push:pg"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@heroicons/react": "^1.0.6",
-    "@mediapipe/tasks-vision": "^0.10.7",
+    "@mediapipe/tasks-vision": "^0.10.8",
+    "@mui/material": "^5.14.20",
+    "@mui/system": "^5.14.20",
     "@neondatabase/serverless": "^0.6.0",
+    "aos": "^2.3.4",
     "autoprefixer": "10.4.15",
     "babel": "^6.23.0",
     "bcryptjs": "^2.4.3",
@@ -22,6 +27,7 @@
     "eslint-config-next": "^14.0.3",
     "file-saver": "^2.0.5",
     "fs": "^0.0.1-security",
+    "html2pdf.js": "^0.9.0",
     "install": "^0.13.0",
     "next": "^14.0.3",
     "next-auth": "^4.24.5",
@@ -39,6 +45,7 @@
     "webpack-node-externals": "^3.0.0"
   },
   "devDependencies": {
+    "@types/aos": "^3.0.7",
     "@types/bcrypt": "^5.0.1",
     "@types/bcryptjs": "^2.4.5",
     "@types/node": "^20.10.3",

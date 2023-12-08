@@ -161,13 +161,13 @@ const SettingsPage = () => {
           <div className="border-t border-gray-300 my-1"></div>
         </div>
         <div className="mb-4">
-          <h1 className="text-4xl mt-30 mb-10 font-bold">Display</h1>
+          {/* <h1 className="text-4xl mt-30 mb-10 font-bold">Display</h1>
           <label className="mb-4 flex flex-row justify-between">
             <span className="text-xl">Dark mode</span>
             <CustomSwitch />
           </label>
           <div className="border-t border-gray-300 my-4"></div>
-          <div></div>
+          <div></div> */}
         </div>
         {/* <div className="mb-4">
           <h1 className="text-4xl mt-30 mb-10">Display</h1>
