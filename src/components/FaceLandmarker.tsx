@@ -23,7 +23,6 @@ export default function FaceLandmarker() {
   const [mouthOpen, setMouthOpen] = useState<string | null>(
     "Loading face detection..."
   );
-  const [message, setMessage] = useState("");
   const [tip, setTip] = useState<string | null>("");
   const [imageURL, setImageURL] = useState("");
   const [isAbleToCapture, setIsAbleToCapture] = useState<boolean | null>(false);
@@ -65,7 +64,7 @@ export default function FaceLandmarker() {
     try {
       // console.log(message);
       // console.log(imageURL);
-      const streamIterator = await submitImage("/api", message, imageURL);
+      const streamIterator = await submitImage("/api", imageURL);
       let result = "";
       for await (const chunk of streamIterator) {
         result += chunk;
