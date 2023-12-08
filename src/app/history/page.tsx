@@ -1,7 +1,8 @@
 "use client";
 import NavBar from "@/components/NavBar";
 import { useState, useEffect } from "react";
-
+import NoScans from "@/components/NoScans";
+  
 type Issue = {
   id: string;
   issue_title: string;
@@ -50,14 +51,14 @@ export default function History() {
   return (
     <div className="flex flex-col gradient-bg overflow-y-auto   items-center relative p-8">
       <div
-        className="bg-white p-5 rounded-xl  h-screen w-screen-full-xlg overflow-hidden mt-20 dark:bg-[var(--mainphrase-bg)]"
-        id="history"
+      className="bg-white p-5 rounded-xl h-screen w-9/12 overflow-hidden mt-10 mb-5 dark:bg-[var(--mainphrase-bg)]"
+      id="history"
       >
-        <h1 className="text-black font-bold text-2xl mb-5 dark:text-white">
+        <h1 className="text-black font-bold text-center text-2xl mb-5 dark:text-white">
           History
         </h1>
         <div id="all-scans-content ">
-          {results && (
+          {results ? (
             <div className="gap-4 mt-1">
               <div className="pl-20 pr-20 p-5">
                 <h3 className="text-black font-bold text-sm sm:text-xl sm:font-bold dark:text-white mb-3">
@@ -123,9 +124,11 @@ export default function History() {
                 <hr className="mt-3" />
               </div>
             </div>
-          )}
-        </div>
-      </div>
+  ) : (
+    <NoScans />
+  )}
+</div>
+</div>
       <div className="mt-auto">
         <NavBar />
       </div>
