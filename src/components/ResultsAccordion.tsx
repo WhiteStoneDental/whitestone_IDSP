@@ -1,6 +1,6 @@
 import React from "react";
 import { OpenAIResult, Issue } from "./Results";
-import { AccordionItem } from "./Accordion";
+import { AccordionItem } from "@/components/Accordion";
 
 export default function ResultsAccordion({
   results,
@@ -8,7 +8,8 @@ export default function ResultsAccordion({
   results: OpenAIResult;
 }) {
   return (
-    <div className="w-full max-w-md max-h-screen overflow-y-scroll mx-auto">
+    <div 
+    className="w-full max-w-md max-h-full overflow-auto mx-auto " >
       {results.severe && results.severe.length > 0 && (
         <div>
           <h3 className="text-black font-bold text-2xl mb-3 dark:text-white cursor-pointer">
@@ -18,7 +19,7 @@ export default function ResultsAccordion({
             <AccordionItem
               key={index}
               title={item.issue_title}
-              content={item.issue_description}
+              content={<p>{item.issue_description}</p>}
               link={"/resources"}
             />
           ))}
@@ -34,7 +35,7 @@ export default function ResultsAccordion({
             <AccordionItem
               key={index}
               title={item.issue_title}
-              content={item.issue_description}
+              content={<p>{item.issue_description}</p>}
               link={"/resources"}
             />
           ))}
@@ -50,7 +51,7 @@ export default function ResultsAccordion({
             <AccordionItem
               key={index}
               title={item.issue_title}
-              content={item.issue_description}
+              content={<p>{item.issue_description}</p>}
               link={"/resources"}
             />
           ))}
