@@ -235,8 +235,8 @@ export default function FaceLandmarker() {
 
   return (
     <div className="container">
-      <div className="relative w-full flex justify-center items-center">
-        {activeWebcam && windowSize && (
+      {activeWebcam && windowSize && (
+        <div className="relative w-full flex justify-center items-center">
           <Webcam
             className="rounded-xl shadow-xl dark:bg-[var(--box-color)]"
             height={windowSize.height / 2}
@@ -247,16 +247,16 @@ export default function FaceLandmarker() {
             mirrored={true}
             screenshotQuality={1}
           />
-        )}
-        <div
-          className="absolute"
-          style={{
-            bottom: windowSize.height / 100,
-          }}
-        >
-          <ScanBox width={100} />
+          <div
+            className="absolute"
+            style={{
+              bottom: windowSize.height / 100,
+            }}
+          >
+            <ScanBox width={100} />
+          </div>
         </div>
-      </div>
+      )}
       {imgSrc && (
         <Image
           className="invisible absolute"
@@ -273,11 +273,23 @@ export default function FaceLandmarker() {
           ref={canvasRef}
         ></canvas>
       </div>
-        {sending && <h2 className="text-white font-bold text-center text-2xl mb-5 dark:text-white">Scanning...</h2>}
-      {mouthOpen && <p className="text-white font-bold text-center  mb-5 dark:text-white">{mouthOpen}</p>}
-      {tip && <p className="text-white font-bold text-center  mb-5 dark:text-white">{tip}</p>}
+      {sending && (
+        <h2 className="text-white font-bold text-center text-2xl mb-5 dark:text-white">
+          Scanning...
+        </h2>
+      )}
+      {mouthOpen && (
+        <p className="text-white font-bold text-center  mb-5 dark:text-white">
+          {mouthOpen}
+        </p>
+      )}
+      {tip && (
+        <p className="text-white font-bold text-center  mb-5 dark:text-white">
+          {tip}
+        </p>
+      )}
       <div className="btn-container flex justify-center mt-4">
-      {mouthOpen === "Mouth open 😁" && (
+        {mouthOpen === "Mouth open 😁" && (
           <button
             onClick={capture}
             className="bg-gray-200 hover:bg-gray-400 text-black font-semibold flex justify-center items-center p-4 rounded-full shadow-lg transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-opacity-50"
