@@ -17,12 +17,10 @@ export default function FaceLandmarker() {
   const webcamRef = useRef<Webcam>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const canvasBoxRef = useRef<HTMLCanvasElement>(null);
   const lastVideoTimeRef = useRef(-1);
   const requestRef = useRef(0);
   const [imgSrc, setImgSrc] = useState<string | null>(null);
   const [mouthOpen, setMouthOpen] = useState("mouth not open");
-  const [message, setMessage] = useState("");
   const [tip, setTip] = useState<string | null>("");
   const [imageURL, setImageURL] = useState("");
   const [loading, setLoading] = useState(false);
@@ -176,13 +174,14 @@ export default function FaceLandmarker() {
       try {
         // console.log(message);
         // console.log(imageURL);
-        const streamIterator = await submitImage("/api", message, imageURL);
+        const streamIterator = await submitImage("/api", imageURL);
         let result = "";
+        const date = new Date();
         for await (const chunk of streamIterator) {
           result += chunk;
         }
-        localStorage.setItem("imageURL", imageURL);
         localStorage.setItem("results", result);
+        localStorage.setItem("imageURL", imageURL);
         router.push("/results");
         // setResult(result);
       } catch (error) {
@@ -198,7 +197,7 @@ export default function FaceLandmarker() {
 
   return (
     <div className="container">
-      <div className="relative">
+      <div className="relative w-full flex justify-center items-center">
         <Webcam
           className="rounded-xl shadow-xl dark:bg-[var(--box-color)]"
           height={600}
@@ -206,6 +205,8 @@ export default function FaceLandmarker() {
           ref={webcamRef}
           screenshotFormat="image/png"
           playsInline={true}
+          mirrored={true}
+          
         />
         <div className="absolute bottom-4 left-44">
           <ScanBox />
@@ -233,12 +234,6 @@ export default function FaceLandmarker() {
         </button>
       </div>
       {sending && <h2>Scanning...</h2>}
-      <ScanPrompt
-        message={message}
-        imageURL={imageURL}
-        onMessageChange={(e) => setMessage(e.target.value)}
-        onImageChange={(e) => setImageURL(e.target.value)}
-      />
     </div>
   );
 }
