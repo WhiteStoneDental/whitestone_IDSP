@@ -148,6 +148,7 @@ export default function History() {
               </div>
             </div>
           ))}
+          {!results && <NoScans />}
         </div>
       </div>
       <div className="mt-auto">

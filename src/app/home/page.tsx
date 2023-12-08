@@ -64,9 +64,11 @@ export default function HomePage() {
       const newResult = {
         imageURL: result.imageURL,
         result: JSON.parse(result.result),
-      }
+      };
       const date = new Date();
-      newResult.result["date"] = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+      newResult.result[
+        "date"
+      ] = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
       newResults.push(newResult);
     }
     console.log(newResults);
@@ -179,6 +181,7 @@ export default function HomePage() {
               </div>
             </div>
           ))}
+          {!results && <NoScans />}
         </div>
       </div>
 
