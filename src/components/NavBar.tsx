@@ -32,12 +32,7 @@ export default function NavBar() {
 
   return (
     <nav className={`items-center fixed bottom-0 left-0 right-0 flex justify-between py-2.5 px-4 shadow-t ${isDarkMode ? 'dark:bg-[var(--mainphrase-bg)]' : 'bg-white text-black'}`}>
-      {/* <Link href="/settings">
-        <div className="flex flex-col items-center text-sm">
-          <i className="fas fa-home text-2xl mb-1"></i>
-          <Image src={isDarkMode ? SettingsDark : Settings} alt="Settings icon" className="w-8 h-8 mb-1" />
-        </div>
-      </Link> */}
+      
       <Link href="/history">
         <div className="flex flex-col items-center text-sm">
           <HistoryIcon color={isDarkMode ? '#F6DFFF' : '#641A99'} />
