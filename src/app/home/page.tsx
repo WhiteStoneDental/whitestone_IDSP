@@ -94,7 +94,7 @@ export default function HomePage() {
 
     {/* "Latest Scans" section */}
     <div
-      className="bg-white p-5 rounded-xl h-screen w-9/12 overflow-hidden mt-10 mb-5 dark:bg-[var(--mainphrase-bg)]"
+      className="bg-white p-5 rounded-xl h-screen w-9/12 mt-10 mb-5 dark:bg-[var(--mainphrase-bg)]"
       id="latest-scans"
     >
       <h3 className="text-black font-bold text-2xl mb-5 text-center dark:text-white">
