@@ -42,7 +42,7 @@ export default function Results() {
   };
 
   return (
-    <div className="flex flex-col p-5 gradient-bg">
+    <div className="flex flex-col p-5 gradient-bg  min-h-screen ">
       <div className="flex flex-col items-center mt-20 mb-5 font-bold text-6xl text-center text-white">
         Scan Results
       </div>
