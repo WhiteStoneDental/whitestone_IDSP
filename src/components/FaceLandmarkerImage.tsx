@@ -102,7 +102,7 @@ export default function FaceLandmarker() {
       )}
       <canvas ref={canvasRef}></canvas>
       <div className="btn-container">
-        <button onClick={capture}>Capture photo</button>
+        <button onClick={capture} >Capture photo</button>
       </div>
     </div>
   );

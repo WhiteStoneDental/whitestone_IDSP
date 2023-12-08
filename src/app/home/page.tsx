@@ -12,7 +12,7 @@ import NavBar from "@/components/NavBar";
 import LoginButton from "@/components/LoginButton";
 import { useState, useEffect } from "react";
 import history from "./history.json";
-
+import NoScans from "@/components/NoScans";
 type Issue = {
   id: string;
   issue_title: string;
@@ -62,7 +62,7 @@ export default function HomePage() {
   const isLoggedIn = true;
 
   return (
-  <div className="flex flex-col items-center p-8 h-full relative overflow-y-auto gradient-bg">
+  <div className="flex flex-col items-center p-8 h-screen relative overflow-y-auto gradient-bg">
     <div className="grid grid-cols-1  lg:grid-cols-3 gap-4">
       <div className="bg-purple-100 bg-opacity-60 pl-20 pr-20 p-5 rounded-xl text-center shadow-xl dark:bg-[var(--box-color)]">
         <h3 className="text-black font-bold text-xl mb-3 dark:text-white cursor-pointer">
@@ -94,14 +94,14 @@ export default function HomePage() {
 
     {/* "Latest Scans" section */}
     <div
-      className="bg-white p-5 rounded-xl h-screen max-w-screen-lg overflow-hidden mt-10 mb-5 dark:bg-[var(--mainphrase-bg)]"
+      className="bg-white p-5 rounded-xl h-screen w-9/12 overflow-hidden mt-10 mb-5 dark:bg-[var(--mainphrase-bg)]"
       id="latest-scans"
     >
-      <h3 className="text-black font-bold text-2xl mb-5 dark:text-white">
+      <h3 className="text-black font-bold text-2xl mb-5 text-center dark:text-white">
         Latest Scans
       </h3>
       <div id="all-scans-content">
-        {results && (
+        {results ? (
           <div className="gap-4 mt-1">
             <div className="pl-20 pr-20 p-5">
               <h3 className="text-black font-bold text-xl dark:text-white mb-3">
@@ -147,7 +147,7 @@ export default function HomePage() {
                         <div className={`rounded-full w-3 h-3 inline-block ${getDotColor('red')} mr-2`} />
                         <span
                           className="text-black text-sm dark:text-white"
-                        >
+                        > 
                           Severe Issue: {issue.issue_title}
                         </span>
                       </div>
@@ -157,10 +157,12 @@ export default function HomePage() {
               )}
               <hr className="mt-3" />
             </div>
-          </div>
-        )}
-      </div>
-    </div>
+            </div>
+    ) : (
+      <NoScans />
+    )}
+  </div>
+</div>
 
     <div className="mt-auto">
       <NavBar />
