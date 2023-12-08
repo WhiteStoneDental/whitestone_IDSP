@@ -254,7 +254,7 @@ export default function FaceLandmarker() {
             bottom: windowSize.height / 100,
           }}
         >
-          <ScanBox />
+          <ScanBox width={100} />
         </div>
       </div>
       {imgSrc && (
