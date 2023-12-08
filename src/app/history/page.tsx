@@ -84,7 +84,7 @@ export default function History() {
         <div id="all-scans-content ">
           {results?.map((resultObject, index) => (
             <div className="gap-4 mt-1" key={String(index)}>
-              <div className="pl-20 pr-20 p-5">
+              <div className="p-2 sm:pl-20 sm:pr-20">
                 <h3 className="text-black font-bold text-sm sm:text-xl sm:font-bold dark:text-white mb-3">
                   {resultObject.result.date}
                 </h3>
