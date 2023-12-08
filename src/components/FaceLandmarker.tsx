@@ -276,7 +276,7 @@ export default function FaceLandmarker() {
       {mouthOpen && <p>{mouthOpen}</p>}
       {tip && <p>{tip}</p>}
       <div className="btn-container flex justify-center mt-4">
-                {isAbleToCapture !== null && (
+      {mouthOpen === "Mouth open 😁" && (
           <button
             onClick={capture}
             className="bg-gray-200 hover:bg-gray-400 text-black font-semibold flex justify-center items-center  p-4 rounded-full shadow-lg transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-opacity-50"
