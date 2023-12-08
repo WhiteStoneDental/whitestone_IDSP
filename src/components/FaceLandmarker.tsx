@@ -182,10 +182,10 @@ export default function FaceLandmarker() {
 
       ctx.drawImage(
         imageRef.current,
-        (imageRef.current.width / 2) / 1.8,
-        (imageRef.current.height / 1.5),
-        (imageRef.current.width / 3),
-        (imageRef.current.height / 3),
+        imageRef.current.width / 2 / 1.8,
+        imageRef.current.height / 1.5,
+        imageRef.current.width / 3,
+        imageRef.current.height / 3,
         0,
         0,
         canvasRef.current.width,
@@ -235,11 +235,12 @@ export default function FaceLandmarker() {
             screenshotQuality={1}
           />
         )}
-        <div className="absolute" style={
-          {
-            bottom: windowSize.height / 100
-          }
-        }>
+        <div
+          className="absolute"
+          style={{
+            bottom: windowSize.height / 100,
+          }}
+        >
           <ScanBox />
         </div>
       </div>
@@ -270,18 +271,27 @@ export default function FaceLandmarker() {
         )}
       </div>
       {verifiedSelection !== null && (
-        <div className="flex justify-center items-center">
-          <h2 className="pr-4">Do you want to use this image to scan?</h2>
-          <button
-            className="pr-8"
-            onClick={() => {
-              setVerifiedSelection(null);
-              handleSubmit();
-            }}
-          >
-            Yes
-          </button>
-          <button onClick={() => reset()}>No</button>
+        <div className="flex flex-col items-center mt-10">
+          <h2 className="text-white font-bold text-center text-2xl mb-5 dark:text-white">
+            Do you want to use this image to scan?
+          </h2>
+          <div className="flex space-x-4">
+            <button
+              className="inline-block px-4 py-2 text-sm font-bold text-white bg-purple-600 rounded transition duration-300 hover:bg-purple-500 focus:outline-none focus:shadow-outline-purple"
+              onClick={() => {
+                setVerifiedSelection(null);
+                handleSubmit();
+              }}
+            >
+              Yes
+            </button>
+            <button
+              className="inline-block px-4 py-2 text-sm font-bold text-white bg-purple-600 rounded transition duration-300 hover:bg-purple-500 focus:outline-none focus:shadow-outline-purple"
+              onClick={() => reset()}
+            >
+              No
+            </button>
+          </div>
         </div>
       )}
     </div>
