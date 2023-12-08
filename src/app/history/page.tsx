@@ -107,7 +107,6 @@ export default function History() {
                             Mild Issue: {issue.issue_title}
                           </span>
                           <h3 className="text-black text-sm dark:text-white mb-3">
-                          <h3 className="text-black text-sm dark:text-white mb-3">
                             {issue.issue_description}
                           </h3>
                         </div>
@@ -134,7 +133,6 @@ export default function History() {
                             Moderate Issue: {issue.issue_title}
                           </span>
                           <h3 className="text-black text-sm dark:text-white mb-3">
-                          <h3 className="text-black text-sm dark:text-white mb-3">
                             {issue.issue_description}
                           </h3>
                         </div>
@@ -160,7 +158,6 @@ export default function History() {
                           <span className="font-bold text-black text-sm dark:text-white mb-3">
                             Severe Issue: {issue.issue_title}
                           </span>
-                          <h3 className="text-black text-sm dark:text-white mb-3">
                           <h3 className="text-black text-sm dark:text-white mb-3">
                             {issue.issue_description}
                           </h3>
