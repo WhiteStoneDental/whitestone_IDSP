@@ -182,10 +182,10 @@ export default function FaceLandmarker() {
 
       ctx.drawImage(
         imageRef.current,
-        (imageRef.current.width / 2) / 2.42,
-        (imageRef.current.height / 2) / 1.3,
-        200,
-        200,
+        (imageRef.current.width / 2) / 1.8,
+        (imageRef.current.height / 1.5),
+        (imageRef.current.width / 3),
+        (imageRef.current.height / 3),
         0,
         0,
         canvasRef.current.width,
@@ -237,7 +237,7 @@ export default function FaceLandmarker() {
         )}
         <div className="absolute" style={
           {
-            bottom: windowSize.height / 6
+            bottom: windowSize.height / 100
           }
         }>
           <ScanBox />
@@ -249,8 +249,8 @@ export default function FaceLandmarker() {
           ref={imageRef}
           src={imgSrc}
           alt="webcam image"
-          fill
-          sizes="100%"
+          width={windowSize.width / 2}
+          height={windowSize.height / 2}
         />
       )}
       <div className="flex justify-center items-center">
