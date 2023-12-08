@@ -65,10 +65,11 @@ export default function HomePage() {
         imageURL: result.imageURL,
         result: JSON.parse(result.result),
       };
-      const date = new Date();
-      newResult.result[
-        "date"
-      ] = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+      // const date = new Date();
+      // newResult.result[
+      //   "date"
+      // ] = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+      newResult.result["date"] = "2023-12-08";
       newResults.push(newResult);
     }
     console.log(newResults);

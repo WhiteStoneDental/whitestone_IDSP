@@ -19,12 +19,14 @@ export default function Results() {
     }
     const jsonData = JSON.parse(data);
     const date = new Date();
-    jsonData[jsonData.length - 1]["date"] = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
-    // jsonData["date"] = "2023-12-08";
+    console.log(date.getMonth());
+    // jsonData[jsonData.length - 1]["date"] = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+    const newData = JSON.parse(jsonData[jsonData.length - 1].result);
+    newData["date"] = "2023-12-08";
     // localStorage.setItem("results", jsonData);
     // console.log(data);
     localStorage.setItem("results", JSON.stringify(jsonData));
-    setResults(JSON.parse(jsonData[jsonData.length - 1].result));
+    setResults(newData);
     setImgSrc(jsonData[jsonData.length - 1].imageURL);
   }, []);
 
