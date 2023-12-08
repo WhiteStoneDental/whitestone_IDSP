@@ -9,7 +9,7 @@ export default function ResultsAccordion({
 }) {
   return (
     <div 
-    className="w-full max-w-md max-h-full overflow-auto mx-auto " >
+    className="w-full max-w-md max-h-full overflow-auto mx-auto" >
       {results.severe && results.severe.length > 0 && (
         <div>
           <h3 className="text-black font-bold text-2xl mb-3 dark:text-white cursor-pointer">

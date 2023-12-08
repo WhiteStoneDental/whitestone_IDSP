@@ -19,7 +19,6 @@ export default function ScanPage() {
       <div className="mt-auto">
         <NavBar />
       </div>
-      
     </div>
   );
 }
