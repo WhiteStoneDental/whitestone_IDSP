@@ -1,31 +1,50 @@
 export const submitImage = async (
   url: string,
-  message: string,
-  image: string
+  image: string,
+  message?: string
 ) => {
+  let messages = [];
+
+  if (message) {
+    messages = [
+      {
+        role: "user",
+        content: [
+          {
+            type: "text",
+            text: message || null,
+          },
+          {
+            type: "image_url",
+            image_url: {
+              url: image,
+            },
+          },
+        ],
+      },
+    ];
+  } else {
+    messages = [
+      {
+        role: "user",
+        content: [
+          {
+            type: "image_url",
+            image_url: {
+              url: image,
+            },
+          },
+        ],
+      },
+    ];
+  }
   const res = await fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      messages: [
-        {
-          role: "user",
-          content: [
-            {
-              type: "text",
-              text: message,
-            },
-            {
-              type: "image_url",
-              image_url: {
-                url: image,
-              },
-            },
-          ],
-        },
-      ],
+      messages
     }),
   });
 
