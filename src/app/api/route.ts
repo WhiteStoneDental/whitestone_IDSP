@@ -26,7 +26,6 @@ const jsonExample = `
     {}
   ],
   "rating": a rating between 1-10,
-  "date": today's date
 }`;
 
 export const runtime = "edge";

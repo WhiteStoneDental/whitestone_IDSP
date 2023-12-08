@@ -19,10 +19,12 @@ export default function Results() {
       return;
     }
     const jsonData = JSON.parse(data);
-    const date = new Date();
+    // const date = new Date();
     // jsonData["date"] = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
     jsonData["date"] = "2023-12-08";
+    // localStorage.setItem("results", jsonData);
     console.log(data);
+    localStorage.setItem("results", JSON.stringify(jsonData));
     setResults(jsonData);
     setImgSrc(imgURL);
   }, []);
@@ -45,7 +47,7 @@ export default function Results() {
       <div className="flex flex-col items-center mt-20 mb-5 font-bold text-6xl text-center text-white">
         Scan Results
       </div>
-      <div className="bg-white p-5 rounded-xl h-full w-full overflow-hidden mb-10 dark:bg-[var(--mainphrase-bg)]">
+      <div className="mx-auto bg-white p-5 rounded-xl h-full overflow-hidden mb-10 dark:bg-[var(--mainphrase-bg)]">
         {imgSrc && (
           <div className="mx-auto flex items-center justify-center mb-5">
             <Image src={imgSrc} alt="webcam image" width={400} height={400} />
