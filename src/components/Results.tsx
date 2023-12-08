@@ -20,12 +20,12 @@ export default function Results() {
     }
     const jsonData = JSON.parse(data);
     const date = new Date();
-    jsonData["date"] = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+    // jsonData["date"] = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+    jsonData["date"] = "2023-12-08";
     console.log(data);
     setResults(jsonData);
     setImgSrc(imgURL);
   }, []);
-
 
   const handleDownload = () => {
     const content = JSON.stringify(results, null, 2);
@@ -53,10 +53,9 @@ export default function Results() {
         )}
         <hr className="border-t border-white dark:border-white border-solid my-5"></hr>
         <div className="flex justify-center">
-          
           <button
             onClick={handleDownload}
-            className="mb-3 border hover:bg-purple-900 text-white font-bold py-2 px-4 rounded"
+            className="mb-3 border hover:bg-purple-900 hover:text-white dark:text-white text-black font-bold py-2 px-4 rounded"
           >
             Download Results
           </button>

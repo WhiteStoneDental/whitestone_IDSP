@@ -1,3 +1,5 @@
+"use client";
+
 import NavBar from "@/components/NavBar";
 import CollapsibleList from "@/components/CollapsibleListItem";
 import LoginButton from "@/components/LoginButton";

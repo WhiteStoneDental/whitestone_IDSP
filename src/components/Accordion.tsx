@@ -43,8 +43,8 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
         <div className="text-gray-800 dark:text-gray-300">{content}</div>
         {link && (
           <div className="mt-2 text-right underline text-purple-700 hover:text-purple-900 dark:hover:text-purple-300">
-            <Link href={link}>
-              <div>Read more</div>
+            <Link href={link} >
+              <div className="dark:text-white " style={{ textDecoration: 'none' }}>Read more</div>
             </Link>
           </div>
         )}

@@ -7,7 +7,7 @@ export default function StartScanButton() {
     <BaseButton className="bg-white w-16 h-16 flex items-center justify-center dark:bg-gray-300">
       <Link href="/scan">
         <div className="flex items-center justify-center">
-          <ScanIcon />
+          <ScanIcon color="black" />
         </div>
       </Link>
     </BaseButton>
