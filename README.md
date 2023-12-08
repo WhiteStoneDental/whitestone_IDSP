@@ -1,8 +1,11 @@
-![White Stone Logo](/public/images/Logo2.png)
+<p align="center">
+  <img src="/public/logo-white.svg" alt="White Stone Logo" width="300">
+</p>
 
-# White Stone : Your Personal Dental Assistant 🦷
 
-White Stone harnesses the power of AI to offer a revolutionary dental analysis experience. Designed specifically for those who find dental care financially challenging, our app aims to detect and advise on minor dental issues early on.
+# WhiteStone : Your Personal Dental Assistant 🦷
+
+WhiteStone harnesses the power of AI to offer a revolutionary dental analysis experience. Designed specifically for those who find dental care financially challenging, our app aims to detect and advise on minor dental issues early on.
 
 ---
 
@@ -17,7 +20,7 @@ White Stone harnesses the power of AI to offer a revolutionary dental analysis e
 
 ## 📥 How to use:
 
-1. Open at the link [...]
+1. Open at the link (https://www.whitestone-app.com/)
 2. Follow the instructions to scan your mouth.
 3. Begin your journey towards better dental health!
 
@@ -25,4 +28,4 @@ White Stone harnesses the power of AI to offer a revolutionary dental analysis e
 
 ## 🤝 Support:
 
-Facing issues or have suggestions? Reach out to our support team at [...]
+Facing issues or have suggestions? Reach out to our support team at White.Stone.23@gmail.com
