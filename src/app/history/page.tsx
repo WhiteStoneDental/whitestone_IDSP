@@ -75,7 +75,7 @@ export default function History() {
   return (
     <div className="flex flex-col gradient-bg overflow-y-auto   items-center relative p-8">
       <div
-        className="bg-white p-5 rounded-xl h-screen w-9/12 overflow-hidden mt-10 mb-5 dark:bg-[var(--mainphrase-bg)]"
+        className="bg-white p-5 rounded-xl h-auto w-9/12 mt-10 mb-5 dark:bg-[var(--mainphrase-bg)]"
         id="history"
       >
         <h1 className="text-black font-bold text-center text-2xl mb-5 dark:text-white">

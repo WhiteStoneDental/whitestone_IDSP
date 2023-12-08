@@ -271,10 +271,10 @@ export default function FaceLandmarker() {
           className={imgSrc ? "" : "invisible absolute"}
           ref={canvasRef}
         ></canvas>
-        {sending && <h2>Scanning...</h2>}
       </div>
-      {mouthOpen && <p>{mouthOpen}</p>}
-      {tip && <p>{tip}</p>}
+        {sending && <h2 className="text-white font-bold text-center text-2xl mb-5 dark:text-white">Scanning...</h2>}
+      {mouthOpen && <p className="text-white font-bold text-center  mb-5 dark:text-white">{mouthOpen}</p>}
+      {tip && <p className="text-white font-bold text-center  mb-5 dark:text-white">{tip}</p>}
       <div className="btn-container flex justify-center mt-4">
       {mouthOpen === "Mouth open 😁" && (
           <button
