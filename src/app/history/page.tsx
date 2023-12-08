@@ -98,11 +98,6 @@ export default function History() {
                               "yellow"
                             )} mr-2`}
                           />
-                          <div
-                            className={`rounded-full w-3 h-3 inline-block ${getDotColor(
-                              "yellow"
-                            )} mr-2`}
-                          />
                           <span className="font-bold text-black text-sm dark:text-white mb-3">
                             Mild Issue: {issue.issue_title}
                           </span>
@@ -124,11 +119,6 @@ export default function History() {
                               "orange"
                             )} mr-2`}
                           />
-                          <div
-                            className={`rounded-full w-3 h-3 inline-block ${getDotColor(
-                              "orange"
-                            )} mr-2`}
-                          />
                           <span className="font-bold text-black text-sm dark:text-white mb-3">
                             Moderate Issue: {issue.issue_title}
                           </span>
@@ -142,14 +132,9 @@ export default function History() {
                 )}
                 {resultObject.result.severe && (
                   <>
-                    <div className="grid grid-cols-1  gap-2">
+                    <div className="grid grid-cols-1 gap-2">
                       {resultObject.result.severe.map((issue) => (
                         <div key={issue.id}>
-                          <div
-                            className={`rounded-full w-3 h-3 inline-block ${getDotColor(
-                              "red"
-                            )} mr-2`}
-                          />
                           <div
                             className={`rounded-full w-3 h-3 inline-block ${getDotColor(
                               "red"
