@@ -13,20 +13,19 @@ export default function Results() {
 
   useEffect(() => {
     let data = localStorage.getItem("results");
-    let imgURL = localStorage.getItem("imageURL");
-    if (!data || !imgURL) {
+    if (!data) {
       console.log("no data");
       return;
     }
     const jsonData = JSON.parse(data);
-    // const date = new Date();
-    // jsonData["date"] = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
-    jsonData["date"] = "2023-12-08";
+    const date = new Date();
+    jsonData[jsonData.length - 1]["date"] = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+    // jsonData["date"] = "2023-12-08";
     // localStorage.setItem("results", jsonData);
-    console.log(data);
+    // console.log(data);
     localStorage.setItem("results", JSON.stringify(jsonData));
-    setResults(jsonData);
-    setImgSrc(imgURL);
+    setResults(JSON.parse(jsonData[jsonData.length - 1].result));
+    setImgSrc(jsonData[jsonData.length - 1].imageURL);
   }, []);
 
   const handleDownload = () => {
