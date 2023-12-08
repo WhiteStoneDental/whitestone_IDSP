@@ -3,6 +3,7 @@ import NavBar from "@/components/NavBar";
 import { useState, useEffect } from "react";
 import NoScans from "@/components/NoScans";
 
+
 type Issue = {
   id: string;
   issue_title: string;
@@ -27,6 +28,12 @@ type IssueSeverity = "red" | "orange" | "yellow";
 
 const getDotColor = (severity: IssueSeverity) => {
   switch (severity) {
+    case "red":
+      return "bg-red-500";
+    case "orange":
+      return "bg-orange-500";
+    case "yellow":
+      return "bg-yellow-400";
     case "red":
       return "bg-red-500";
     case "orange":
@@ -91,9 +98,15 @@ export default function History() {
                               "yellow"
                             )} mr-2`}
                           />
+                          <div
+                            className={`rounded-full w-3 h-3 inline-block ${getDotColor(
+                              "yellow"
+                            )} mr-2`}
+                          />
                           <span className="font-bold text-black text-sm dark:text-white mb-3">
                             Mild Issue: {issue.issue_title}
                           </span>
+                          <h3 className="text-black text-sm dark:text-white mb-3">
                           <h3 className="text-black text-sm dark:text-white mb-3">
                             {issue.issue_description}
                           </h3>
@@ -112,9 +125,15 @@ export default function History() {
                               "orange"
                             )} mr-2`}
                           />
+                          <div
+                            className={`rounded-full w-3 h-3 inline-block ${getDotColor(
+                              "orange"
+                            )} mr-2`}
+                          />
                           <span className="font-bold text-black text-sm dark:text-white mb-3">
                             Moderate Issue: {issue.issue_title}
                           </span>
+                          <h3 className="text-black text-sm dark:text-white mb-3">
                           <h3 className="text-black text-sm dark:text-white mb-3">
                             {issue.issue_description}
                           </h3>
@@ -133,9 +152,15 @@ export default function History() {
                               "red"
                             )} mr-2`}
                           />
+                          <div
+                            className={`rounded-full w-3 h-3 inline-block ${getDotColor(
+                              "red"
+                            )} mr-2`}
+                          />
                           <span className="font-bold text-black text-sm dark:text-white mb-3">
                             Severe Issue: {issue.issue_title}
                           </span>
+                          <h3 className="text-black text-sm dark:text-white mb-3">
                           <h3 className="text-black text-sm dark:text-white mb-3">
                             {issue.issue_description}
                           </h3>

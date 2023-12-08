@@ -43,7 +43,14 @@ const getDotColor = (severity: IssueSeverity) => {
       return "bg-orange-500";
     case "yellow":
       return "bg-yellow-400";
+    case "red":
+      return "bg-red-500";
+    case "orange":
+      return "bg-orange-500";
+    case "yellow":
+      return "bg-yellow-400";
     default:
+      return "";
       return "";
   }
 };
@@ -88,6 +95,16 @@ export default function HomePage() {
             <PastScan />
           </div>
         </div>
+    <div className="flex flex-col items-center p-8 h-screen relative overflow-y-auto gradient-bg">
+      <div className="grid grid-cols-1  lg:grid-cols-3 gap-4">
+        <div className="bg-purple-100 bg-opacity-60 pl-20 pr-20 p-5 rounded-xl text-center shadow-xl dark:bg-[var(--box-color)]">
+          <h3 className="text-black font-bold text-xl mb-3 dark:text-white cursor-pointer">
+            History
+          </h3>
+          <div className="mx-auto flex items-center justify-center">
+            <PastScan />
+          </div>
+        </div>
 
         <div className="bg-purple-100 bg-opacity-90 pl-20 pr-20 p-5 rounded-xl text-center shadow-xl dark:bg-[var(--box-color)]">
           <h3 className="text-black font-bold text-xl mb-3 dark:text-white cursor-pointer">
@@ -97,7 +114,24 @@ export default function HomePage() {
             <StartScanButton />
           </div>
         </div>
+        <div className="bg-purple-100 bg-opacity-90 pl-20 pr-20 p-5 rounded-xl text-center shadow-xl dark:bg-[var(--box-color)]">
+          <h3 className="text-black font-bold text-xl mb-3 dark:text-white cursor-pointer">
+            Start Scan
+          </h3>
+          <div className="mx-auto flex items-center justify-center">
+            <StartScanButton />
+          </div>
+        </div>
 
+        <div className="bg-purple-100 bg-opacity-60 pl-20 pr-20 p-5 rounded-xl text-center shadow-xl dark:bg-[var(--box-color)]">
+          <h3 className="text-black font-bold text-xl mb-3 dark:text-white cursor-pointer">
+            Resources
+          </h3>
+          <div className="mx-auto flex items-center justify-center">
+            <ResourceButton />
+          </div>
+        </div>
+      </div>
         <div className="bg-purple-100 bg-opacity-60 pl-20 pr-20 p-5 rounded-xl text-center shadow-xl dark:bg-[var(--box-color)]">
           <h3 className="text-black font-bold text-xl mb-3 dark:text-white cursor-pointer">
             Resources
@@ -185,6 +219,11 @@ export default function HomePage() {
         </div>
       </div>
 
+      <div className="mt-auto">
+        <NavBar />
+      </div>
+    </div>
+  );
       <div className="mt-auto">
         <NavBar />
       </div>
